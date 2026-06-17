@@ -303,7 +303,7 @@ abstract class Controller
         ->get();
         return $phxfsh;
     }
-    protected function phxvds($lim=5){
+    protected function phxvds_version1($lim=5){
         $phxvds = DB::table('videos')
         ->join('users','users.id','=','videos.userid_video')
         ->select('videos.*','users.id','users.lastename_user','users.firstname_user')
@@ -312,6 +312,42 @@ abstract class Controller
         ->get();
         return $phxvds;
     }
+
+protected function phxvds($lim=5){
+
+    $phxvds = DB::table('videos')
+
+    ->join('users','users.id','=','videos.userid_video')
+
+    ->select(
+        'videos.*',
+        'users.id',
+        'users.lastename_user',
+        'users.firstname_user'
+    )
+
+    ->orderBy('id_video','desc')
+
+    ->limit($lim)
+
+    ->get();
+
+    foreach($phxvds as $v){
+
+    preg_match(
+        '/(?:youtube\.com\/watch\?v=|youtu\.be\/)?([^&\n?#]+)/',
+        $v->linkyoutube_video,
+        $matches
+    );
+
+    $v->ytid = $matches[1] ?? $v->linkyoutube_video;
+
+}
+
+    return $phxvds;
+
+}
+
     protected function artcount(){
         $artnb = DB::table('articles')->count();
         return $artnb;

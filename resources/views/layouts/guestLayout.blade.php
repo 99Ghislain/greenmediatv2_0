@@ -52,7 +52,15 @@
 		<link rel="stylesheet" href="{{url('assets/css/style.css')}}">
 		<link rel="stylesheet" href="{{url('assets/css/skins/all.css')}}">
 		<link rel="stylesheet" href="{{url('assets/css/demo.css')}}">
-		<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+
+		<link href="https://fonts.googleapis.com/css2?
+			family=Montserrat:wght@400;500;600;700;800&
+			family=Poppins:wght@300;400;500;600;700&
+			family=Roboto:wght@300;400;500;700&
+			family=Merriweather:wght@300;400;700&
+			display=swap"
+			rel="stylesheet">
 
 
 		<!-- Wheather -->
@@ -77,9 +85,12 @@
               font-style: normal;
             }
             
-            body {
-              font-family: "ComicSansMSc", "Comic Sans MS", "Comic Neue", sans-serif !important;
-            }
+            body{
+    font-family: 'Roboto', sans-serif !important;
+    font-size:16px;
+    line-height:1.7;
+    color:#222;
+}
             
             /**/
             
@@ -553,18 +564,60 @@
 				75%  {opacity: 0.4;}
 			}
 
-            .skin-orange a {
-                color: #0b1303;
-				font-family: "ComicSansMSc", "Comic Sans MS", "Comic Neue", sans-serif !important;
-				font-weight: bold;
-				font-style: normal;
-				text-transform: uppercase;
-            }
-            .skin-orange p {
-                font-family: "ComicSansMSc", "Comic Sans MS", "Comic Neue", sans-serif !important;
-				/*font-weight: normal !important;*/
-				text-transform: initial;
-            }
+           /* Texte général */
+body,
+.skin-orange p,
+.skin-orange span,
+.skin-orange li,
+.skin-orange div {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+/* Menus principaux */
+.skin-orange .menu ul > li > a {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Liens généraux */
+.skin-orange a {
+    color: #0b1303;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 500;
+}
+
+/* Sous-titres */
+.sub-title-2,
+.top-title,
+.top-title-3,
+.acategory,
+.acategory-two {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600;
+}
+
+/* Titres importants */
+.top-title-2,
+.title-police,
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700;
+}
+
+/* Articles */
+.article p,
+.article-content,
+.b-content-1,
+.content-1 p {
+    font-family: 'Merriweather', serif !important;
+    font-size: 18px;
+    line-height: 1.8;
+}
             .skin-orange .content-1 p,
             .skin-orange .content-1 div {
                 font-size: 22px !important;

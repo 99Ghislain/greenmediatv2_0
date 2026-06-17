@@ -96,7 +96,9 @@
         </div>
     </nav>
 </header>
-<!---->
+<!---->  
+
+//bloc partenaires en haut de page
 <section class="m-0 p-0 best-of-the-week bg-success" style="background-image: url({{url('hphx/img/_pub_6912ef4a554a7z.png')}}) !important; background-size: cover; background-repeat: no-repeat;">
     <div class="container b-white-shadow b-radius-6" style="background-color: #fff;">
         <div class="owl-carousel owl-theme carousel-1">
@@ -118,7 +120,7 @@
     </div>
 </section>
 <section class="m-0 p-0" style="padding-bottom: 0;">
-    <div class="container" style="padding: 0 auto !important;">
+    <div class="container-fluid px-0" style="padding: 0 auto !important;">
         <div class="row">
             <div class="col-md-12 ">
                 <div class="d-flex position-relative justify-content-between align-items-center breaking-news bg-white mt-5 b-radius-6" style="position: relative;">

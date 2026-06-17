@@ -79,7 +79,7 @@ class GuestController extends Controller
         $hsteart = $this->nwssbcatL1(4,12);
         $hallstearts = $this->nwssbcatL1(4,12,2);
         // Vidéos
-        $hlastvd = $this->phxvds(1);
+        $hlastvd = $this->phxvds(20);
         $hrecvds = $this->phxvds(20);
         $hmainvds = $this->phxvds(8);
         $rdsdvds = $hrecvds->random(4);
@@ -136,7 +136,7 @@ class GuestController extends Controller
         //-// Entête - Footer
         $wcount = $this->countnwswldL2();
         // Vidéos
-        $hlastvd = $this->phxvds(1);
+        $hlastvd = $this->phxvds(100);
         $hrecvds = $this->phxvds(20);
         $hmainvds = $this->phxvds(8);
         $rdsdvds = $hrecvds->random(4);
@@ -148,7 +148,7 @@ class GuestController extends Controller
         $hafnws2 = $this->nwscatL1(11,3);
         $hwdlnws = $this->nwswldL1();
         //// Vidéos
-        $hlastvd = $this->phxvds(1);
+        $hlastvd = $this->phxvds(100);
         $hwdlmns = $this->nwswldL0();
         $hinvnms = $this->nwscatL1(8,4);
         $hartvws = $this->hvws(4);
@@ -193,7 +193,7 @@ class GuestController extends Controller
         $donline = $this->d_visitors_online();
         //-// Entête - Footer
         // Vidéos
-        $hlastvd = $this->phxvds(1);
+        $hlastvd = $this->phxvds(100);
         $hrecvds = $this->phxvds(20);
         $hmainvds = $this->phxvds(8);
         $rdsdvds = $hrecvds->random(4);
@@ -251,7 +251,7 @@ class GuestController extends Controller
         $donline = $this->d_visitors_online();
         //-// Entête - Footer
         // Vidéos
-        $hlastvd = $this->phxvds(1);
+        $hlastvd = $this->phxvds(100);
         $hrecvds = $this->phxvds(20);
         $hmainvds = $this->phxvds(8);
         $rdsdvds = $hrecvds->random(4);

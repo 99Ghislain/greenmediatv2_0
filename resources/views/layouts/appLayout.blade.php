@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="{{url('plugins/summernote/summernote-bs4.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- TinyMCE -->
   <script src="https://cdn.tiny.cloud/1/rcw0511443o7nnx56k3kae9uryfs1pcjqq53m4szbxla6uca/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   <!--  <script> -->
