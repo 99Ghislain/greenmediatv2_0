@@ -11,9 +11,11 @@
 @if($hlastvd[0]->typevideo_id=='2')
 <section class="home" style="margin-top: 20px ; padding: 0;">
     <div class="container-fluid px-0">
-        <div class="" style="margin-bottom: 5px;">
-            <div class=" acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow" style="">&nbsp; Live Streaming &nbsp;🔴</div>
-        </div>
+       <div class="" style="margin-bottom: 30px;"> 
+    <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow"> 
+        &nbsp; <span class="gm-animated-dot"></span> LIVE STREAMING &nbsp;
+    </div>
+</div>
         
         @if(isset($hlastvd)&&!empty($hlastvd))
             <div class="row">
@@ -108,7 +110,7 @@
                         <div class="video-info-classy">
                             <div class="video-meta">
                                 <a href="{{route('visitors.allvideos')}}" class="live-badge-modern">
-                                    <span class="live-dot"></span> Live Streaming
+                                    <span class="live-dot"></span> Live 
                                 </a>
                                 <span id="video-date" class="video-date-modern">
                                     {{ $hlastvd[0]->datepub_video }}

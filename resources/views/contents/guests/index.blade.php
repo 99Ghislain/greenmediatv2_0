@@ -16,111 +16,139 @@
 </div>
 {{--  --}}
 <!-- / Home -->
-<section class="home " style="margin-top: -30px ; padding: 0;">
-	<div class="container">
-		<div class="" style="margin-bottom: 5px;">
-			<div class=" acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow" style="">&nbsp; A LA UNE &nbsp;</div>
-		</div>
+
+<section class="gm-news-section">
+    <div class="container">
+
+<div class="" style="margin-bottom: 30px;"> 
+    <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow"> 
+        &nbsp; <span class="gm-animated-dot"></span> A LA UNE &nbsp;
+    </div>
+</div>
+      
+
         @if(isset($hcarous)&&!empty($hcarous))
             <div class="row">
-                <div class="col-md-7" style="padding-bottom: 10px; margin-bottom: 5px;">
+                
+                <div class="col-md-7 mb-4">
                     <?php $dt = date_create($hcarous[0]->datepub_article); $dty = today();?>
-                    <div class="b-radius-6 box-green" style=" background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                        <article class="mx-2" style="overflow: hidden; max-height: 350px; padding: 0 2px !important; margin: 0 auto;">
-                            <a href="{{route('visitors.sgactu',['rub'=>$hcarous[0]->slug_prinrub,'slug'=>$hcarous[0]->slug_article,'ip'=>$hcarous[0]->id_article])}}">
-                                <img src="{{url('hphx/img/'.$hcarous[0]->image_article)}}" alt="{{$hcarous[0]->title_article}}" class="w-100" style="width: 100%;">
+                    
+                    <div class="gm-main-card">
+                        <a href="{{route('visitors.sgactu',['rub'=>$hcarous[0]->slug_prinrub,'slug'=>$hcarous[0]->slug_article,'ip'=>$hcarous[0]->id_article])}}" class="gm-main-img-wrap">
+                            <img src="{{url('hphx/img/'.$hcarous[0]->image_article)}}" alt="{{$hcarous[0]->title_article}}">
+                        </a>
+                        
+                        <div class="gm-main-content">
+                            <div class="d-flex align-items-center flex-wrap">
+                                <a href="{{route('visitors.allactus',['rub' => $hcarous[0]->slug_prinrub])}}" class="gm-badge">
+                                    {{$hcarous[0]->desig_prinrub}}
+                                </a>
+                                <span class="gm-separator">|</span>
+                                <span style="font-weight: 500;">
+                                    @if(!empty($hcarous[0]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif
+                                </span>
+                            </div>
+
+                            <a href="{{route('visitors.sgactu',['rub'=>$hcarous[0]->slug_prinrub,'slug'=>$hcarous[0]->slug_article,'ip'=>$hcarous[0]->id_article])}}" class="gm-main-title">
+                                {{Str::limit($hcarous[0]->title_article, 120)}}
                             </a>
-                        </article>
-                        <p>
-                            <a href="{{route('visitors.allactus',['rub' => $hcarous[0]->slug_prinrub])}}" class="acategory" style="">{{$hcarous[0]->desig_prinrub}}</a>
-                            &nbsp;&nbsp; <span style=""> @if(!empty($hcarous[0]->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                        </p>
-                        <p class="m-0 p-auto sub-title-2" style="height: 80px; font-weight: bold; padding: auto 5px; margin: 10px; overflow: hidden;">
-                            <a href="{{route('visitors.sgactu',['rub'=>$hcarous[0]->slug_prinrub,'slug'=>$hcarous[0]->slug_article,'ip'=>$hcarous[0]->id_article])}}" class="" style="font-size: 150%; font-weight: bold;">{{Str::limit($hcarous[0]->title_article,250)}}</a>
-                        </p>
-                        <p class="m-0 p-auto font-content-1" style="height: 60px; padding: auto 5px; margin: 10px;">
-                            <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hcarous[0]->slug_prinrub,'slug'=>$hcarous[0]->slug_article,'ip'=>$hcarous[0]->id_article])}}">{{Str::limit($hcarous[0]->desc_article,170)}}</a>
-                        </p>
+                            <p class="gm-main-desc">
+                                {{Str::limit($hcarous[0]->desc_article, 170)}}
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-5 m-auto b-radius-6" style="margin-bottom: 20px; padding-top: 0px;">
-                    <div class="">
-                        @if(isset($hrandarts)&&count($hrandarts)!=0)
-                            @foreach($hrandarts as $hrh)
-                                {{--  --}}
-                                <div class="row b-radius-6 box-green" style="min-height: 150px; padding: 5px; margin: 0 auto 20px auto; background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                                    <div class="col-12" style="padding-bottom: 1px; overflow-y: hidden; margin-bottom: 5px;">
-                                        <?php $dt = date_create($hrh->datepub_article); $dty = today();?>
-                                        {{-- <div class="" style=""> --}}
-                                        <div class="col-xs-5 col-md-5 p-0 mx-2 size-img-sb" style=" line-height: 120px; overflow: hidden;">
-                                            <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}">
-                                                <img src="{{url('hphx/img/'.$hrh->image_article)}}" alt="{{$hrh->title_article}}" class="w-100" style="width: 100%;">
-                                            </a>
-                                        </div>
-                                        {{-- </div> --}}
-                                        <div class="col-xs-7 col-md-7 p-0">
-                                            <p class="m-0 p-auto sub-title-2" style="max-height: 70px; font-weight: bold; padding: auto 5px; overflow: hidden;">
-                                                <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}" class="" style="font-size: 100%; font-weight: bold;">{{Str::limit($hrh->title_article,250)}}</a>
-                                            </p>
-                                            <p class="m-0 p-auto font-content-1" style="max-height: 30px; margin: 1px;">
-                                                <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}">{{Str::limit($hrh->desc_article,100)}}</a>
-                                            </p>
-                                        </div>
+
+                <div class="col-md-5">
+                    @if(isset($hrandarts)&&count($hrandarts)!=0)
+                        @foreach($hrandarts as $hrh)
+                            <?php $dt = date_create($hrh->datepub_article); $dty = today();?>
+                            
+                            <div class="gm-side-card">
+                                <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}" class="gm-side-body">
+                                    <img src="{{url('hphx/img/'.$hrh->image_article)}}" alt="{{$hrh->title_article}}" class="gm-side-img">
+                                    <div class="gm-side-text">
+                                        <h3 class="gm-side-title">{{Str::limit($hrh->title_article, 80)}}</h3>
+                                        <p class="gm-side-desc">{{Str::limit($hrh->desc_article, 80)}}</p>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="d-inline-block time p-auto bg-success b-radius-6" style="font-size: 85%; padding: auto 5px;">
-                                            <a href="{{route('visitors.allactus',['rub' => $hrh->slug_prinrub])}}" class="acategory" style="">{{$hrh->desig_prinrub}}</a>
-                                            <span style=""> @if(!empty($hrh->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                                            &nbsp;&nbsp; | &nbsp;&nbsp; <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}">{{$hrh->view_article}} Vues</a>
-                                        </div>
-                                    </div>
+                                </a>
+                                
+                                <div class="gm-card-footer">
+                                    <a href="{{route('visitors.allactus',['rub' => $hrh->slug_prinrub])}}" style="font-weight: 700;">
+                                        {{$hrh->desig_prinrub}}
+                                    </a>
+                                    <span class="gm-separator">|</span>
+                                    <span>
+                                        @if(!empty($hrh->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif
+                                    </span>
+                                    <span class="gm-separator">|</span>
+                                    <span>
+                                        <i class="ion-ios-eye gm-icon-eye"></i> {{$hrh->view_article}}
+                                    </span>
                                 </div>
-                                {{--  --}}
-                            @endforeach
-                        @endif
-                    </div>
+                            </div>
+
+                        @endforeach
+                    @endif
                 </div>
             </div>
         @endif
-        <div class="" style="margin-bottom: 5px;">
-            <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow" style="">&nbsp; ARTICLES RECENTS  &nbsp;</div>
-        </div>
-        <div class="row ">
+
+        <hr>
+
+        <div class="mt-4 mb-4"></div>
+
+      <div class="" style="margin-bottom: 30px;"> 
+    <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow"> 
+        &nbsp; <span class="gm-animated-dot"></span> ARTICLES RECENTS &nbsp;
+    </div>
+</div>
+        
+        <div class="row">
             @if(isset($hcf)&&count($hcf)!=0)
                 @foreach ($hcf as $is)
-                    <div class="col-md-3" style="padding-bottom: 10px; margin-bottom: 5px;">
+                    <div class="col-md-3 gm-grid-col">
                         <?php $dt = date_create($is->datepub_article); $dty = today();?>
-                        <div class="b-radius-6 box-green" style=" background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                            <article class="featured mx-2" style="height: 150px; padding: 0 2px !important; margin: 0 auto;">
-                                <a href="{{route('visitors.sgactu',['rub'=>$is->slug_prinrub,'slug'=>$is->slug_article,'ip'=>$is->id_article])}}">
-                                    <img src="{{url('hphx/img/'.$is->image_article)}}" alt="{{$is->title_article}}" class="w-100" style="width: 100%;">
+                        
+                        <div class="gm-grid-card">
+                            <a href="{{route('visitors.sgactu',['rub'=>$is->slug_prinrub,'slug'=>$is->slug_article,'ip'=>$is->id_article])}}">
+                                <img src="{{url('hphx/img/'.$is->image_article)}}" alt="{{$is->title_article}}" class="gm-grid-img">
+                            </a>
+                            
+                            <div class="gm-grid-body">
+                                <a href="{{route('visitors.sgactu',['rub'=>$is->slug_prinrub,'slug'=>$is->slug_article,'ip'=>$is->id_article])}}" class="gm-grid-title">
+                                    {{Str::limit($is->title_article, 90)}}
                                 </a>
-                            </article>
-                            <p>
-                                <a href="{{route('visitors.allactus',['rub' => $is->slug_prinrub])}}" class="acategory" style="">{{$is->desig_prinrub}}</a>
-                            </p>
-                            <p class="m-0 p-auto sub-title-2" style="height: 53px; font-weight: bold; padding: auto 5px; margin: 10px; overflow: hidden;">
-                                <a href="{{route('visitors.sgactu',['rub'=>$is->slug_prinrub,'slug'=>$is->slug_article,'ip'=>$is->id_article])}}" class="" style="">{{Str::limit($is->title_article,100)}}</a>
-                            </p>
-                            <p class="m-0 p-auto font-content-1" style="height: 80px; padding: auto 5px; margin: 10px;">
-                                <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$is->slug_prinrub,'slug'=>$is->slug_article,'ip'=>$is->id_article])}}">{{Str::limit($is->desc_article,160)}}</a>
-                            </p>
-                            <div class="time p-auto bg-success" style="font-size: 85%; padding: auto 5px; margin: 0 10px;">
-                                <span style=""> @if(!empty($is->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                                &nbsp;&nbsp; | &nbsp;&nbsp; <a href="{{route('visitors.sgactu',['rub'=>$is->slug_prinrub,'slug'=>$is->slug_article,'ip'=>$is->id_article])}}">{{$is->view_article}} Vues</a>
+                                <p class="gm-side-desc">
+                                    {{Str::limit($is->desc_article, 100)}}
+                                </p>
                             </div>
-                            <hr>
+
+                            <div class="gm-card-footer">
+                                <a href="{{route('visitors.allactus',['rub' => $is->slug_prinrub])}}" style="font-weight: 700;">
+                                    {{$is->desig_prinrub}}
+                                </a>
+                                <span class="gm-separator" style="margin: 0 5px;">|</span>
+                                <span>@if(!empty($is->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                                <span class="gm-separator" style="margin: 0 5px;">|</span>
+                                <span><i class="ion-ios-eye gm-icon-eye"></i> {{$is->view_article}}</span>
+                            </div>
                         </div>
                     </div>
                 @endforeach
             @endif
-            <div class="col-12 col-md-12" style="margin-top: 10px;">
-                <a href="{{route('visitors.allactus',['rub' => $hcarous[0]->slug_prinrub])}}" class="btn btn-link m-auto b-radius-6" style="width: 100%;"> Voir plus ... <i class="ion-ios-arrow-thin-right"></i></a>
+            
+            <div class="col-12 mt-5 pt-4 mb-5 text-center">
+                <a href="{{route('visitors.allactus',['rub' => $hcarous[0]->slug_prinrub])}}" class="btn btn-outline-success" style="border-radius: 30px; font-weight: 700; padding: 12px 35px; border-color: #127319; color: #127319;"> 
+                    Voir plus d'actualités <i class="ion-ios-arrow-thin-right"></i>
+                </a>
             </div> 
         </div>
-	</div>
+
+    </div>
 </section>
 {{--  --}}
+
 <section class="container" style="margin-top: -15px;">
     <div class="banner">
         <figure class="ads text-center">
@@ -132,133 +160,152 @@
         </figure>
     </div>
 </section>
-<section class="home " style="margin-top: 20px; padding: 0;">
-	<div class="container">
-        <div class="" style="margin-bottom: 5px;">
-			<div class="acategory-two text-color-1 top-title-2 b-white-shadow" style=";">&nbsp;AGRICULTURES &nbsp;<a href="{{route('visitors.allactus',['rub' => 'agriculture'])}}" class="btn btn-success b-radius-6" style="padding: 1px auto; font-weight: 200%;"><i class="ion-ios-arrow-thin-right"></i></a>&nbsp; </div>
-		</div>
-        @if(isset($hagriart)&&!empty($hagriart))
-            <div class="row" style="">
-                <div class="col-md-7" style="padding-bottom: 10px; margin-bottom: 5px;">
-                    <?php $dt = date_create($hagriart[0]->datepub_article); $dty = today();?>
-                    <div class="b-radius-6 box-green" style=" background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                        <article class="mx-2" style="overflow: hidden; max-height: 350px; padding: 0 2px !important; margin: 0 auto;">
-                            <a href="{{route('visitors.sgactu',['rub'=>$hagriart[0]->slug_prinrub,'slug'=>$hagriart[0]->slug_article,'ip'=>$hagriart[0]->id_article])}}">
-                                <img src="{{url('hphx/img/'.$hagriart[0]->image_article)}}" alt="{{$hagriart[0]->title_article}}" class="w-100" style="width: 100%;">
-                            </a>
-                        </article>
-                        <p>
-                            <a href="{{route('visitors.allactus',['rub' => $hagriart[0]->slug_prinrub])}}" class="acategory" style="">{{$hagriart[0]->desig_prinrub}}</a>
-                            &nbsp;&nbsp; <span style=""> @if(!empty($hagriart[0]->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                        </p>
-                        <p class="m-0 p-auto sub-title-2" style="height: 80px; font-weight: bold; padding: auto 5px; margin: 10px; overflow: hidden;">
-                            <a href="{{route('visitors.sgactu',['rub'=>$hagriart[0]->slug_prinrub,'slug'=>$hagriart[0]->slug_article,'ip'=>$hagriart[0]->id_article])}}" class="" style="font-size: 150%; font-weight: bold;">{{Str::limit($hagriart[0]->title_article,250)}}</a>
-                        </p>
-                        <p class="m-0 p-auto font-content-1" style="height: 60px; padding: auto 5px; margin: 10px;">
-                            <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hagriart[0]->slug_prinrub,'slug'=>$hagriart[0]->slug_article,'ip'=>$hagriart[0]->id_article])}}">{{Str::limit($hagriart[0]->desc_article,170)}}</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-5 m-auto b-radius-6" style="margin-bottom: 20px; padding-top: 0px;">
-                    <div class="">
-                        @if(isset($hagriart)&&count($hagriart)!=0)
-                            @for($i=1; $i<=3;$i++)
-                                <div class="row b-radius-6 box-green" style="min-height: 150px; padding: 5px; margin: 0 auto 20px auto; background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                                    <div class="col-12" style="padding-bottom: 1px; overflow-y: hidden; margin-bottom: 5px;">
-                                        <?php $dt = date_create($hagriart[$i]->datepub_article); $dty = today();?>
-                                        <div class="col-xs-5 col-md-5 p-0 mx-2 size-img-sb" style=" line-height: 120px; overflow: hidden;">
-                                            <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}">
-                                                <img src="{{url('hphx/img/'.$hagriart[$i]->image_article)}}" alt="{{$hagriart[$i]->title_article}}" class="w-100" style="width: 100%;">
-                                            </a>
-                                        </div>
-                                        <div class="col-xs-7 col-md-7 p-0">
-                                            <p class="m-0 p-auto sub-title-2" style="max-height: 70px; font-weight: bold; padding: auto 5px; overflow: hidden;">
-                                                <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}" class="" style="font-size: 100%; font-weight: bold;">{{Str::limit($hagriart[$i]->title_article,250)}}</a>
-                                            </p>
-                                            <p class="m-0 p-auto font-content-1" style="max-height: 30px; margin: 1px;">
-                                                <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}">{{Str::limit($hagriart[$i]->desc_article,100)}}</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="d-inline-block time p-auto bg-success b-radius-6" style="font-size: 85%; padding: auto 5px;">
-                                            <a href="{{route('visitors.allactus',['rub' => $hagriart[$i]->slug_prinrub])}}" class="acategory" style="">{{$hagriart[$i]->desig_prinrub}}</a>
-                                            <span style=""> @if(!empty($hagriart[$i]->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                                            &nbsp;&nbsp; | &nbsp;&nbsp; <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}">{{$hagriart[$i]->view_article}} Vues</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{--  --}}
-                            @endfor
-                        @endif
-                    </div>
-                </div>
-                @if(isset($hagriart)&&count($hagriart)!=0)
-                    @for($i=4; $i<=7;$i++)
-                    <div class="col-md-6">
-                        <div class="row b-radius-6 box-green" style="min-height: 150px; padding: 5px; margin: 0 auto 20px auto; background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                            <div class="col-12" style="padding-bottom: 1px; overflow-y: hidden; margin-bottom: 5px;">
-                                <?php $dt = date_create($hagriart[$i]->datepub_article); $dty = today();?>
-                                <div class="col-xs-5 col-md-5 p-0 mx-2 size-img-sb" style=" line-height: 120px; overflow: hidden;">
-                                    <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}">
-                                        <img src="{{url('hphx/img/'.$hagriart[$i]->image_article)}}" alt="{{$hagriart[$i]->title_article}}" class="w-100" style="width: 100%;">
-                                    </a>
-                                </div>
-                                <div class="col-xs-7 col-md-7 p-0">
-                                    <p class="m-0 p-auto sub-title-2" style="max-height: 70px; font-weight: bold; padding: auto 5px; overflow: hidden;">
-                                        <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}" class="" style="font-size: 100%; font-weight: bold;">{{Str::limit($hagriart[$i]->title_article,250)}}</a>
-                                    </p>
-                                    <p class="m-0 p-auto font-content-1" style="max-height: 30px; margin: 1px;">
-                                        <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}">{{Str::limit($hagriart[$i]->desc_article,100)}}</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="d-inline-block time p-auto bg-success b-radius-6" style="font-size: 85%; padding: auto 5px;">
-                                    <a href="{{route('visitors.allactus',['rub' => $hagriart[$i]->slug_prinrub])}}" class="acategory" style="">{{$hagriart[$i]->desig_prinrub}}</a>
-                                    <span style=""> @if(!empty($hagriart[$i]->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                                    &nbsp;&nbsp; | &nbsp;&nbsp; <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}">{{$hagriart[$i]->view_article}} Vues</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endfor
-                @endif
-                @if(isset($hagriart)&&count($hagriart)!=0)
-                    @for($i=7; $i<=10;$i++)
-                    <div class="col-md-3" style="padding-bottom: 10px; margin-bottom: 5px;">
-                        <?php $dt = date_create($hagriart[$i]->datepub_article); $dty = today();?>
-                        <div class="b-radius-6 box-green" style=" background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                            <article class="featured mx-2" style="height: 150px; padding: 0 2px !important; margin: 0 auto;">
-                                <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}">
-                                    <img src="{{url('hphx/img/'.$hagriart[$i]->image_article)}}" alt="{{$hagriart[$i]->title_article}}" class="w-100" style="width: 100%;">
-                                </a>
-                            </article>
-                            <p>
-                                <a href="{{route('visitors.allactus',['rub' => $hagriart[$i]->slug_prinrub])}}" class="acategory" style="">{{$hagriart[$i]->desig_prinrub}}</a>
-                            </p>
-                            <p class="m-0 p-auto sub-title-2" style="height: 53px; font-weight: bold; padding: auto 5px; margin: 10px; overflow: hidden;">
-                                <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}" class="" style="">{{Str::limit($hagriart[$i]->title_article,100)}}</a>
-                            </p>
-                            <p class="m-0 p-auto font-content-1" style="height: 80px; padding: auto 5px; margin: 10px;">
-                                <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}">{{Str::limit($hagriart[$i]->desc_article,160)}}</a>
-                            </p>
-                            <div class="time p-auto bg-success" style="font-size: 85%; padding: auto 5px; margin: 0 10px;">
-                                <span style=""> @if(!empty($hagriart[$i]->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                                &nbsp;&nbsp; | &nbsp;&nbsp; <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}">{{$hagriart[$i]->view_article}} Vues</a>
-                            </div>
-                            <hr>
-                        </div>
-                    </div>
-                    @endfor
-                @endif
+
+
+<section class="home" style="margin-top: 20px; padding: 0;">
+    <div class="container">
+        
+        <div class="" style="margin-bottom: 30px;"> 
+            <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow"> 
+                &nbsp; <span class="gm-animated-dot"></span> AGRICULTURES &nbsp;<a href="{{route('visitors.allactus',['rub' => 'agriculture'])}}" class="btn btn-success b-radius-6" style="padding: 1px auto; font-weight: 200%;"><i class="ion-ios-arrow-thin-right"></i></a>&nbsp; 
             </div>
-        @endif
-        <div class="col-12" style="margin-top: 10px;">
-            <a href="{{route('visitors.allactus',['rub' => 'agriculture'])}}" class="btn btn-link b-radius-6" style="width: 100%;"> Voir plus ... <i class="ion-ios-arrow-thin-right"></i></a>
         </div>
-	</div>
+
+        @if(isset($hagriart) && !empty($hagriart))
+            
+            <div class="row">
+                
+                <div class="col-md-7" style="margin-bottom: 30px;">
+                    <?php $dt = date_create($hagriart[0]->datepub_article); $dty = today();?>
+                    
+                    <div class="gm-main-card">
+                        <a href="{{route('visitors.sgactu',['rub'=>$hagriart[0]->slug_prinrub,'slug'=>$hagriart[0]->slug_article,'ip'=>$hagriart[0]->id_article])}}" class="gm-main-img-wrap">
+                            <img src="{{url('hphx/img/'.$hagriart[0]->image_article)}}" alt="{{$hagriart[0]->title_article}}">
+                        </a>
+                        
+                        <div class="gm-main-content">
+                            <div style="display: flex; align-items: center; flex-wrap: wrap;">
+                                <a href="{{route('visitors.allactus',['rub' => $hagriart[0]->slug_prinrub])}}" class="gm-badge">
+                                    {{$hagriart[0]->desig_prinrub}}
+                                </a>
+                                <span class="gm-separator">|</span>
+                                <span style="font-weight: 500;">
+                                    @if(!empty($hagriart[0]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif
+                                </span>
+                            </div>
+
+                            <a href="{{route('visitors.sgactu',['rub'=>$hagriart[0]->slug_prinrub,'slug'=>$hagriart[0]->slug_article,'ip'=>$hagriart[0]->id_article])}}" class="gm-main-title">
+                                {{Str::limit($hagriart[0]->title_article, 120)}}
+                            </a>
+                            <p class="gm-main-desc">
+                                {{Str::limit($hagriart[0]->desc_article, 170)}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    @for($i=1; $i<=3; $i++)
+                        @if(isset($hagriart[$i]))
+                            <?php $dt = date_create($hagriart[$i]->datepub_article); $dty = today();?>
+                            <div class="gm-side-card" style="margin-bottom: 25px;">
+                                <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}" class="gm-side-body">
+                                    <img src="{{url('hphx/img/'.$hagriart[$i]->image_article)}}" alt="{{$hagriart[$i]->title_article}}" class="gm-side-img">
+                                    <div class="gm-side-text">
+                                        <h3 class="gm-side-title">{{Str::limit($hagriart[$i]->title_article, 80)}}</h3>
+                                        <p class="gm-side-desc">{{Str::limit($hagriart[$i]->desc_article, 80)}}</p>
+                                    </div>
+                                </a>
+                                
+                                <div class="gm-card-footer">
+                                    <a href="{{route('visitors.allactus',['rub' => $hagriart[$i]->slug_prinrub])}}" style="font-weight: 700;">
+                                        {{$hagriart[$i]->desig_prinrub}}
+                                    </a>
+                                    <span class="gm-separator">|</span>
+                                    <span>@if(!empty($hagriart[$i]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                                    <span class="gm-separator">|</span>
+                                    <span><i class="ion-ios-eye gm-icon-eye"></i> {{$hagriart[$i]->view_article}}</span>
+                                </div>
+                            </div>
+                        @endif
+                    @endfor
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 15px;">
+                @for($i=4; $i<=7; $i++)
+                    @if(isset($hagriart[$i]))
+                        <div class="col-md-6" style="margin-bottom: 30px;">
+                            <?php $dt = date_create($hagriart[$i]->datepub_article); $dty = today();?>
+                            <div class="gm-side-card" style="height: 100%; margin-bottom: 0;">
+                                <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}" class="gm-side-body" style="flex-grow: 1;">
+                                    <img src="{{url('hphx/img/'.$hagriart[$i]->image_article)}}" alt="{{$hagriart[$i]->title_article}}" class="gm-side-img" style="width: 160px; height: 120px;">
+                                    <div class="gm-side-text">
+                                        <h3 class="gm-side-title">{{Str::limit($hagriart[$i]->title_article, 90)}}</h3>
+                                        <p class="gm-side-desc">{{Str::limit($hagriart[$i]->desc_article, 90)}}</p>
+                                    </div>
+                                </a>
+                                <div class="gm-card-footer">
+                                    <a href="{{route('visitors.allactus',['rub' => $hagriart[$i]->slug_prinrub])}}" style="font-weight: 700;">
+                                        {{$hagriart[$i]->desig_prinrub}}
+                                    </a>
+                                    <span class="gm-separator">|</span>
+                                    <span>@if(!empty($hagriart[$i]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                                    <span class="gm-separator">|</span>
+                                    <span><i class="ion-ios-eye gm-icon-eye"></i> {{$hagriart[$i]->view_article}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endfor
+            </div>
+
+            <div class="row" style="margin-top: 15px;">
+                @for($i=8; $i<=11; $i++) 
+                    @if(isset($hagriart[$i]))
+                        <div class="col-md-3 gm-grid-col" style="margin-bottom: 40px;">
+                            <?php $dt = date_create($hagriart[$i]->datepub_article); $dty = today();?>
+                            <div class="gm-grid-card">
+                                <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}">
+                                    <img src="{{url('hphx/img/'.$hagriart[$i]->image_article)}}" alt="{{$hagriart[$i]->title_article}}" class="gm-grid-img">
+                                </a>
+                                <div class="gm-grid-body">
+                                    <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}" class="gm-grid-title">
+                                        {{Str::limit($hagriart[$i]->title_article, 90)}}
+                                    </a>
+                                    <p class="gm-side-desc">
+                                        {{Str::limit($hagriart[$i]->desc_article, 100)}}
+                                    </p>
+                                </div>
+                                <div class="gm-card-footer">
+                                    <a href="{{route('visitors.allactus',['rub' => $hagriart[$i]->slug_prinrub])}}" style="font-weight: 700;">
+                                        {{$hagriart[$i]->desig_prinrub}}
+                                    </a>
+                                    <span class="gm-separator" style="margin: 0 5px;">|</span>
+                                    <span>@if(!empty($hagriart[$i]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                                    <span class="gm-separator" style="margin: 0 5px;">|</span>
+                                    <span><i class="ion-ios-eye gm-icon-eye"></i> {{$hagriart[$i]->view_article}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endfor
+            </div>
+
+        @endif
+        
+        <div class="row">
+            <div class="col-12 text-center" style="margin-top: 10px; margin-bottom: 50px;">
+                <a href="{{route('visitors.allactus',['rub' => 'agriculture'])}}" class="btn btn-outline-success" style="border-radius: 30px; font-weight: 700; padding: 12px 35px; border-color: #127319; color: #127319;"> 
+                    Voir plus d'actualités <i class="ion-ios-arrow-thin-right"></i>
+                </a>
+            </div>
+        </div>
+        
+    </div>
 </section>
+
+
 <section class="container">
     <div class="banner" style="">
         <figure class="ads text-center">
@@ -270,46 +317,60 @@
         </figure>
     </div>
 </section>
-<section>
-	<div class="container">
-		<div class="" style="margin-bottom: 5px;">
-			<div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow" style="">&nbsp; Plus d'articles populairs &nbsp;</div>
-		</div>
-		<div class="row" style="padding: 10px auto;">
-            @if(isset($pplars)&&count($pplars)!=0)
+
+
+
+<section style="margin-top: 20px; padding: 0;">
+    <div class="container">
+        
+        <div class="" style="margin-bottom: 30px;"> 
+            <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow"> 
+                &nbsp; <span class="gm-animated-dot"></span> PLUS D'ARTICLES POPULAIRES &nbsp;
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            @if(isset($pplars) && count($pplars) != 0)
                 @foreach($pplars as $hrh)
-                    <div class="col-md-6" style="padding-bottom: 10px; margin-bottom: 5px;">
-                        <div class="row b-radius-6 box-green" style="height: 180px; padding: 5px; margin: 0 auto 20px auto; background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                            <div class="col-12" style="padding-bottom: 1px; overflow-y: hidden; margin-bottom: 5px;">
-                                <?php $dt = date_create($hrh->datepub_article); $dty = today();?>
-                                <div class="col-xs-5 col-md-5 p-0 mx-2 size-img-sb" style=" line-height: 120px; overflow: hidden;">
-                                    <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}">
-                                        <img src="{{url('hphx/img/'.$hrh->image_article)}}" alt="{{$hrh->title_article}}" class="w-100" style="width: 100%;">
-                                    </a>
-                                </div>
-                                <div class="col-xs-7 col-md-7 p-0">
-                                    <p class="m-0 p-auto sub-title-2" style="max-height: 70px; font-weight: bold; padding: auto 5px; overflow: hidden;">
-                                        <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}" class="" style="font-size: 100%; font-weight: bold;">{{Str::limit($hrh->title_article,250)}}</a>
-                                    </p>
-                                    <p class="m-0 p-auto font-content-1" style="max-height: 46px; margin: 1px;">
-                                        <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}">{{Str::limit($hrh->desc_article,170)}}</a>
-                                    </p>
-                                </div>
+                    
+                    <div class="col-md-4 gm-grid-col" style="margin-bottom: 40px;">
+                        <?php $dt = date_create($hrh->datepub_article); $dty = today();?>
+                        
+                        <div class="gm-grid-card">
+                            <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}">
+                                <img src="{{url('hphx/img/'.$hrh->image_article)}}" alt="{{$hrh->title_article}}" class="gm-grid-img">
+                            </a>
+                            
+                            <div class="gm-grid-body">
+                                <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}" class="gm-grid-title">
+                                    {{Str::limit($hrh->title_article, 90)}}
+                                </a>
+                                <p class="gm-side-desc">
+                                    {{Str::limit($hrh->desc_article, 100)}}
+                                </p>
                             </div>
-                            <div class="col-12">
-                                <div class="d-inline-block time p-auto bg-success b-radius-6" style="font-size: 85%; padding: auto 5px;">
-                                    <a href="{{route('visitors.allactus',['rub' => $hrh->slug_prinrub])}}" class="acategory" style="">{{$hrh->desig_prinrub}}</a>
-                                    <span style=""> @if(!empty($hrh->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                                    &nbsp;&nbsp; | &nbsp;&nbsp; <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}">{{$hrh->view_article}} Vues</a>
-                                </div>
+
+                            <div class="gm-card-footer">
+                                <a href="{{route('visitors.allactus',['rub' => $hrh->slug_prinrub])}}" style="font-weight: 700;">
+                                    {{$hrh->desig_prinrub}}
+                                </a>
+                                <span class="gm-separator" style="margin: 0 5px;">|</span>
+                                <span>@if(!empty($hrh->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                                <span class="gm-separator" style="margin: 0 5px;">|</span>
+                                <span><i class="ion-ios-eye gm-icon-eye"></i> {{$hrh->view_article}}</span>
                             </div>
                         </div>
                     </div>
+
                 @endforeach
             @endif
         </div>
-	</div>
+
+    </div>
 </section>
+
+
+
 <div class="container" style="">
     <div class="banner">
         <figure class="ads text-center">
@@ -321,104 +382,125 @@
         </figure>
     </div>    
 </div>
-<section class="home " style="margin-top: 20px; padding: 0;">
-	<div class="container">
-        <div class="" style="margin-bottom: 5px;">
-			<div class="acategory-two text-color-1 top-title-2 b-white-shadow" style=";">&nbsp;ENVIRONNEMENT &nbsp;<a href="{{route('visitors.allactus',['rub' => 'environnement'])}}" class="btn btn-success b-radius-6" style="padding: 1px auto; font-weight: 200%;"><i class="ion-ios-arrow-thin-right"></i></a>&nbsp; </div>
-		</div>
-        @if(isset($hallsoarts)&&!empty($hallsoarts))
-            <div class="row" style="">
-                <div class="col-md-7" style="padding-bottom: 10px; margin-bottom: 5px;">
+
+
+
+<section class="home" style="margin-top: 20px; padding: 0;">
+    <div class="container">
+        
+        <div class="" style="margin-bottom: 30px;">
+            <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow">
+                &nbsp; <span class="gm-animated-dot"></span> ENVIRONNEMENT &nbsp;
+                <a href="{{route('visitors.allactus',['rub' => 'environnement'])}}" class="btn btn-success b-radius-6" style="padding: 1px auto; font-weight: 200%;">
+                    <i class="ion-ios-arrow-thin-right"></i>
+                </a>&nbsp;
+            </div>
+        </div>
+
+        @if(isset($hallsoarts) && !empty($hallsoarts))
+            
+            <div class="row">
+                
+                <div class="col-md-7" style="margin-bottom: 30px;">
                     <?php $dt = date_create($hallsoarts[0]->datepub_article); $dty = today();?>
-                    <div class="b-radius-6 box-green" style=" background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                        <article class="mx-2" style="overflow: hidden; max-height: 350px; padding: 0 2px !important; margin: 0 auto;">
-                            <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[0]->slug_prinrub,'slug'=>$hallsoarts[0]->slug_article,'ip'=>$hallsoarts[0]->id_article])}}">
-                                <img src="{{url('hphx/img/'.$hallsoarts[0]->image_article)}}" alt="{{$hallsoarts[0]->title_article}}" class="w-100" style="width: 100%;">
+                    
+                    <div class="gm-main-card">
+                        <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[0]->slug_prinrub,'slug'=>$hallsoarts[0]->slug_article,'ip'=>$hallsoarts[0]->id_article])}}" class="gm-main-img-wrap">
+                            <img src="{{url('hphx/img/'.$hallsoarts[0]->image_article)}}" alt="{{$hallsoarts[0]->title_article}}">
+                        </a>
+                        
+                        <div class="gm-main-content">
+                            <div style="display: flex; align-items: center; flex-wrap: wrap;">
+                                <a href="{{route('visitors.allactus',['rub' => $hallsoarts[0]->slug_prinrub])}}" class="gm-badge">
+                                    {{$hallsoarts[0]->desig_prinrub}}
+                                </a>
+                                <span class="gm-separator">|</span>
+                                <span style="font-weight: 500;">
+                                    @if(!empty($hallsoarts[0]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif
+                                </span>
+                            </div>
+
+                            <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[0]->slug_prinrub,'slug'=>$hallsoarts[0]->slug_article,'ip'=>$hallsoarts[0]->id_article])}}" class="gm-main-title">
+                                {{Str::limit($hallsoarts[0]->title_article, 120)}}
                             </a>
-                        </article>
-                        <p>
-                            <a href="{{route('visitors.allactus',['rub' => $hallsoarts[0]->slug_prinrub])}}" class="acategory" style="">{{$hallsoarts[0]->desig_prinrub}}</a>
-                            &nbsp;&nbsp; <span style=""> @if(!empty($hallsoarts[0]->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                        </p>
-                        <p class="m-0 p-auto sub-title-2" style="height: 80px; font-weight: bold; padding: auto 5px; margin: 10px; overflow: hidden;">
-                            <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[0]->slug_prinrub,'slug'=>$hallsoarts[0]->slug_article,'ip'=>$hallsoarts[0]->id_article])}}" class="" style="font-size: 150%; font-weight: bold;">{{Str::limit($hallsoarts[0]->title_article,250)}}</a>
-                        </p>
-                        <p class="m-0 p-auto font-content-1" style="height: 60px; padding: auto 5px; margin: 10px;">
-                            <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hallsoarts[0]->slug_prinrub,'slug'=>$hallsoarts[0]->slug_article,'ip'=>$hallsoarts[0]->id_article])}}">{{Str::limit($hallsoarts[0]->desc_article,170)}}</a>
-                        </p>
+                            <p class="gm-main-desc">
+                                {{Str::limit($hallsoarts[0]->desc_article, 170)}}
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-5 m-auto b-radius-6" style="margin-bottom: 20px; padding-top: 0px;">
-                    <div class="">
-                        @if(isset($hallsoarts)&&count($hallsoarts)!=0)
-                            @for($i=1; $i<=3;$i++)
-                                <div class="row b-radius-6 box-green" style="min-height: 150px; padding: 5px; margin: 0 auto 20px auto; background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                                    <div class="col-12" style="padding-bottom: 1px; overflow-y: hidden; margin-bottom: 5px;">
-                                        <?php $dt = date_create($hallsoarts[$i]->datepub_article); $dty = today();?>
-                                        <div class="col-xs-5 col-md-5 p-0 mx-2 size-img-sb" style=" line-height: 120px; overflow: hidden;">
-                                            <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}">
-                                                <img src="{{url('hphx/img/'.$hallsoarts[$i]->image_article)}}" alt="{{$hallsoarts[$i]->title_article}}" class="w-100" style="width: 100%;">
-                                            </a>
-                                        </div>
-                                        <div class="col-xs-7 col-md-7 p-0">
-                                            <p class="m-0 p-auto sub-title-2" style="max-height: 70px; font-weight: bold; padding: auto 5px; overflow: hidden;">
-                                                <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}" class="" style="font-size: 100%; font-weight: bold;">{{Str::limit($hallsoarts[$i]->title_article,250)}}</a>
-                                            </p>
-                                            <p class="m-0 p-auto font-content-1" style="max-height: 30px; margin: 1px;">
-                                                <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}">{{Str::limit($hallsoarts[$i]->desc_article,100)}}</a>
-                                            </p>
-                                        </div>
+
+                <div class="col-md-5">
+                    @for($i=1; $i<=3; $i++)
+                        @if(isset($hallsoarts[$i]))
+                            <?php $dt = date_create($hallsoarts[$i]->datepub_article); $dty = today();?>
+                            <div class="gm-side-card" style="margin-bottom: 25px;">
+                                <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}" class="gm-side-body">
+                                    <img src="{{url('hphx/img/'.$hallsoarts[$i]->image_article)}}" alt="{{$hallsoarts[$i]->title_article}}" class="gm-side-img">
+                                    <div class="gm-side-text">
+                                        <h3 class="gm-side-title">{{Str::limit($hallsoarts[$i]->title_article, 80)}}</h3>
+                                        <p class="gm-side-desc">{{Str::limit($hallsoarts[$i]->desc_article, 80)}}</p>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="d-inline-block time p-auto bg-success b-radius-6" style="font-size: 85%; padding: auto 5px;">
-                                            <a href="{{route('visitors.allactus',['rub' => $hallsoarts[$i]->slug_prinrub])}}" class="acategory" style="">{{$hallsoarts[$i]->desig_prinrub}}</a>
-                                            <span style=""> @if(!empty($hallsoarts[$i]->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                                            &nbsp;&nbsp; | &nbsp;&nbsp; <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}">{{$hallsoarts[$i]->view_article}} Vues</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endfor
-                        @endif
-                    </div>
-                </div>
-                @if(isset($hallsoarts)&&count($hallsoarts)!=0)
-                    @for($i=4; $i<=7;$i++)
-                    <div class="col-md-6">
-                        <div class="row b-radius-6 box-green" style="min-height: 150px; padding: 5px; margin: 0 auto 20px auto; background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                            <div class="col-12" style="padding-bottom: 1px; overflow-y: hidden; margin-bottom: 5px;">
-                                <?php $dt = date_create($hallsoarts[$i]->datepub_article); $dty = today();?>
-                                <div class="col-xs-5 col-md-5 p-0 mx-2 size-img-sb" style=" line-height: 120px; overflow: hidden;">
-                                    <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}">
-                                        <img src="{{url('hphx/img/'.$hallsoarts[$i]->image_article)}}" alt="{{$hallsoarts[$i]->title_article}}" class="w-100" style="width: 100%;">
+                                </a>
+                                
+                                <div class="gm-card-footer">
+                                    <a href="{{route('visitors.allactus',['rub' => $hallsoarts[$i]->slug_prinrub])}}" style="font-weight: 700;">
+                                        {{$hallsoarts[$i]->desig_prinrub}}
                                     </a>
-                                </div>
-                                <div class="col-xs-7 col-md-7 p-0">
-                                    <p class="m-0 p-auto sub-title-2" style="max-height: 70px; font-weight: bold; padding: auto 5px; overflow: hidden;">
-                                        <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}" class="" style="font-size: 100%; font-weight: bold;">{{Str::limit($hallsoarts[$i]->title_article,250)}}</a>
-                                    </p>
-                                    <p class="m-0 p-auto font-content-1" style="max-height: 30px; margin: 1px;">
-                                        <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}">{{Str::limit($hallsoarts[$i]->desc_article,100)}}</a>
-                                    </p>
+                                    <span class="gm-separator">|</span>
+                                    <span>@if(!empty($hallsoarts[$i]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                                    <span class="gm-separator">|</span>
+                                    <span><i class="ion-ios-eye gm-icon-eye"></i> {{$hallsoarts[$i]->view_article}}</span>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="d-inline-block time p-auto bg-success b-radius-6" style="font-size: 85%; padding: auto 5px;">
-                                    <a href="{{route('visitors.allactus',['rub' => $hallsoarts[$i]->slug_prinrub])}}" class="acategory" style="">{{$hallsoarts[$i]->desig_prinrub}}</a>
-                                    <span style=""> @if(!empty($hallsoarts[$i]->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                                    &nbsp;&nbsp; | &nbsp;&nbsp; <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}">{{$hallsoarts[$i]->view_article}} Vues</a>
+                        @endif
+                    @endfor
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 15px;">
+                @for($i=4; $i<=7; $i++)
+                    @if(isset($hallsoarts[$i]))
+                        <div class="col-md-6" style="margin-bottom: 30px;">
+                            <?php $dt = date_create($hallsoarts[$i]->datepub_article); $dty = today();?>
+                            <div class="gm-side-card" style="height: 100%; margin-bottom: 0;">
+                                <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}" class="gm-side-body" style="flex-grow: 1;">
+                                    <img src="{{url('hphx/img/'.$hallsoarts[$i]->image_article)}}" alt="{{$hallsoarts[$i]->title_article}}" class="gm-side-img" style="width: 160px; height: 120px;">
+                                    <div class="gm-side-text">
+                                        <h3 class="gm-side-title">{{Str::limit($hallsoarts[$i]->title_article, 90)}}</h3>
+                                        <p class="gm-side-desc">{{Str::limit($hallsoarts[$i]->desc_article, 90)}}</p>
+                                    </div>
+                                </a>
+                                <div class="gm-card-footer">
+                                    <a href="{{route('visitors.allactus',['rub' => $hallsoarts[$i]->slug_prinrub])}}" style="font-weight: 700;">
+                                        {{$hallsoarts[$i]->desig_prinrub}}
+                                    </a>
+                                    <span class="gm-separator">|</span>
+                                    <span>@if(!empty($hallsoarts[$i]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                                    <span class="gm-separator">|</span>
+                                    <span><i class="ion-ios-eye gm-icon-eye"></i> {{$hallsoarts[$i]->view_article}}</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @endfor
-                @endif
+                    @endif
+                @endfor
             </div>
+
         @endif
-        <div class="col-12" style="margin-top: 10px;">
-            <a href="{{route('visitors.allactus',['rub' => 'environnement'])}}" class="btn btn-link b-radius-6" style="width: 100%;"> Voir plus ... <i class="ion-ios-arrow-thin-right"></i></a>
+        
+        <div class="row">
+            <div class="col-12 text-center" style="margin-top: 10px; margin-bottom: 50px;">
+                <a href="{{route('visitors.allactus',['rub' => 'environnement'])}}" class="btn btn-outline-success" style="border-radius: 30px; font-weight: 700; padding: 12px 35px; border-color: #127319; color: #127319;"> 
+                    Voir plus d'actualités <i class="ion-ios-arrow-thin-right"></i>
+                </a>
+            </div>
         </div>
-	</div>
+        
+    </div>
 </section>
+
+
+
 <div class="container" style="">
     <div class="banner">
         <figure class="ads text-center">
@@ -430,107 +512,121 @@
         </figure>
     </div>
 </div>
-<section class="home " style="margin-top: 20px; margin-bottom: 50px; padding: 0;">
-	<div class="container">
-        <div class="" style="margin-bottom: 5px;">
-			<div class="acategory-two text-color-1 top-title-2 b-white-shadow" style=";">&nbsp;RESSOURCES ANIMALES &nbsp;<a href="{{route('visitors.allactus',['rub' => 'environnement'])}}" class="btn btn-success b-radius-6" style="padding: 1px auto; font-weight: 200%;"><i class="ion-ios-arrow-thin-right"></i></a>&nbsp; </div>
-		</div>
-        @if(isset($hallspoarts)&&!empty($hallspoarts))
-            <div class="row" style="">
-                <div class="col-md-7" style="padding-bottom: 10px; margin-bottom: 5px;">
+
+
+
+<section class="home" style="margin-top: 20px; margin-bottom: 50px; padding: 0;">
+    <div class="container">
+        
+        <div class="" style="margin-bottom: 30px;">
+            <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow">
+                &nbsp; <span class="gm-animated-dot"></span> RESSOURCES ANIMALES &nbsp;
+                <a href="{{route('visitors.allactus',['rub' => 'ressourcesanimales'])}}" class="btn btn-success b-radius-6" style="padding: 1px auto; font-weight: 200%;">
+                    <i class="ion-ios-arrow-thin-right"></i>
+                </a>&nbsp;
+            </div>
+        </div>
+
+        @if(isset($hallspoarts) && !empty($hallspoarts))
+            
+            <div class="row">
+                
+                <div class="col-md-7" style="margin-bottom: 30px;">
                     <?php $dt = date_create($hallspoarts[0]->datepub_article); $dty = today();?>
-                    <div class="b-radius-6 box-green" style=" background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                        <article class="mx-2" style="overflow: hidden; max-height: 350px; padding: 0 2px !important; margin: 0 auto;">
-                            <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[0]->slug_prinrub,'slug'=>$hallspoarts[0]->slug_article,'ip'=>$hallspoarts[0]->id_article])}}">
-                                <img src="{{url('hphx/img/'.$hallspoarts[0]->image_article)}}" alt="{{$hallspoarts[0]->title_article}}" class="w-100" style="width: 100%;">
+                    
+                    <div class="gm-main-card">
+                        <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[0]->slug_prinrub,'slug'=>$hallspoarts[0]->slug_article,'ip'=>$hallspoarts[0]->id_article])}}" class="gm-main-img-wrap">
+                            <img src="{{url('hphx/img/'.$hallspoarts[0]->image_article)}}" alt="{{$hallspoarts[0]->title_article}}">
+                        </a>
+                        
+                        <div class="gm-main-content">
+                            <div style="display: flex; align-items: center; flex-wrap: wrap;">
+                                <a href="{{route('visitors.allactus',['rub' => $hallspoarts[0]->slug_prinrub])}}" class="gm-badge">
+                                    {{$hallspoarts[0]->desig_prinrub}}
+                                </a>
+                                <span class="gm-separator">|</span>
+                                <span style="font-weight: 500;">
+                                    @if(!empty($hallspoarts[0]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif
+                                </span>
+                            </div>
+
+                            <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[0]->slug_prinrub,'slug'=>$hallspoarts[0]->slug_article,'ip'=>$hallspoarts[0]->id_article])}}" class="gm-main-title">
+                                {{Str::limit($hallspoarts[0]->title_article, 120)}}
                             </a>
-                        </article>
-                        <p>
-                            <a href="{{route('visitors.allactus',['rub' => $hallspoarts[0]->slug_prinrub])}}" class="acategory" style="">{{$hallspoarts[0]->desig_prinrub}}</a>
-                            &nbsp;&nbsp; <span style=""> @if(!empty($hallspoarts[0]->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                        </p>
-                        <p class="m-0 p-auto sub-title-2" style="height: 80px; font-weight: bold; padding: auto 5px; margin: 10px; overflow: hidden;">
-                            <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[0]->slug_prinrub,'slug'=>$hallspoarts[0]->slug_article,'ip'=>$hallspoarts[0]->id_article])}}" class="" style="font-size: 150%; font-weight: bold;">{{Str::limit($hallspoarts[0]->title_article,250)}}</a>
-                        </p>
-                        <p class="m-0 p-auto font-content-1" style="height: 60px; padding: auto 5px; margin: 10px;">
-                            <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hallspoarts[0]->slug_prinrub,'slug'=>$hallspoarts[0]->slug_article,'ip'=>$hallspoarts[0]->id_article])}}">{{Str::limit($hallspoarts[0]->desc_article,170)}}</a>
-                        </p>
+                            <p class="gm-main-desc">
+                                {{Str::limit($hallspoarts[0]->desc_article, 170)}}
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-5 m-auto b-radius-6" style="margin-bottom: 20px; padding-top: 0px;">
-                    <div class="">
-                        @if(isset($hallspoarts)&&count($hallspoarts)!=0)
-                            @for($i=1; $i<=3;$i++)
-                                @if (isset($hallspoarts[$i])&& ($hallspoarts[$i]==!null))
-                                    <div class="row b-radius-6 box-green" style="min-height: 150px; padding: 5px; margin: 0 auto 20px auto; background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                                        <div class="col-12" style="padding-bottom: 1px; overflow-y: hidden; margin-bottom: 5px;">
-                                            <?php $dt = date_create($hallspoarts[$i]->datepub_article); $dty = today();?>
-                                            <div class="col-xs-5 col-md-5 p-0 mx-2 size-img-sb" style=" line-height: 120px; overflow: hidden;">
-                                                <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}">
-                                                    <img src="{{url('hphx/img/'.$hallspoarts[$i]->image_article)}}" alt="{{$hallspoarts[$i]->title_article}}" class="w-100" style="width: 100%;">
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-7 col-md-7 p-0">
-                                                <p class="m-0 p-auto sub-title-2" style="max-height: 70px; font-weight: bold; padding: auto 5px; overflow: hidden;">
-                                                    <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}" class="" style="font-size: 100%; font-weight: bold;">{{Str::limit($hallspoarts[$i]->title_article,250)}}</a>
-                                                </p>
-                                                <p class="m-0 p-auto font-content-1" style="max-height: 30px; margin: 1px;">
-                                                    <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}">{{Str::limit($hallspoarts[$i]->desc_article,100)}}</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="d-inline-block time p-auto bg-success b-radius-6" style="font-size: 85%; padding: auto 5px;">
-                                                <a href="{{route('visitors.allactus',['rub' => $hallspoarts[$i]->slug_prinrub])}}" class="acategory" style="">{{$hallspoarts[$i]->desig_prinrub}}</a>
-                                                <span style=""> @if(!empty($hallspoarts[$i]->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                                                &nbsp;&nbsp; | &nbsp;&nbsp; <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}">{{$hallspoarts[$i]->view_article}} Vues</a>
-                                            </div>
-                                        </div>
-                                    </div> 
-                                @endif
-                            @endfor
-                        @endif
-                    </div>
-                </div>
-                @if(isset($hallspoarts)&&count($hallspoarts)!=0)
-                    @for($i=4; $i<=7;$i++)
-                        @if (isset($hallspoarts[$i])&& ($hallspoarts[$i]==!null))
-                            <div class="col-md-6">
-                                <div class="row b-radius-6 box-green" style="min-height: 150px; padding: 5px; margin: 0 auto 20px auto; background-color:rgb(255, 255, 255); box-shadow: 1px 1px 5px 1px #92929292; overflow: hidden;">
-                                    <div class="col-12" style="padding-bottom: 1px; overflow-y: hidden; margin-bottom: 5px;">
-                                        <?php $dt = date_create($hallspoarts[$i]->datepub_article); $dty = today();?>
-                                        <div class="col-xs-5 col-md-5 p-0 mx-2 size-img-sb" style=" line-height: 120px; overflow: hidden;">
-                                            <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}">
-                                                <img src="{{url('hphx/img/'.$hallspoarts[$i]->image_article)}}" alt="{{$hallspoarts[$i]->title_article}}" class="w-100" style="width: 100%;">
-                                            </a>
-                                        </div>
-                                        <div class="col-xs-7 col-md-7 p-0">
-                                            <p class="m-0 p-auto sub-title-2" style="max-height: 70px; font-weight: bold; padding: auto 5px; overflow: hidden;">
-                                                <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}" class="" style="font-size: 100%; font-weight: bold;">{{Str::limit($hallspoarts[$i]->title_article,250)}}</a>
-                                            </p>
-                                            <p class="m-0 p-auto font-content-1" style="max-height: 30px; margin: 1px;">
-                                                <a class="font-content-1" href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}">{{Str::limit($hallspoarts[$i]->desc_article,100)}}</a>
-                                            </p>
-                                        </div>
+
+                <div class="col-md-5">
+                    @for($i=1; $i<=3; $i++)
+                        @if(isset($hallspoarts[$i]) && ($hallspoarts[$i] != null))
+                            <?php $dt = date_create($hallspoarts[$i]->datepub_article); $dty = today();?>
+                            <div class="gm-side-card" style="margin-bottom: 25px;">
+                                <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}" class="gm-side-body">
+                                    <img src="{{url('hphx/img/'.$hallspoarts[$i]->image_article)}}" alt="{{$hallspoarts[$i]->title_article}}" class="gm-side-img">
+                                    <div class="gm-side-text">
+                                        <h3 class="gm-side-title">{{Str::limit($hallspoarts[$i]->title_article, 80)}}</h3>
+                                        <p class="gm-side-desc">{{Str::limit($hallspoarts[$i]->desc_article, 80)}}</p>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="d-inline-block time p-auto bg-success b-radius-6" style="font-size: 85%; padding: auto 5px;">
-                                            <a href="{{route('visitors.allactus',['rub' => $hallspoarts[$i]->slug_prinrub])}}" class="acategory" style="">{{$hallspoarts[$i]->desig_prinrub}}</a>
-                                            <span style=""> @if(!empty($hallspoarts[$i]->datepub_article)){{ $tday = phxdtformat($dt) }}@else{{$tday = phxdtformat($dty)}} @endif </span>
-                                            &nbsp;&nbsp; | &nbsp;&nbsp; <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}">{{$hallspoarts[$i]->view_article}} Vues</a>
-                                        </div>
-                                    </div>
+                                </a>
+                                
+                                <div class="gm-card-footer">
+                                    <a href="{{route('visitors.allactus',['rub' => $hallspoarts[$i]->slug_prinrub])}}" style="font-weight: 700;">
+                                        {{$hallspoarts[$i]->desig_prinrub}}
+                                    </a>
+                                    <span class="gm-separator">|</span>
+                                    <span>@if(!empty($hallspoarts[$i]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                                    <span class="gm-separator">|</span>
+                                    <span><i class="ion-ios-eye gm-icon-eye"></i> {{$hallspoarts[$i]->view_article}}</span>
                                 </div>
                             </div>
                         @endif
                     @endfor
-                @endif
+                </div>
             </div>
+
+            <div class="row" style="margin-top: 15px;">
+                @for($i=4; $i<=7; $i++)
+                    @if(isset($hallspoarts[$i]) && ($hallspoarts[$i] != null))
+                        <div class="col-md-6" style="margin-bottom: 30px;">
+                            <?php $dt = date_create($hallspoarts[$i]->datepub_article); $dty = today();?>
+                            <div class="gm-side-card" style="height: 100%; margin-bottom: 0;">
+                                <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}" class="gm-side-body" style="flex-grow: 1;">
+                                    <img src="{{url('hphx/img/'.$hallspoarts[$i]->image_article)}}" alt="{{$hallspoarts[$i]->title_article}}" class="gm-side-img" style="width: 160px; height: 120px;">
+                                    <div class="gm-side-text">
+                                        <h3 class="gm-side-title">{{Str::limit($hallspoarts[$i]->title_article, 90)}}</h3>
+                                        <p class="gm-side-desc">{{Str::limit($hallspoarts[$i]->desc_article, 90)}}</p>
+                                    </div>
+                                </a>
+                                <div class="gm-card-footer">
+                                    <a href="{{route('visitors.allactus',['rub' => $hallspoarts[$i]->slug_prinrub])}}" style="font-weight: 700;">
+                                        {{$hallspoarts[$i]->desig_prinrub}}
+                                    </a>
+                                    <span class="gm-separator">|</span>
+                                    <span>@if(!empty($hallspoarts[$i]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                                    <span class="gm-separator">|</span>
+                                    <span><i class="ion-ios-eye gm-icon-eye"></i> {{$hallspoarts[$i]->view_article}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endfor
+            </div>
+
         @endif
-        <div class="col-12" style="margin-top: 10px;">
-            <a href="{{route('visitors.allactus',['rub' => 'ressourcesanimales'])}}" class="btn btn-link b-radius-6" style="width: 100%;"> Voir plus ... <i class="ion-ios-arrow-thin-right"></i></a>
+        
+        <div class="row">
+            <div class="col-12 text-center" style="margin-top: 10px; margin-bottom: 20px;">
+                <a href="{{route('visitors.allactus',['rub' => 'ressourcesanimales'])}}" class="btn btn-outline-success" style="border-radius: 30px; font-weight: 700; padding: 12px 35px; border-color: #127319; color: #127319;"> 
+                    Voir plus d'actualités <i class="ion-ios-arrow-thin-right"></i>
+                </a>
+            </div>
         </div>
-	</div>
+        
+    </div>
 </section>
 {{--  --}}
 {{--  --}}

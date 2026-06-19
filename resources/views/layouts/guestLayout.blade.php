@@ -95,7 +95,7 @@
             /**/
             
 			body {
-				background-image: url({{url('hphx/img/background-cocoa-civ-225-1.png')}}) !important;
+				background-image: url({{url('hphx/img/ivoire.png')}}) !important;
 				/* background-attachment: fixed; */
 			}
 			.box-green {
@@ -797,6 +797,511 @@ h4 {
 			.skin-orange .menu ul > li .dropdown-menu > li.active a:after {
 				background-color: rgb(255, 165, 0)
 			}
+
+/* ===========================
+    A LA UNE
+=========================== */
+
+.home-title{
+
+    font-family:'Montserrat',sans-serif;
+
+    font-size:34px;
+
+    font-weight:800;
+
+    color:#1B3102;
+
+    border-left:6px solid #FFA500;
+
+    padding-left:15px;
+
+    margin-bottom:25px;
+
+}
+
+.hero-card{
+
+    background:#fff;
+
+    border:1px solid #ECECEC;
+
+    overflow:hidden;
+
+    transition:.3s;
+
+}
+
+.hero-card:hover{
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.hero-image{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.hero-image img{
+
+    width:100%;
+
+    height:420px;
+
+    object-fit:cover;
+
+    transition:.4s;
+
+}
+
+.hero-card:hover .hero-image img{
+
+    transform:scale(1.04);
+
+}
+
+.hero-category{
+
+    position:absolute;
+
+    top:20px;
+
+    left:20px;
+
+    background:#FFA500;
+
+    color:white;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-family:'Poppins';
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+.hero-meta{
+
+    font-family:'Roboto';
+
+    color:#777;
+
+    font-size:14px;
+
+    margin-top:20px;
+
+}
+
+.hero-title a{
+
+    font-family:'Montserrat';
+
+    font-size:38px;
+
+    line-height:1.2;
+
+    font-weight:800;
+
+    color:#222;
+
+    text-decoration:none;
+
+}
+
+.hero-title a:hover{
+
+    color:#64B802;
+
+}
+
+.hero-desc{
+
+    font-family:'Merriweather';
+
+    font-size:18px;
+
+    color:#555;
+
+    line-height:1.8;
+
+}
+
+/* ===== petits articles ===== */
+
+.side-card{
+
+    display:flex;
+
+    gap:18px;
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    border:1px solid #ECECEC;
+
+    background:#fff;
+
+    transition:.3s;
+
+}
+
+.side-card:hover{
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.side-card img{
+
+    width:160px;
+
+    height:110px;
+
+    object-fit:cover;
+
+}
+
+.side-content{
+
+    flex:1;
+
+}
+
+.side-meta{
+
+    font-family:'Roboto';
+
+    font-size:13px;
+
+    color:#777;
+
+}
+
+.side-title a{
+
+    font-family:'Poppins';
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:#222;
+
+    text-decoration:none;
+
+}
+
+.side-title a:hover{
+
+    color:#64B802;
+
+}
+
+.side-desc{
+
+    font-family:'Merriweather';
+
+    font-size:15px;
+
+    color:#666;
+
+}
+
+/* VARIABLES DE COULEURS GREEN MEDIA */
+    :root {
+        --gm-dark-green: #127319; /* Vert profond des blocs */
+        --gm-light-green: #58b918; /* Vert clair des badges */
+        --gm-orange: #f59f00; /* Orange des séparateurs */
+    }
+
+    .gm-news-section {
+        margin-top: 20px;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* --- CARTE PRINCIPALE (GAUCHE) --- */
+    .gm-main-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        background-color: var(--gm-dark-green);
+    }
+    .gm-main-img-wrap {
+        width: 100%;
+        height: 400px; /* Hauteur importante pour la Une */
+        overflow: hidden;
+    }
+    .gm-main-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    .gm-main-card:hover .gm-main-img-wrap img {
+        transform: scale(1.03);
+    }
+    .gm-main-content {
+        padding: 25px;
+        color: white;
+    }
+    .gm-badge {
+        background-color: var(--gm-light-green);
+        color: white;
+        padding: 4px 12px;
+        font-weight: 800;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        border-radius: 3px;
+        display: inline-block;
+    }
+    .gm-separator {
+        color: var(--gm-orange);
+        font-weight: bold;
+        margin: 0 10px;
+    }
+    .gm-main-title {
+        color: white !important;
+        font-weight: 900;
+        font-size: 2rem;
+        text-transform: uppercase;
+        line-height: 1.1;
+        margin: 15px 0;
+        text-decoration: none;
+        display: block;
+    }
+    .gm-main-title:hover {
+        color: #e0e0e0 !important;
+    }
+    .gm-main-desc {
+        font-size: 1.1rem;
+        opacity: 0.95;
+        margin-bottom: 0;
+        line-height: 1.5;
+    }
+
+    /* --- CARTES SECONDAIRES (DROITE) --- */
+    .gm-side-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        background: white;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    .gm-side-card:last-child {
+        margin-bottom: 0;
+    }
+    .gm-side-body {
+        display: flex;
+        padding: 15px;
+        gap: 15px;
+        text-decoration: none;
+    }
+    .gm-side-body:hover {
+        background-color: #fcfcfc;
+    }
+    .gm-side-img {
+        width: 140px;
+        height: 105px;
+        object-fit: cover;
+        border-radius: 4px;
+        flex-shrink: 0;
+    }
+    .gm-side-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .gm-side-title {
+        color: #000 !important;
+        font-weight: 800;
+        font-size: 1.05rem;
+        line-height: 1.3;
+        margin-bottom: 8px;
+        text-decoration: none;
+    }
+    .gm-side-desc {
+        color: #444;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        margin-bottom: 0;
+    }
+    .gm-card-footer {
+        background-color: var(--gm-dark-green);
+        color: white;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        text-transform: uppercase;
+    }
+    .gm-card-footer a {
+        color: white;
+        text-decoration: none;
+    }
+    .gm-card-footer a:hover {
+        color: var(--gm-light-green);
+    }
+    .gm-icon-eye {
+        font-size: 1.1rem;
+        vertical-align: text-bottom;
+        margin-right: 4px;
+    }
+
+  /* --- GRILLE ARTICLES RECENTS (CORRIGÉE) --- */
+    .gm-grid-col {
+        display: flex;
+        align-items: stretch; /* Force toutes les cartes de la ligne à avoir la même hauteur exacte */
+        margin-bottom: 40px; /* Crée un grand espace (aération) entre les lignes d'articles du haut et du bas */
+    }
+    .gm-grid-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        background: white;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .gm-grid-img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+    }
+    .gm-grid-body {
+        padding: 15px;
+        flex-grow: 1; /* Permet à cette zone de s'étirer au maximum... */
+        display: flex;
+        flex-direction: column;
+    }
+    .gm-grid-title {
+        color: #000 !important;
+        font-weight: 800;
+        font-size: 1.1rem;
+        line-height: 1.3;
+        margin-bottom: 8px;
+        text-decoration: none;
+        display: block;
+    }
+    .gm-grid-title:hover { text-decoration: underline; }
+    
+    /* On cible spécifiquement le footer des grilles pour le coller en bas */
+    .gm-grid-card .gm-card-footer {
+        margin-top: auto; /* ...pour forcer le footer vert à rester collé tout en bas ! */
+        padding: 8px 12px; 
+        font-size: 0.75rem;
+    }
+
+/* --- TITRES DE SECTION : GRAND BADGE CARRÉ ANIMÉ --- */
+    .gm-badge-wrapper {
+        display: flex;
+        align-items: center;
+        margin-bottom: 35px; 
+        margin-top: 20px;
+    }
+
+    /* La ligne de fuite élégante */
+    .gm-badge-wrapper::after {
+        content: '';
+        flex-grow: 1;
+        height: 3px; 
+        background-color: #e4e4e4;
+        margin-left: 20px;
+        border-radius: 2px;
+    }
+
+    /* Le Grand Badge Premium (Forme Carrée/Rectangulaire) */
+    .gm-square-badge {
+        display: inline-flex;
+        align-items: center;
+        background-color: #ffffff; 
+        color: #111111 !important; 
+        font-size: 1.4rem; 
+        font-weight: 900;
+        text-transform: uppercase;
+        padding: 12px 25px;
+        border-radius: 2px; /* Angles presque totalement droits (carrés) pour le style News */
+        border: 3px solid #f59f00; /* Contour orange conservé */
+        border-left: 10px solid #f59f00; /* Bordure gauche très épaisse : l'astuce TV ! */
+        box-shadow: 0 4px 15px rgba(245, 159, 0, 0.12); 
+        letter-spacing: 1px;
+        margin: 0;
+    }
+
+    /* L'icône animée (Le point TV qui clignote) */
+    .gm-animated-dot {
+        width: 14px; 
+        height: 14px; 
+        background-color: #e53935; 
+        border-radius: 50%;
+        margin-right: 15px;
+        position: relative;
+    }
+
+    /* L'onde de l'animation */
+    .gm-animated-dot::after {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        border-radius: 50%;
+        border: 2px solid #e53935;
+        animation: gm-pulse-alert 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+
+    /* L'animation CSS */
+    @keyframes gm-pulse-alert {
+        0% { transform: scale(0.6); opacity: 1; }
+        100% { transform: scale(1.6); opacity: 0; }
+    }
+
+	/* --- L'icône animée incrustée dans le texte --- */
+    .gm-animated-dot {
+        display: inline-block; /* Très important : permet au point de s'aligner avec le texte */
+        vertical-align: middle; /* Aligne le point avec le milieu de la police d'écriture */
+        width: 12px; 
+        height: 12px; 
+        background-color: #e53935; /* Rouge alerte */
+        border-radius: 50%;
+        margin-right: 5px; /* Espace entre le point et la lettre 'A' */
+        margin-bottom: 3px; /* Petit ajustement optique de la hauteur */
+        position: relative;
+    }
+
+    /* L'onde rouge de l'animation */
+    .gm-animated-dot::after {
+        content: '';
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+        border-radius: 50%;
+        border: 2px solid #e53935;
+        animation: gm-pulse-alert 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+
+    /* L'animation de clignotement */
+    @keyframes gm-pulse-alert {
+        0% { transform: scale(0.6); opacity: 1; }
+        100% { transform: scale(1.6); opacity: 0; }
+    }
+
         </style>
     </head>
 
