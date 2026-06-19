@@ -1,4 +1,4 @@
-<header class="primary">
+<header class="primary" style="position: relative !important; z-index: 999;">
     <div class="d-sm-none firstbar" style="margin: 0;  padding: 0; padding-top: 10px; padding-bottom: 10px; background-image: url({{url('hphx/img/cacao-banniere-3.jpg')}}) !important; background-size: cover; background-repeat: no-repeat;">
         <div class="container" style="">
             <div class="row m-0 p-0" style="overflow: hidden; max-height: 100px; margin: 0; padding: 0;">
@@ -32,7 +32,7 @@
         </div>
     </div>
     <!-- Start nav  -->
-    <nav class="menu">
+    <nav class="menu" style="position: relative !important; width: 100%;">
         <div class="container">
             <div class="brand">
                 <a href="{{url('/')}}">
@@ -98,7 +98,7 @@
 </header>
 <!---->  
 
-//bloc partenaires en haut de page
+
 <section class="m-0 p-0 best-of-the-week bg-success" style="background-image: url({{url('hphx/img/_pub_6912ef4a554a7z.png')}}) !important; background-size: cover; background-repeat: no-repeat;">
     <div class="container b-white-shadow b-radius-6" style="background-color: #fff;">
         <div class="owl-carousel owl-theme carousel-1">

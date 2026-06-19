@@ -1128,7 +1128,7 @@ h4 {
     .gm-side-title {
         color: #000 !important;
         font-weight: 800;
-        font-size: 1.05rem;
+        font-size: 1.5rem;
         line-height: 1.3;
         margin-bottom: 8px;
         text-decoration: none;
@@ -1190,7 +1190,7 @@ h4 {
     .gm-grid-title {
         color: #000 !important;
         font-weight: 800;
-        font-size: 1.1rem;
+        font-size: 1.5rem;
         line-height: 1.3;
         margin-bottom: 8px;
         text-decoration: none;

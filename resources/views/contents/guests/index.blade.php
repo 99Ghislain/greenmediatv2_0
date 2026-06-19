@@ -20,11 +20,11 @@
 <section class="gm-news-section">
     <div class="container">
 
-<div class="" style="margin-bottom: 30px;"> 
-    <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow"> 
+        <div class="" style="margin-bottom: 30px;"> 
+            <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow"> 
         &nbsp; <span class="gm-animated-dot"></span> A LA UNE &nbsp;
-    </div>
-</div>
+            </div>
+        </div>
       
 
         @if(isset($hcarous)&&!empty($hcarous))
@@ -99,52 +99,51 @@
         <div class="mt-4 mb-4"></div>
 
       <div class="" style="margin-bottom: 30px;"> 
-    <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow"> 
+                 <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow"> 
         &nbsp; <span class="gm-animated-dot"></span> ARTICLES RECENTS &nbsp;
-    </div>
-</div>
-        
-        <div class="row">
-            @if(isset($hcf)&&count($hcf)!=0)
-                @foreach ($hcf as $is)
-                    <div class="col-md-3 gm-grid-col">
-                        <?php $dt = date_create($is->datepub_article); $dty = today();?>
-                        
-                        <div class="gm-grid-card">
-                            <a href="{{route('visitors.sgactu',['rub'=>$is->slug_prinrub,'slug'=>$is->slug_article,'ip'=>$is->id_article])}}">
-                                <img src="{{url('hphx/img/'.$is->image_article)}}" alt="{{$is->title_article}}" class="gm-grid-img">
-                            </a>
-                            
-                            <div class="gm-grid-body">
-                                <a href="{{route('visitors.sgactu',['rub'=>$is->slug_prinrub,'slug'=>$is->slug_article,'ip'=>$is->id_article])}}" class="gm-grid-title">
-                                    {{Str::limit($is->title_article, 90)}}
-                                </a>
-                                <p class="gm-side-desc">
-                                    {{Str::limit($is->desc_article, 100)}}
-                                </p>
-                            </div>
-
-                            <div class="gm-card-footer">
-                                <a href="{{route('visitors.allactus',['rub' => $is->slug_prinrub])}}" style="font-weight: 700;">
-                                    {{$is->desig_prinrub}}
-                                </a>
-                                <span class="gm-separator" style="margin: 0 5px;">|</span>
-                                <span>@if(!empty($is->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
-                                <span class="gm-separator" style="margin: 0 5px;">|</span>
-                                <span><i class="ion-ios-eye gm-icon-eye"></i> {{$is->view_article}}</span>
-                            </div>
-                        </div>
                     </div>
-                @endforeach
-            @endif
-            
-            <div class="col-12 mt-5 pt-4 mb-5 text-center">
-                <a href="{{route('visitors.allactus',['rub' => $hcarous[0]->slug_prinrub])}}" class="btn btn-outline-success" style="border-radius: 30px; font-weight: 700; padding: 12px 35px; border-color: #127319; color: #127319;"> 
-                    Voir plus d'actualités <i class="ion-ios-arrow-thin-right"></i>
-                </a>
-            </div> 
-        </div>
+         </div>
 
+        <div class="row" style="display: flex; flex-wrap: wrap;">
+    @if(isset($hcf)&&count($hcf)!=0)
+        @foreach ($hcf as $is)
+            <div class="col-md-3 gm-grid-col" style="margin-bottom: 30px;">
+                <?php $dt = date_create($is->datepub_article); $dty = today();?>
+                
+                <div class="gm-grid-card" style="width: 100%;">
+                    <a href="{{route('visitors.sgactu',['rub'=>$is->slug_prinrub,'slug'=>$is->slug_article,'ip'=>$is->id_article])}}">
+                        <img src="{{url('hphx/img/'.$is->image_article)}}" alt="{{$is->title_article}}" class="gm-grid-img">
+                    </a>
+                    
+                    <div class="gm-grid-body">
+                        <a href="{{route('visitors.sgactu',['rub'=>$is->slug_prinrub,'slug'=>$is->slug_article,'ip'=>$is->id_article])}}" class="gm-grid-title">
+                            <h3 class="gm-grid-title">{{Str::limit($is->title_article, 90)}}</h3>
+                        </a>
+                        <p class="gm-side-desc">
+                            {{Str::limit($is->desc_article, 100)}}
+                        </p>
+                    </div>
+
+                    <div class="gm-card-footer">
+                        <a href="{{route('visitors.allactus',['rub' => $is->slug_prinrub])}}" style="font-weight: 700;">
+                            {{$is->desig_prinrub}}
+                        </a>
+                        <span class="gm-separator" style="margin: 0 5px;">|</span>
+                        <span>@if(!empty($is->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                        <span class="gm-separator" style="margin: 0 5px;">|</span>
+                        <span><i class="ion-ios-eye gm-icon-eye"></i> {{$is->view_article}}</span>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endif
+    
+             <div class="col-12 mt-3 mb-5" style="display: flex; justify-content: center; width: 100%;">
+                <a href="{{route('visitors.allactus',['rub' => $hcarous[0]->slug_prinrub])}}" class="btn btn-outline-success" style="border-radius: 30px; font-weight: 700; padding: 12px 35px; border-color: #127319; color: #127319;"> 
+        Voir plus d'actualités <i class="ion-ios-arrow-thin-right"></i>
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 {{--  --}}
@@ -271,7 +270,7 @@
                                 </a>
                                 <div class="gm-grid-body">
                                     <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}" class="gm-grid-title">
-                                        {{Str::limit($hagriart[$i]->title_article, 90)}}
+                                       <h3 class="gm-side-title"> {{Str::limit($hagriart[$i]->title_article, 90)}}</h3>
                                     </a>
                                     <p class="gm-side-desc">
                                         {{Str::limit($hagriart[$i]->desc_article, 100)}}
@@ -329,21 +328,21 @@
             </div>
         </div>
 
-        <div class="row mt-4">
+        <div class="row mt-4" style="display: flex; flex-wrap: wrap;">
             @if(isset($pplars) && count($pplars) != 0)
                 @foreach($pplars as $hrh)
                     
                     <div class="col-md-4 gm-grid-col" style="margin-bottom: 40px;">
                         <?php $dt = date_create($hrh->datepub_article); $dty = today();?>
                         
-                        <div class="gm-grid-card">
+                        <div class="gm-grid-card" style="width: 100%;">
                             <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}">
                                 <img src="{{url('hphx/img/'.$hrh->image_article)}}" alt="{{$hrh->title_article}}" class="gm-grid-img">
                             </a>
                             
                             <div class="gm-grid-body">
                                 <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}" class="gm-grid-title">
-                                    {{Str::limit($hrh->title_article, 90)}}
+                                  <h3 class="gm-side-title">  {{Str::limit($hrh->title_article, 90)}}</h3>
                                 </a>
                                 <p class="gm-side-desc">
                                     {{Str::limit($hrh->desc_article, 100)}}
