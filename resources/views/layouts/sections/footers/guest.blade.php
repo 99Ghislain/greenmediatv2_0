@@ -7,7 +7,7 @@
                     <div class="acategory-two text-uppercase" style="font-weight: bold;">&nbsp;A Propos &nbsp; </div>
                     <div class="block-body">
                         <figure class="foot-logo">
-                            <img src="{{url('hphx/img/logo-green-media-green.png')}}" class="img-responsive" alt="Logo">
+                            <img src="{{url('hphx/img/greenmedia mise jour.png')}}" class="img-responsive" alt="Logo">
                         </figure>
                         <p class="brand-description">
                             Green Media Africa, Presse spécialiste des questions agricoles et environnementales opère à travers des reportages, enquêtes, dossiers et interviews.

@@ -5,7 +5,7 @@
                 <div class="col-md-3 col-sm-12" style=" margin: 0; padding: 0;">
                     <div class="brand" style=" margin: 0; padding: 0;">
                         <a href="{{url('/')}}">
-                            <img src="{{url('hphx/img/logo-green-media-00.png')}}" alt="Green Media Africa" style="width: 90%; margin: 0; padding: 0;">
+                            <img src="{{url('hphx/img/greenmedia mise jour.png')}}" alt="Green Media Africa" style="width: 70%; margin: 0; padding: 0;">
                         </a>
                     </div>						
                 </div>
@@ -36,7 +36,7 @@
         <div class="container">
             <div class="brand">
                 <a href="{{url('/')}}">
-                    <img src="{{url('hphx/img/logo-green-media-green.png')}}" alt="Green Media Africa">
+                    <img src="{{url('hphx/img/greenmedia mise jour.png')}}" alt="Green Media Africa">
                 </a>
                 @php
                     $linkId = null;
@@ -119,6 +119,7 @@
         </div>
     </div>
 </section>
+
 <section class="m-0 p-0" style="padding-bottom: 0;">
     <div class="container-fluid px-0" style="padding: 0 auto !important;">
         <div class="row">

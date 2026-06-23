@@ -95,7 +95,7 @@
             /**/
             
 			body {
-				background-image: url({{url('hphx/img/ivoire.png')}}) !important;
+				background-image: url({{url('hphx/img/ivoir.png')}}) !important;
 				/* background-attachment: fixed; */
 			}
 			.box-green {
@@ -1057,8 +1057,8 @@ h4 {
         color: white;
     }
     .gm-badge {
-        background-color: var(--gm-light-green);
-        color: white;
+        background-color: #ffa000 !important;
+        color: #ffffff !important;
         padding: 4px 12px;
         font-weight: 800;
         font-size: 0.85rem;
@@ -1301,6 +1301,132 @@ h4 {
         0% { transform: scale(0.6); opacity: 1; }
         100% { transform: scale(1.6); opacity: 0; }
     }
+
+	/* --- BADGE DE CATÉGORIE ORANGE DANS LE PIED DE CARTE --- */
+    .gm-card-footer a {
+        background-color: #ffa000 !important; 
+        color: #ffff !important; 
+        padding: 4px 10px; 
+        border-radius: 3px; 
+        text-decoration: none !important; /* Ceci supprime le trait noir sous HYDRAULIQUE */
+        display: inline-block;
+        font-weight: 800;
+    }
+
+    /* Changement de couleur au survol de la souris */
+    .gm-card-footer a:hover {
+        background-color: #e69000 !important; 
+        color: #ffffff !important;
+    }
+
+	/* --- METTRE TOUS LES TITRES DES ARTICLES EN MINUSCULES --- */
+    .gm-main-title, 
+    .gm-side-title, 
+    .gm-grid-title {
+        text-transform: lowercase !important;
+    }
+
+	/* 2. On cible UNIQUEMENT la première lettre pour la mettre en majuscule */
+    .gm-main-title::first-letter, 
+    .gm-side-title::first-letter, 
+    .gm-grid-title::first-letter {
+        text-transform: uppercase !important;
+
+
+		
+    /* =========================================
+       STYLES PREMIUM GREEN MEDIA (GLOBAL)
+       ========================================= */
+
+    /* --- CARTES ET GRILLES FLEXBOX --- */
+    .gm-grid-card {
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+    }
+    .gm-grid-img {
+        width: 100%;
+        height: 200px; /* Force l'image à avoir de belles proportions */
+        object-fit: cover; /* Empêche l'image de s'écraser */
+    }
+    .gm-grid-body {
+        padding: 15px;
+        flex-grow: 1; /* Pousse toujours la barre verte vers le bas */
+    }
+    .gm-side-desc {
+        color: #555;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 0;
+    }
+    
+    /* --- PIED DE CARTE (FOOTER VERT) --- */
+    .gm-card-footer {
+        background-color: #127319; /* Vert Green Media */
+        padding: 10px 15px;
+        color: #fff;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        margin-top: auto; 
+    }
+    .gm-card-footer a {
+        background-color: #ffa000 !important; /* Badge Orange */
+        color: #ffffff !important;
+        padding: 4px 10px;
+        border-radius: 3px;
+        text-decoration: none !important;
+        font-weight: 800;
+        display: inline-block;
+    }
+    .gm-card-footer a:hover {
+        background-color: #e69000 !important;
+    }
+
+    /* --- BADGES ET POINT CLIGNOTANT --- */
+    .gm-badge {
+        background-color: #ffa000 !important;
+        color: #ffffff !important;
+        padding: 4px 12px;
+        border-radius: 3px;
+        text-decoration: none !important;
+        font-weight: 800;
+        display: inline-block;
+    }
+    .gm-animated-dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: #ff0000;
+        border-radius: 50%;
+        vertical-align: middle;
+        margin-right: 5px;
+        animation: pulse-live 1.5s infinite;
+    }
+    @keyframes pulse-live {
+        0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+    }
+
+    /* --- TYPOGRAPHIE (Majuscule au début) --- */
+    .gm-main-title, .gm-side-title, .gm-grid-title {
+        text-transform: lowercase !important;
+        font-weight: 900;
+        color: #111;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+    .gm-main-title::first-letter, .gm-side-title::first-letter, .gm-grid-title::first-letter {
+        text-transform: uppercase !important;
+    }
+
 
         </style>
     </head>

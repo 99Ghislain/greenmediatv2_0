@@ -33,30 +33,30 @@
                 <div class="col-md-7 mb-4">
                     <?php $dt = date_create($hcarous[0]->datepub_article); $dty = today();?>
                     
-                    <div class="gm-main-card">
-                        <a href="{{route('visitors.sgactu',['rub'=>$hcarous[0]->slug_prinrub,'slug'=>$hcarous[0]->slug_article,'ip'=>$hcarous[0]->id_article])}}" class="gm-main-img-wrap">
-                            <img src="{{url('hphx/img/'.$hcarous[0]->image_article)}}" alt="{{$hcarous[0]->title_article}}">
-                        </a>
-                        
-                        <div class="gm-main-content">
-                            <div class="d-flex align-items-center flex-wrap">
-                                <a href="{{route('visitors.allactus',['rub' => $hcarous[0]->slug_prinrub])}}" class="gm-badge">
-                                    {{$hcarous[0]->desig_prinrub}}
-                                </a>
-                                <span class="gm-separator">|</span>
-                                <span style="font-weight: 500;">
-                                    @if(!empty($hcarous[0]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif
-                                </span>
-                            </div>
+<div class="gm-main-card">
+        <a href="{{route('visitors.sgactu',['rub'=>$hcarous[0]->slug_prinrub,'slug'=>$hcarous[0]->slug_article,'ip'=>$hcarous[0]->id_article])}}" class="gm-main-img-wrap">
+            <img src="{{url('hphx/img/'.$hcarous[0]->image_article)}}" alt="{{$hcarous[0]->title_article}}">
+        </a>
+    
+        <div class="gm-main-content">
+            <div class="d-flex align-items-center flex-wrap">
+            <a href="{{route('visitors.allactus',['rub' => $hcarous[0]->slug_prinrub])}}" class="gm-badge">
+                {{$hcarous[0]->desig_prinrub}}
+            </a>
+            <span class="gm-separator">|</span>
+            <span style="font-weight: 500;">
+                @if(!empty($hcarous[0]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif
+            </span>
+        </div>
 
-                            <a href="{{route('visitors.sgactu',['rub'=>$hcarous[0]->slug_prinrub,'slug'=>$hcarous[0]->slug_article,'ip'=>$hcarous[0]->id_article])}}" class="gm-main-title">
-                                {{Str::limit($hcarous[0]->title_article, 120)}}
-                            </a>
-                            <p class="gm-main-desc">
-                                {{Str::limit($hcarous[0]->desc_article, 170)}}
-                            </p>
-                        </div>
-                    </div>
+        <a href="{{route('visitors.sgactu',['rub'=>$hcarous[0]->slug_prinrub,'slug'=>$hcarous[0]->slug_article,'ip'=>$hcarous[0]->id_article])}}" class="gm-main-title">
+            {{Str::limit($hcarous[0]->title_article, 120)}}
+        </a>
+                    <p class="gm-main-desc">
+            {{Str::limit($hcarous[0]->desc_article, 170)}}
+                    </p>
+            </div>
+    </div>
                 </div>
 
                 <div class="col-md-5">
