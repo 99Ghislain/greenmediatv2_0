@@ -31,7 +31,7 @@
                         <span style="background-color: #127319; color: #ffffff; padding: 4px 12px; text-transform: uppercase; font-weight: 800; font-size: 0.95rem;">
                             {{$hcart[0]->slug_prinrub}} 
                             @if(isset($hnbartsprinrub) && isset($hnbartsprinrub[$hcart[0]->id_prinrub])) 
-                                [ {{sprintf("%02d", $hnbartsprinrub[$hcart[0]->id_prinrub])}} ART ] 
+                                [ {{sprintf("%02d", $hnbartsprinrub[$hcart[0]->id_prinrub])}} ARTICLES ] 
                             @endif
                         </span>
                         <span style="margin: 0 15px; color: #ffa000; font-weight: 900;">|</span>

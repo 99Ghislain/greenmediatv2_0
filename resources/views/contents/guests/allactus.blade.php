@@ -13,14 +13,52 @@
             </div>
         </div>
 
-        <div class="row" style="margin-bottom: 30px;">
+        <div class="row" style="margin-bottom: 40px;">
             <div class="col-md-12">
-                <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow">
-                    &nbsp; <span class="gm-animated-dot"></span> Voici @if(!empty($hcarts[0]->id_prinrub)&&!isset($wcount)){{count($hcarts)}}/{{$hnbartsprinrub[$hcarts[0]->id_prinrub]}}@elseif(isset($wcount)){{count($hcarts)}}/{{$wcount}} @else 0/0 @endif Article(s) de : <span style="color: #ffa000;">{{$rub}}</span> &nbsp;
+                <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; background-color: #ffffff; padding: 15px 20px; border-bottom: 8px solid #ffa000; box-shadow: 0 4px 15px rgba(0,0,0,0.05); gap: 15px;">
+
+                    <div style="font-size: 2.2rem; font-weight: 900; color: #111; text-transform: uppercase; display: flex; align-items: center; letter-spacing: 1px;">
+                        <span class="gm-animated-dot" style="margin-right: 15px;"></span>
+                        VOICI @if(!empty($hcarts[0]->id_prinrub)&&!isset($wcount)){{count($hcarts)}}/{{$hnbartsprinrub[$hcarts[0]->id_prinrub]}}@elseif(isset($wcount)){{count($hcarts)}}/{{$wcount}} @else 0/0 @endif ARTICLES
+                    </div>
+
+                    <div style="font-size: 2.8rem; font-weight: 900; color: #127319; margin: 0 10px; line-height: 1;">
+                        |
+                    </div>
+
+                    <div style="background-color: #127319; color: #ffffff; padding: 6px 25px 6px 6px; border-radius: 8px; font-size: 2.2rem; font-weight: 900; text-transform: uppercase; display: flex; align-items: center; letter-spacing: 1px;">
+                        
+                        @php
+                            // On met le nom de la rubrique en minuscules pour faciliter la recherche
+                            $nomRubrique = strtolower(trim($rub));
+                            
+                            // 1. Icône par défaut (si la catégorie n'est pas reconnue ci-dessous)
+                            $iconeCat = 'ion-navicon-round'; 
+
+                            // 2. Vérification des mots-clés pour attribuer la bonne icône
+                            if (strpos($nomRubrique, 'agri') !== false) {
+                                $iconeCat = 'ion-leaf'; // Feuille pour l'Agriculture
+                            } elseif (strpos($nomRubrique, 'hydrau') !== false || strpos($nomRubrique, 'eau') !== false) {
+                                $iconeCat = 'ion-waterdrop'; // Goutte d'eau pour l'Hydraulique
+                            } elseif (strpos($nomRubrique, 'environ') !== false) {
+                                $iconeCat = 'ion-earth'; // Planète pour l'Environnement
+                            } elseif (strpos($nomRubrique, 'animal') !== false) {
+                                $iconeCat = 'ion-android-walk'; // Icône pour Ressources Animales
+                            } elseif (strpos($nomRubrique, 'forêt') !== false || strpos($nomRubrique, 'foret') !== false) {
+                                $iconeCat = 'ion-tree'; // Arbre pour Forêt (si disponible)
+                            }
+                        @endphp
+
+                        <span style="background-color: #ffa000; color: #ffffff; border-radius: 5px; padding: 4px 15px; margin-right: 15px; display: flex; align-items: center; justify-content: center;">
+                            <i class="{{ $iconeCat }}" style="font-size: 1.8rem;"></i>
+                        </span>
+                        
+                        {{$rub}}
+                    </div>
+
                 </div>
             </div>
         </div>
-
         @if(count($hcarts) != 0)
             <div class="row mt-4" style="display: flex; flex-wrap: wrap;">
                 
