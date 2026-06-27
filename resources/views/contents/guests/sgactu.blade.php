@@ -54,7 +54,7 @@
 
                         <div style="background-color: #ffffff; border-radius: 0 0 5px 5px; box-shadow: 0 5px 10px rgba(0,0,0,0.05); padding: 20px 20px 30px 20px; font-size: 1.1rem; line-height: 1.8; color: #333;">
                             @if(!empty($hcart[0]->desc_article))
-                                <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 20px;">{{$hcart[0]->desc_article}}</p>
+                                <p style="font-weight: bold; font-size: 1.6rem; margin-bottom: 20px;">{{$hcart[0]->desc_article}}</p>
                             @endif
                             
                             <div class="article-body">

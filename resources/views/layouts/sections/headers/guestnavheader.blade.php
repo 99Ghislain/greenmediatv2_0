@@ -1,4 +1,4 @@
-<header class="primary" style="position: relative !important; z-index: 999;">
+<header class="primary" style="position: relative !important; z-index: 999; margin-bottom: 0 !important;">
     <div class="d-sm-none firstbar" style="margin: 0;  padding: 0; padding-top: 10px; padding-bottom: 10px; background-image: url({{url('hphx/img/cacao-banniere-3.jpg')}}) !important; background-size: cover; background-repeat: no-repeat;">
         <div class="container" style="">
             <div class="row m-0 p-0" style="overflow: hidden; max-height: 100px; margin: 0; padding: 0;">
@@ -7,7 +7,7 @@
                         <a href="{{url('/')}}">
                             <img src="{{url('hphx/img/greenmedia mise jour.png')}}" alt="Green Media Africa" style="width: 70%; margin: 0; padding: 0;">
                         </a>
-                    </div>						
+                    </div>                      
                 </div>
                 <div class="col-md-push-6 col-md-3 col-sm-12 text-right" style=" margin: 0; padding: 0;">
                     <ul class="nav-icons" style=" margin: 0; padding: 0;">
@@ -98,33 +98,59 @@
 </header>
 <!---->  
 
+<!-- BANNIÈRE PUBLICITAIRE (Remplace les partenaires) -->
+<style>
+    /* Comportement par défaut (Pour les téléphones) : On remonte juste un peu */
+    .gm-ad-section {
+        margin-top: -10px !important;
+        margin-bottom: 15px !important;
+        position: relative;
+        z-index: 10;
+        width: 100%;
+    }
+    
+    /* Comportement pour les Tablettes et Ordinateurs : On aspire le grand vide (-60px) */
+    @media (min-width: 768px) {
+        .gm-ad-section {
+            margin-top: -80px !important;
+        }
+    }
+</style>
 
-<section class="m-0 p-0 best-of-the-week bg-success" style="background-image: url({{url('hphx/img/_pub_6912ef4a554a7z.png')}}) !important; background-size: cover; background-repeat: no-repeat;">
-    <div class="container b-white-shadow b-radius-6" style="background-color: #fff;">
-        <div class="owl-carousel owl-theme carousel-1">
-            @if(isset($parts)&&!empty($parts))
-                @foreach($parts as $part)
-                    <?php $dt = date_create($part->created_at);?>
-                    <article class="article" style="margin-bottom: 0; padding-bottom: 0; border: 1px solid transparent;">
-                        <div class="inner" style="border: 1px solid transparent;">
-                            <figure style="margin-bottom: 0; padding-bottom: 0; maxi-height: 150px;">
-                                <a href="{{$part->link_partenaire}}">
-                                    <img src="{{url('hphx/img/'.$part->logo_partenaire)}}" alt="{{$part->name_partenaire}}" style="height: 50px;">
-                                </a>
-                            </figure>
-                        </div>
-                    </article>
-                @endforeach
-            @endif
+<section class="m-0 p-0 gm-ad-section">
+    <div class="container">
+        
+        <div style="background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 5px; padding: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; box-sizing: border-box; min-height: 150px;">
+            
+            <div style="font-size: 0.75rem; color: #aaaaaa; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; font-weight: 600; user-select: none;">
+                - Espace Publicitaire -
+            </div>
+            
+            <div style="width: 100%; overflow: hidden;">
+                
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+                <ins class="adsbygoogle"
+                     style="display:block; min-width:250px; max-height:280px;"
+                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                     data-ad-slot="XXXXXXXXXX"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+                
+            </div>
+
         </div>
     </div>
 </section>
+<!-- FIN BANNIÈRE PUBLICITAIRE -->
 
 <section class="m-0 p-0" style="padding-bottom: 0;">
     <div class="container-fluid px-0" style="padding: 0 auto !important;">
         <div class="row">
             <div class="col-md-12 ">
-                <div class="d-flex position-relative justify-content-between align-items-center breaking-news bg-white mt-5 b-radius-6" style="position: relative;">
+                <div class="d-flex position-relative justify-content-between align-items-center breaking-news bg-white mt-2 b-radius-6" style="position: relative;">
                     <marquee class="news-scroll bg-dark b-radius-6 b-white-shadow" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="background-color: #000; line-height: 25px;" >
                         @if(isset($fhs)&&count($fhs)!=0)
                             @foreach($fhs as $f)
