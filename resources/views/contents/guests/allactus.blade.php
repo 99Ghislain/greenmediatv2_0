@@ -73,7 +73,7 @@
                             
                             <div class="gm-grid-body">
                                 <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}" class="gm-grid-title">
-                                    {{Str::limit($hrh->title_article, 90)}}
+                                    {{Str::limit(formatTitle($hrh->title_article), 90)}}
                                 </a>
                                 <p class="gm-side-desc">
                                     {{Str::limit($hrh->desc_article, 100)}}

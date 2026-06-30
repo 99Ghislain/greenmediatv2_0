@@ -1319,19 +1319,12 @@ h4 {
         color: #ffffff !important;
     }
 
-	/* --- METTRE TOUS LES TITRES DES ARTICLES EN MINUSCULES --- */
+	/* --- TYPOGRAPHIE DES TITRES (Laisse le PHP travailler) --- */
     .gm-main-title, 
     .gm-side-title, 
     .gm-grid-title {
-        text-transform: lowercase !important;
+        text-transform: none !important;
     }
-
-	/* 2. On cible UNIQUEMENT la première lettre pour la mettre en majuscule */
-    .gm-main-title::first-letter, 
-    .gm-side-title::first-letter, 
-    .gm-grid-title::first-letter {
-        text-transform: uppercase !important;
-
 
 		
     /* =========================================
@@ -1413,18 +1406,15 @@ h4 {
         100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
     }
 
-    /* --- TYPOGRAPHIE (Majuscule au début) --- */
+    /* --- TYPOGRAPHIE (Majuscule à chaque mot) --- */
     .gm-main-title, .gm-side-title, .gm-grid-title {
-        text-transform: lowercase !important;
+        text-transform: capitalize !important;
         font-weight: 900;
         color: #111;
         text-decoration: none;
         display: block;
         margin-bottom: 10px;
         line-height: 1.4;
-    }
-    .gm-main-title::first-letter, .gm-side-title::first-letter, .gm-grid-title::first-letter {
-        text-transform: uppercase !important;
     }
 
 
@@ -1444,5 +1434,6 @@ h4 {
         @yield('layoutContent')
         <!-- End Main News Area -->
         @include('layouts.sections.footers.guest')
+		
     </body>
 </html>

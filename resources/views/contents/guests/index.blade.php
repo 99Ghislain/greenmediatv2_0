@@ -1,7 +1,5 @@
 @extends('layouts/guestLayout')
 @section('layoutContent')
-<!-- Start Main Default News Area -->
-
 {{--  --}}
 <div class="container" style="margin-top: -30px; margin-bottom: 30px !important;">
     <div class="banner">
@@ -15,8 +13,6 @@
     </div>
 </div>
 {{--  --}}
-<!-- / Home -->
-
 <section class="gm-news-section">
     <div class="container">
 
@@ -50,7 +46,7 @@
         </div>
 
         <a href="{{route('visitors.sgactu',['rub'=>$hcarous[0]->slug_prinrub,'slug'=>$hcarous[0]->slug_article,'ip'=>$hcarous[0]->id_article])}}" class="gm-main-title">
-            {{Str::limit($hcarous[0]->title_article, 120)}}
+            {{Str::limit(formatTitle($hcarous[0]->title_article), 120)}}
         </a>
                     <p class="gm-main-desc">
             {{Str::limit($hcarous[0]->desc_article, 170)}}
@@ -68,7 +64,7 @@
                                 <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}" class="gm-side-body">
                                     <img src="{{url('hphx/img/'.$hrh->image_article)}}" alt="{{$hrh->title_article}}" class="gm-side-img">
                                     <div class="gm-side-text">
-                                        <h3 class="gm-side-title">{{Str::limit($hrh->title_article, 80)}}</h3>
+                                        <h3 class="gm-side-title">{{Str::limit(formatTitle($hrh->title_article), 80)}}</h3>
                                         <p class="gm-side-desc">{{Str::limit($hrh->desc_article, 80)}}</p>
                                     </div>
                                 </a>
@@ -117,7 +113,7 @@
                     
                     <div class="gm-grid-body">
                         <a href="{{route('visitors.sgactu',['rub'=>$is->slug_prinrub,'slug'=>$is->slug_article,'ip'=>$is->id_article])}}" class="gm-grid-title">
-                            <h3 class="gm-grid-title">{{Str::limit($is->title_article, 90)}}</h3>
+                            <h3 class="gm-grid-title">{{Str::limit(formatTitle($is->title_article), 90)}}</h3>
                         </a>
                         <p class="gm-side-desc">
                             {{Str::limit($is->desc_article, 100)}}
@@ -194,7 +190,7 @@
                             </div>
 
                             <a href="{{route('visitors.sgactu',['rub'=>$hagriart[0]->slug_prinrub,'slug'=>$hagriart[0]->slug_article,'ip'=>$hagriart[0]->id_article])}}" class="gm-main-title">
-                                {{Str::limit($hagriart[0]->title_article, 120)}}
+                                {{Str::limit(formatTitle($hagriart[0]->title_article), 120)}}
                             </a>
                             <p class="gm-main-desc">
                                 {{Str::limit($hagriart[0]->desc_article, 170)}}
@@ -211,7 +207,7 @@
                                 <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}" class="gm-side-body">
                                     <img src="{{url('hphx/img/'.$hagriart[$i]->image_article)}}" alt="{{$hagriart[$i]->title_article}}" class="gm-side-img">
                                     <div class="gm-side-text">
-                                        <h3 class="gm-side-title">{{Str::limit($hagriart[$i]->title_article, 80)}}</h3>
+                                        <h3 class="gm-side-title">{{Str::limit(formatTitle($hagriart[$i]->title_article), 80)}}</h3>
                                         <p class="gm-side-desc">{{Str::limit($hagriart[$i]->desc_article, 80)}}</p>
                                     </div>
                                 </a>
@@ -240,7 +236,7 @@
                                 <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}" class="gm-side-body" style="flex-grow: 1;">
                                     <img src="{{url('hphx/img/'.$hagriart[$i]->image_article)}}" alt="{{$hagriart[$i]->title_article}}" class="gm-side-img" style="width: 160px; height: 120px;">
                                     <div class="gm-side-text">
-                                        <h3 class="gm-side-title">{{Str::limit($hagriart[$i]->title_article, 90)}}</h3>
+                                        <h3 class="gm-side-title">{{Str::limit(formatTitle($hagriart[$i]->title_article), 90)}}</h3>
                                         <p class="gm-side-desc">{{Str::limit($hagriart[$i]->desc_article, 90)}}</p>
                                     </div>
                                 </a>
@@ -270,7 +266,7 @@
                                 </a>
                                 <div class="gm-grid-body">
                                     <a href="{{route('visitors.sgactu',['rub'=>$hagriart[$i]->slug_prinrub,'slug'=>$hagriart[$i]->slug_article,'ip'=>$hagriart[$i]->id_article])}}" class="gm-grid-title">
-                                       <h3 class="gm-side-title"> {{Str::limit($hagriart[$i]->title_article, 90)}}</h3>
+                                       <h3 class="gm-side-title"> {{Str::limit(formatTitle($hagriart[$i]->title_article), 90)}}</h3>
                                     </a>
                                     <p class="gm-side-desc">
                                         {{Str::limit($hagriart[$i]->desc_article, 100)}}
@@ -342,7 +338,7 @@
                             
                             <div class="gm-grid-body">
                                 <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}" class="gm-grid-title">
-                                  <h3 class="gm-side-title">  {{Str::limit($hrh->title_article, 90)}}</h3>
+                                  <h3 class="gm-side-title">  {{Str::limit(formatTitle($hrh->title_article), 90)}}</h3>
                                 </a>
                                 <p class="gm-side-desc">
                                     {{Str::limit($hrh->desc_article, 100)}}
@@ -379,7 +375,7 @@
             </a>
             @endif
         </figure>
-    </div>    
+    </div>  
 </div>
 
 
@@ -420,7 +416,7 @@
                             </div>
 
                             <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[0]->slug_prinrub,'slug'=>$hallsoarts[0]->slug_article,'ip'=>$hallsoarts[0]->id_article])}}" class="gm-main-title">
-                                {{Str::limit($hallsoarts[0]->title_article, 120)}}
+                                {{Str::limit(formatTitle($hallsoarts[0]->title_article), 120)}}
                             </a>
                             <p class="gm-main-desc">
                                 {{Str::limit($hallsoarts[0]->desc_article, 170)}}
@@ -437,7 +433,7 @@
                                 <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}" class="gm-side-body">
                                     <img src="{{url('hphx/img/'.$hallsoarts[$i]->image_article)}}" alt="{{$hallsoarts[$i]->title_article}}" class="gm-side-img">
                                     <div class="gm-side-text">
-                                        <h3 class="gm-side-title">{{Str::limit($hallsoarts[$i]->title_article, 80)}}</h3>
+                                        <h3 class="gm-side-title">{{Str::limit(formatTitle($hallsoarts[$i]->title_article), 80)}}</h3>
                                         <p class="gm-side-desc">{{Str::limit($hallsoarts[$i]->desc_article, 80)}}</p>
                                     </div>
                                 </a>
@@ -466,7 +462,7 @@
                                 <a href="{{route('visitors.sgactu',['rub'=>$hallsoarts[$i]->slug_prinrub,'slug'=>$hallsoarts[$i]->slug_article,'ip'=>$hallsoarts[$i]->id_article])}}" class="gm-side-body" style="flex-grow: 1;">
                                     <img src="{{url('hphx/img/'.$hallsoarts[$i]->image_article)}}" alt="{{$hallsoarts[$i]->title_article}}" class="gm-side-img" style="width: 160px; height: 120px;">
                                     <div class="gm-side-text">
-                                        <h3 class="gm-side-title">{{Str::limit($hallsoarts[$i]->title_article, 90)}}</h3>
+                                        <h3 class="gm-side-title">{{Str::limit(formatTitle($hallsoarts[$i]->title_article), 90)}}</h3>
                                         <p class="gm-side-desc">{{Str::limit($hallsoarts[$i]->desc_article, 90)}}</p>
                                     </div>
                                 </a>
@@ -550,7 +546,7 @@
                             </div>
 
                             <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[0]->slug_prinrub,'slug'=>$hallspoarts[0]->slug_article,'ip'=>$hallspoarts[0]->id_article])}}" class="gm-main-title">
-                                {{Str::limit($hallspoarts[0]->title_article, 120)}}
+                                {{Str::limit(formatTitle($hallspoarts[0]->title_article), 120)}}
                             </a>
                             <p class="gm-main-desc">
                                 {{Str::limit($hallspoarts[0]->desc_article, 170)}}
@@ -567,7 +563,7 @@
                                 <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}" class="gm-side-body">
                                     <img src="{{url('hphx/img/'.$hallspoarts[$i]->image_article)}}" alt="{{$hallspoarts[$i]->title_article}}" class="gm-side-img">
                                     <div class="gm-side-text">
-                                        <h3 class="gm-side-title">{{Str::limit($hallspoarts[$i]->title_article, 80)}}</h3>
+                                        <h3 class="gm-side-title">{{Str::limit(formatTitle($hallspoarts[$i]->title_article), 80)}}</h3>
                                         <p class="gm-side-desc">{{Str::limit($hallspoarts[$i]->desc_article, 80)}}</p>
                                     </div>
                                 </a>
@@ -596,7 +592,7 @@
                                 <a href="{{route('visitors.sgactu',['rub'=>$hallspoarts[$i]->slug_prinrub,'slug'=>$hallspoarts[$i]->slug_article,'ip'=>$hallspoarts[$i]->id_article])}}" class="gm-side-body" style="flex-grow: 1;">
                                     <img src="{{url('hphx/img/'.$hallspoarts[$i]->image_article)}}" alt="{{$hallspoarts[$i]->title_article}}" class="gm-side-img" style="width: 160px; height: 120px;">
                                     <div class="gm-side-text">
-                                        <h3 class="gm-side-title">{{Str::limit($hallspoarts[$i]->title_article, 90)}}</h3>
+                                        <h3 class="gm-side-title">{{Str::limit(formatTitle($hallspoarts[$i]->title_article), 90)}}</h3>
                                         <p class="gm-side-desc">{{Str::limit($hallspoarts[$i]->desc_article, 90)}}</p>
                                     </div>
                                 </a>
@@ -629,7 +625,6 @@
 </section>
 {{--  --}}
 {{--  --}}
-<!-- // Home Page -->
 <?php 
 function phxdtformat($dt){
     $tabm = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
@@ -646,6 +641,7 @@ function phxdtformat($dt){
    
     return $ljr.' '.$jr.' '.$mfr.' '.$an ;
 } 
+
+
 ;?>
 @endsection
-            
