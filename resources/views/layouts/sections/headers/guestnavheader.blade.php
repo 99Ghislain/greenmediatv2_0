@@ -89,7 +89,7 @@
                         </ul>
                     </li>
                     
-                    <li class="<?=(isset($hpage)&&($hpage=='Green Media Africa - TV'))?'active':false;?> bg-warning-green" ><a href="<?=(isset($hpage)&&($hpage=='Green Media Africa - TV'))?'#':route('visitors.allvideos');?>" class="text-white" style="width: 100%;"> Green M. TV</a></li>
+                    <li class="<?=(isset($hpage)&&($hpage=='Green Media Africa - TV'))?'active':false;?> bg-warning-green" ><a href="<?=(isset($hpage)&&($hpage=='Green Media Africa - TV'))?'#':route('visitors.allvideos');?>" class="text-white" style="width: 100%;"><img src="{{url('hphx/img/tv.png')}}" alt="Green Media Africa" style="width: 30px; height: 30px; object-fit: contain;"> TV</a></li>
                     <li class="<?=(isset($hpage)&&($hpage=='Green Media Africa - TV'))? false:false;?>" style="" ><a href="{{url('/2phx-login-greenmedia-2025')}}" target="_blank" class="text-white btn btn-danger btn-xs" style="width: 100%; padding: 0 auto !important;"><i class="ion-locked" style=""></i></a></li>
                 </ul>
             </div>

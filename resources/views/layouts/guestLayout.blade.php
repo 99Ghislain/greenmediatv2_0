@@ -1418,6 +1418,284 @@ h4 {
     }
 
 
+   body {
+        background-color: #0b0f19 !important; /* Fond ultra-sombre style cinéma */
+        color: #ffffff;
+    }
+    
+    .breadcrumb li a {
+        color: #58b918 !important;
+    }
+    .breadcrumb .active {
+        color: #ffffff !important;
+    }
+
+    /* --- SECTION DU LECTEUR PRINCIPAL (HERO) --- */
+    .gm-tv-main-section {
+        background: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
+        padding: 40px 0;
+        border-bottom: 1px solid #1f2937;
+    }
+
+    .gm-tv-hero-card {
+        background: #111827;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+        border: 1px solid #1f2937;
+    }
+
+    .gm-tv-player-container {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* Ratio 16:9 Cinéma parfait */
+        background-color: #000;
+    }
+
+    .gm-tv-player-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Grand bouton Play central */
+    .gm-tv-central-play {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90px;
+        height: 90px;
+        background-color: #ff0000; /* Rouge vif TV */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 5;
+    }
+
+    .gm-tv-player-container:hover .gm-tv-central-play {
+        transform: translate(-50%, -50%) scale(1.12);
+        background-color: #cc0000;
+        box-shadow: 0 0 40px rgba(255, 0, 0, 0.8);
+    }
+
+    .gm-tv-central-play i {
+        color: #ffffff;
+        font-size: 40px;
+        margin-left: 6px; /* Ajustement géométrique pour le triangle */
+    }
+
+    .gm-tv-hero-details {
+        padding: 30px;
+    }
+
+    /* Le badge exclusif LIVE clignotant */
+    .gm-tv-live-tag {
+        display: inline-flex;
+        align-items: center;
+        background-color: rgba(239, 68, 68, 0.2);
+        border: 1px solid #ef4444;
+        color: #fca5a5;
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
+    .gm-tv-live-pulse {
+        width: 10px;
+        height: 10px;
+        background-color: #ef4444;
+        border-radius: 50%;
+        margin-right: 10px;
+        box-shadow: 0 0 10px #ef4444;
+        animation: tv-pulse 1.6s infinite;
+    }
+
+    @keyframes tv-pulse {
+        0% { transform: scale(0.8); opacity: 1; }
+        50% { transform: scale(1.3); opacity: 0.5; }
+        100% { transform: scale(0.8); opacity: 1; }
+    }
+
+    .gm-tv-hero-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #ffffff !important;
+        margin: 20px 0 10px 0;
+        line-height: 1.3;
+        text-decoration: none;
+        display: block;
+    }
+    
+    .gm-tv-hero-title:hover {
+        color: #58b918 !important;
+    }
+
+    /* --- SECTION DE LA GRILLE DES REPLAYS --- */
+    .gm-tv-grid-section {
+        padding: 60px 0;
+    }
+
+    .gm-tv-section-heading {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: #ffffff;
+        border-left: 6px solid #58b918;
+        padding-left: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .gm-tv-card {
+        background: #111827;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #1f2937;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .gm-tv-card:hover {
+        transform: translateY(-6px);
+        border-color: #374151;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+
+    .gm-tv-thumb-wrap {
+        position: relative;
+        width: 100%;
+        height: 190px;
+        overflow: hidden;
+        background-color: #000;
+    }
+
+    .gm-tv-thumb-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .gm-tv-card:hover .gm-tv-thumb-wrap img {
+        transform: scale(1.05);
+    }
+
+    .gm-tv-small-play {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 54px;
+        height: 54px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #ffffff;
+        transition: all 0.3s ease;
+    }
+
+    .gm-tv-card:hover .gm-tv-small-play {
+        background-color: #ff0000;
+        border-color: #ff0000;
+    }
+
+    .gm-tv-small-play i {
+        color: #ffffff;
+        font-size: 22px;
+        margin-left: 3px;
+    }
+
+    .gm-tv-card-body {
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .gm-tv-card-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #ffffff !important;
+        line-height: 1.4;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .gm-tv-card-title:hover {
+        color: #58b918 !important;
+    }
+
+    .gm-tv-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        color: #9ca3af;
+        border-top: 1px solid #1f2937;
+        padding-top: 15px;
+    }
+
+    .gm-tv-mini-tag {
+        background-color: #ff0000;
+        color: #ffffff !important;
+        padding: 2px 10px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        border-radius: 4px;
+    }
+
+	/* CSS spécifiques pour incruster les boutons "Play" sur vos images de grilles standards */
+    .gm-tv-player-wrapper {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* Ratio 16:9 parfait pour la vidéo à la une */
+        background-color: #000;
+        border-radius: 8px 8px 0 0;
+        overflow: hidden;
+    }
+    .gm-tv-player-wrapper img {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .gm-tv-play-btn {
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: 80px; height: 80px; background-color: rgba(229, 57, 53, 0.9);
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 0 20px rgba(229, 57, 53, 0.6); transition: transform 0.3s ease; z-index: 10;
+    }
+    .gm-tv-player-wrapper:hover .gm-tv-play-btn { transform: translate(-50%, -50%) scale(1.1); }
+    .gm-tv-play-btn i { color: white; font-size: 35px; margin-left: 5px; }
+
+    /* Pour les petites cartes de la grille */
+    .gm-video-thumb { position: relative; width: 100%; height: 160px; overflow: hidden; }
+    .gm-video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+    .gm-grid-card:hover .gm-video-thumb img { transform: scale(1.05); }
+    
+    .gm-video-play-small {
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: 50px; height: 50px; background-color: rgba(0,0,0,0.6); border-radius: 50%;
+        display: flex; align-items: center; justify-content: center; border: 2px solid white; transition: all 0.3s ease;
+    }
+    .gm-grid-card:hover .gm-video-play-small { background-color: rgba(229, 57, 53, 0.9); border-color: rgba(229, 57, 53, 0.9); }
+    .gm-video-play-small i { color: white; font-size: 24px; margin-left: 3px; }
+
+
         </style>
     </head>
 

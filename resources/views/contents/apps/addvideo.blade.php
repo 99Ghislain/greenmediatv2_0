@@ -5,18 +5,15 @@
     <form method="POST" action="{{route('admins.insvd')}}" class="card" enctype="multipart/form-data">
       @csrf   
       <div class="card-body ">
-        <!-- Informations sur  -->
         <div role="form">
           <div class="row">
             <div class="col-sm-6">
-              <!-- text input -->
               <div class="form-group">
                 <label>Titre </label>
                 <input type="text" class="form-control border-radius-0" name="vd_title" placeholder="Titre de la Vidéo *" required="required" value="">
               </div>
             </div>
             <div class="col-sm-6">
-              <!-- text input -->
               <div class="form-group">
                 <label>Type de vidéo (Simple ou Live) </label>
                 <br>
@@ -44,16 +41,20 @@
                 <input type="file" class="form-control border-radius-0" name="vd_firstimg" placeholder="" >
               </div>
             </div>
+            
             <div class="col-md-6 col-12">
               <div class="form-group">
-                <label for="vd_link">Lien de la Vidéo <span style="color: #f00;"></span></label>
+                <label for="vd_link">Lien complet ou ID de la Vidéo <span style="color: #f00;">*</span></label>
                 <div class="input-group">
-                  <span class="input-group-addon bg-danger border-radius-0" style="/*border-radius: 6px 0 0 6px;*/ padding: 5px 10px; font-weight: bolder;">https://www.youtube.com/watch?v=</span>
-                  <input id="vd_link" type="text" class="form-control border-radius-0" name="vd_link" placeholder="ox9rILtills" value="" required="required">
+                  <span class="input-group-addon bg-danger border-radius-0" style="padding: 5px 15px; font-weight: bolder; color: white;"><i class="fa fa-youtube-play"></i></span>
+                  <input id="vd_link" type="text" class="form-control border-radius-0" name="vd_link" placeholder="Collez le lien YouTube ici..." value="" required="required">
                 </div>
+                <small style="color: #127319; font-weight: bold; margin-top: 5px; display: block;">
+                    Astuce : Collez le lien entier de votre téléphone, le système ne gardera que le code utile !
+                </small>
               </div>
             </div>
-          </div>
+            </div>
         </div>
         <div class="card-footer">
           <div class="row">
@@ -70,10 +71,24 @@
           </div>
         </div>
       </div>
-      <!-- /.card-header-->
-      <!-- /.card-body -->
-    <!-- /.card -->
   </form>
 </div>
-<!-- /.row -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var inputLink = document.getElementById('vd_link');
+        
+        inputLink.addEventListener('input', function(e) {
+            var url = e.target.value;
+            
+            // On vérifie si c'est un lien YouTube (Formats supportés: youtube.com/watch, youtu.be, youtube.com/shorts)
+            var match = url.match(/(?:youtube(?:-nocookie)?\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/|youtube\.com\/shorts\/)([^"&?\/\s]{11})/i);
+            
+            // Si on trouve le code à 11 caractères, on remplace tout le contenu de la case par ce code.
+            if (match && match[1]) {
+                e.target.value = match[1];
+            }
+        });
+    });
+</script>
 @stop
