@@ -2,7 +2,7 @@
 
 if (!function_exists('formatTitle')) {
     function formatTitle($text) {
-        return mb_convert_case(mb_strtolower($text, 'UTF-8'), MB_CASE_TITLE, 'UTF-8');
+        return $text; // Retourne le texte original sans aucune modification de casse
     }
 }
 
@@ -26,13 +26,14 @@ if (!function_exists('phxdtformat')) {
 }
 
 
-// 3. Extraction de l'ID YouTube (Lien partagé mobile, Shorts ou URL PC)
+// 3. Extraction de l'ID YouTube (Prend désormais en compte les LIVES spécifiques)
 if (!function_exists('getYoutubeId')) {
     function getYoutubeId($url) {
-        preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/|youtube\.com/shorts/)([^"&?/\s]{11})%i', $url, $match);
+        // Formule mise à jour pour détecter aussi /live/
+        preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=|live/)|youtu\.be/|youtube\.com/shorts/)([^"&?/\s]{11})%i', $url, $match);
         if (isset($match[1])) {
             return $match[1];
         }
-        return $url; // Renvoie le texte tel quel si c'est déjà un ID pur
+        return $url;
     }
 }

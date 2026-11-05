@@ -2,8 +2,8 @@
   
   <aside style="margin-bottom: 40px;">
     <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow" style="margin-bottom: 25px; text-align: center; font-size: 16px !important;">
-    &nbsp; <span class="gm-animated-dot"></span> ça peut vous intéresser &nbsp;
-</div>
+      <span class="gm-animated-dot"></span> ça peut vous intéresser 
+    </div>
 
     <div style="margin-bottom: 25px;">
       @if(isset($hrandarts[0]) && !empty($hrandarts[0]))
@@ -29,12 +29,16 @@
                   </a>
                   <span class="gm-separator" style="margin: 0 5px;">|</span>
                   <span>@if(!empty($hrandarts[0]->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                  <span class="gm-separator" style="margin: 0 5px;">|</span>
+                  <span style="color: #ff9800; font-weight: 600;">
+                      <i class="ion-android-time"></i> {{ $hrandarts[0]->temps_lecture ?? 1 }} min
+                  </span>
               </div>
           </div>
       @endif
     </div>
 
-<div>
+    <div>
         @if(isset($hrandarts) && count($hrandarts)!=0)
             @for ($i = 1; $i <= 4; $i++)
                 @if(isset($hrandarts[$i]) && !empty($hrandarts[$i]))
@@ -55,9 +59,12 @@
                             <a href="{{route('visitors.sgactu',['rub'=>$hrandarts[$i]->slug_prinrub,'slug'=>$hrandarts[$i]->slug_article,'ip'=>$hrandarts[$i]->id_article])}}" class="gm-side-title" style="font-size: 1.1rem; font-weight: 800; color: #111; line-height: 1.3; display: block; margin-bottom: 8px;">
                                 {{Str::limit($hrandarts[$i]->title_article, 60)}}
                             </a>
-                            <p style="font-size: 0.85rem; color: #444; line-height: 1.4; margin: 0;">
+                            <p style="font-size: 0.85rem; color: #444; line-height: 1.4; margin: 0 0 5px 0;">
                                 {{Str::limit($hrandarts[$i]->desc_article, 75)}}
                             </p>
+                            <div style="font-size: 0.75rem; color: #ff9800; font-weight: 700;">
+                                <i class="ion-android-time"></i> Lecture : {{ $hrandarts[$i]->temps_lecture ?? 1 }} min
+                            </div>
                         </div>
 
                     </div>
@@ -83,7 +90,7 @@
   <aside style="margin-bottom: 40px;">
     
    <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow" style="margin-bottom: 25px; text-align: center; font-size: 16px !important;">
-    &nbsp; <span class="gm-animated-dot"></span> GREEN MEDIA AFRICA - TV &nbsp;
+    <span class="gm-animated-dot"></span> GREEN MEDIA AFRICA - TV 
 </div>
 
     <div class="aside-body">

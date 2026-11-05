@@ -67,6 +67,7 @@
                         <?php $dt = date_create($hrh->datepub_article); $dty = today();?>
                         
                         <div class="gm-grid-card" style="width: 100%;">
+                            
                             <a href="{{route('visitors.sgactu',['rub'=>$hrh->slug_prinrub,'slug'=>$hrh->slug_article,'ip'=>$hrh->id_article])}}">
                                 <img src="{{url('hphx/img/'.$hrh->image_article)}}" alt="{{$hrh->title_article}}" class="gm-grid-img">
                             </a>
@@ -85,9 +86,17 @@
                                     {{$hrh->desig_prinrub}}
                                 </a>
                                 <span class="gm-separator" style="margin: 0 5px;">|</span>
-                                <span>@if(!empty($hrh->datepub_article)){{ phxdtformat($dt) }}@else{{ phxdtformat($dty) }}@endif</span>
+                                <span style="text-transform: none;"><strong style="font-size: 1rem">
+                                    @if(!empty($hrh->datepub_article))
+                                        {{ \Carbon\Carbon::parse($hrh->datepub_article)->locale('fr')->diffForHumans() }}
+                                    @else
+                                        {{ \Carbon\Carbon::now()->locale('fr')->diffForHumans() }}
+                                    @endif
+                                </strong></span>
                                 <span class="gm-separator" style="margin: 0 5px;">|</span>
-                                <span><i class="ion-ios-eye gm-icon-eye"></i> {{$hrh->view_article}}</span>
+                                <span><i class="ion-ios-eye gm-icon-eye"></i> <strong>{{$hrh->view_article}}</strong></span>
+                                <span class="gm-separator" style="margin: 0 5px;">|</span>
+                                <span><a href="#" class="reading-time" style="font-weight: 700;"> <strong style="font-size: 1rem">Temps de lecture : {{$hrh->temps_lecture}} min</strong></a></span>
                             </div>
                         </div>
                     </div>

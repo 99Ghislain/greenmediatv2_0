@@ -1,51 +1,43 @@
-{{-- Live Streaming / Vidéo à la une --}}
 @php
     $mainVideo = null;
     $sortedVideos = [];
 
     if(isset($hlastvd) && count($hlastvd) > 0) {
-        // 1. On cherche d'abord s'il y a une vidéo en "Live Streaming" (type 2)
-        foreach($hlastvd as $video) {
-            if(isset($video->typevideo_id) && $video->typevideo_id == '2') {
-                $mainVideo = $video;
-                break;
-            }
-        }
         
-        // 2. S'il n'y a pas de Live en ce moment, on prend la vidéo la plus récente
-        if($mainVideo == null) {
-            $mainVideo = $hlastvd[0];
-        }
+        // On filtre pour ne garder STRICTEMENT que les vidéos "Live Streaming" (type 2)
+        $liveVideos = $hlastvd->where('typevideo_id', '2')->values();
 
-        // 3. On réorganise la playlist pour le JavaScript (La vidéo principale d'abord)
-        $tempMain = clone $mainVideo;
-        $tempMain->formatted_title = formatTitle($mainVideo->title_video);
-        $tempMain->formatted_date = phxdtformat(date_create($mainVideo->datepub_video));
-        $sortedVideos[] = $tempMain;
-        
-        foreach($hlastvd as $vd) {
-            if($vd->id_video != $mainVideo->id_video) {
-                $temp = clone $vd;
-                $temp->formatted_title = formatTitle($vd->title_video);
-                $temp->formatted_date = phxdtformat(date_create($vd->datepub_video));
-                $sortedVideos[] = $temp;
+        // Si on a trouvé au moins une vidéo Live, on construit la liste
+        if(count($liveVideos) > 0) {
+            
+            $mainVideo = $liveVideos[0];
+
+            $tempMain = clone $mainVideo;
+            $tempMain->formatted_title = formatTitle($mainVideo->title_video);
+            $tempMain->formatted_date = phxdtformat(date_create($mainVideo->datepub_video));
+            $sortedVideos[] = $tempMain;
+            
+            foreach($liveVideos as $vd) {
+                if($vd->id_video != $mainVideo->id_video) {
+                    $temp = clone $vd;
+                    $temp->formatted_title = formatTitle($vd->title_video);
+                    $temp->formatted_date = phxdtformat(date_create($vd->datepub_video));
+                    $sortedVideos[] = $temp;
+                }
             }
         }
     }
 @endphp
 
-@if($mainVideo != null)
-<section class="home" style="margin-top: 20px ; padding: 0;">
+{{-- La section s'affiche TOUT LE TEMPS, même si $mainVideo est null --}}
+<section class="home gm-streaming-section">
     <div class="container-fluid px-0">
+        
+        <!-- En-tête exclusif au LIVE STREAMING -->
         <div class="" style="margin-bottom: 30px;"> 
             <div class="acategory-two text-color-1 top-title-2 text-uppercase b-white-shadow"> 
                 &nbsp; <span class="gm-animated-dot" style="background-color: #d32f2f;"></span> 
-                @if(isset($mainVideo->typevideo_id) && $mainVideo->typevideo_id == '2')
-                    LIVE STREAMING
-                @else
-                    VIDÉO À LA UNE
-                @endif
-                &nbsp;
+                LIVE STREAMING &nbsp;
             </div>
         </div>
         
@@ -57,7 +49,7 @@
                         border-radius: 12px;
                         overflow: hidden;
                         box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-                        background: linear-gradient(135deg, #0f3e1a 0%, #2e7d32 100%); 
+                        background: linear-gradient(135deg, #e0ebe0 0%, #c1c4c2 100%); 
                         margin-bottom: 20px;
                     }
                     .video-info-classy {
@@ -75,6 +67,10 @@
                     .live-badge-modern:hover {
                         transform: translateY(-2px); color: #ffffff; text-decoration: none;
                     }
+                    .live-badge-offline {
+                        background-color: #555555 !important;
+                        box-shadow: none !important;
+                    }
                     .live-dot {
                         width: 8px; height: 8px; background-color: #ffffff; border-radius: 50%;
                         display: inline-block; animation: pulse-live 1.5s infinite;
@@ -85,92 +81,124 @@
                         100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
                     }
                     .video-date-modern {
-                        color: rgba(255, 255, 255, 0.85); font-size: 0.95rem; font-weight: 500;
+                        color: rgba(12, 5, 5, 0.85); font-size: 0.95rem; font-weight: 500;
                     }
-                    .video-title-modern {
-                        color: #ffffff !important; font-size: 1.35rem; font-weight: 700; line-height: 1.4;
-                        text-decoration: none; display: block; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-                        transition: color 0.2s ease;
+                    .empty-live-container {
+                        display: flex; 
+                        flex-direction: column; 
+                        align-items: center; 
+                        justify-content: center;
+                        width: 100%; 
+                        height: 100%; 
+                        position: absolute; 
+                        top: 0; 
+                        left: 0;
+                        text-align: center; /* Centre le texte s'il passe sur 2 lignes sur mobile */
                     }
-                    .video-title-modern:hover {
-                        color: #c8e6c9 !important; text-decoration: none;
+                    /* Espacement par défaut (Ordinateur et grands écrans) */
+                    .gm-streaming-section {
+                        margin-top:-170px !important; 
+                        padding: 0;
+                    }
+
+                    /* Adaptation spécifique pour les téléphones (écrans de 768px ou moins) */
+                    @media (max-width: 768px) {
+                        .gm-streaming-section {
+                            margin-top: -60px !important; /* Ajustez cette valeur si besoin (ex: 5px à 15px) pour qu'il soit bien collé sans passer sous le menu */
+                        }
                     }
                 </style>
 
                 <div class="video-card-modern">
-                    <article style="overflow: hidden; padding: 0 !important; margin: 0 auto; aspect-ratio: 16/9; background-color: #000;">
-                        <div id="youtube-player" style="width:100%; height:100%;"></div>  
+                   <article style="position: relative; overflow: hidden; padding: 0 !important; margin: 0 auto; aspect-ratio: 16/9; background-color: #000;">
+    
+                        @if($mainVideo != null)
+                            <!-- Affichage du lecteur YouTube s'il y a un live -->
+                            <div id="youtube-player" style="width:100%; height:100%;"></div>
+                        @else
+                            <!-- Écran de remplacement (Bloc vide) s'il n'y a pas de live -->
+                            <div class="empty-live-container">
+                                <i class="ion-ios-videocam" style="font-size: 4.5rem; color: #555;"></i>
+                                <h4 style="color: #888; margin: 15px 0 0 0; font-weight: 600; text-align: center; width: 100%;">
+                                    Aucun direct pour le moment
+                                </h4>
+                            </div>
+                        @endif
+                        
                     </article>
 
                     <div class="video-info-classy">
                         <div class="video-meta">
-                            <a href="{{route('visitors.allvideos')}}" class="live-badge-modern" style="{{ $mainVideo->typevideo_id != '2' ? 'background-color: #ffa000; box-shadow: 0 4px 10px rgba(255, 160, 0, 0.4);' : '' }}">
-                                @if(isset($mainVideo->typevideo_id) && $mainVideo->typevideo_id == '2')
+                            
+                            @if($mainVideo != null)
+                                <!-- Badge Live Rouge -->
+                                <a href="{{route('visitors.allvideos')}}" class="live-badge-modern">
                                     <span class="live-dot"></span> EN DIRECT
-                                @else
-                                    <i class="ion-ios-videocam"></i> TV
-                                @endif
-                            </a>
-                            <span id="video-date" class="video-date-modern">
-                                {{ phxdtformat(date_create($mainVideo->datepub_video)) }}
-                            </span>
-                        </div>
+                                </a>
+                                <span id="video-date" class="video-date-modern">
+                                    {{ phxdtformat(date_create($mainVideo->datepub_video)) }}
+                                </span>
+                            @else
+                                <!-- Badge Hors Ligne Gris -->
+                                <a href="{{route('visitors.allvideos')}}" class="live-badge-modern live-badge-offline">
+                                    <i class="ion-ios-videocam"></i> HORS LIGNE
+                                </a>
+                                <span class="video-date-modern" style="color: #888;">
+                                    Revenez plus tard
+                                </span>
+                            @endif
 
-                        <a href="{{route('visitors.allvideos')}}" id="video-title" class="video-title-modern">
-                            {{ formatTitle($mainVideo->title_video) }}
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div> 
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        // On récupère notre liste de vidéos réorganisée (Live en premier)
-        let videos = @json($sortedVideos);
-        
-        // On génère la playlist en utilisant notre fonction PHP 'getYoutubeId' pour être 100% sûr d'avoir l'ID
-        let playlist = [
-            @foreach($sortedVideos as $video)
-                "{{ getYoutubeId($video->linkyoutube_video) }}",
-            @endforeach
-        ];
-        
-        let currentIndex = 0;
-        let player;
+    {{-- On ne charge le script YouTube QUE s'il y a une vidéo à jouer --}}
+    @if($mainVideo != null)
+        <script src="https://www.youtube.com/iframe_api"></script>
+        <script>
+            let videos = @json($sortedVideos);
+            
+            let playlist = [
+                @foreach($sortedVideos as $video)
+                    "{{ getYoutubeId($video->linkyoutube_video) }}",
+                @endforeach
+            ];
+            
+            let currentIndex = 0;
+            let player;
 
-        function onYouTubeIframeAPIReady(){
-            player = new YT.Player('youtube-player', {
-                height: '100%', 
-                width: '100%',
-                videoId: playlist[0], // Charge le premier ID
-                playerVars : {
-                    autoplay: 1,
-                    mute: 1,
-                    rel: 0,
-                    modestbranding: 1
-                },
-                events : {
-                    'onStateChange': onPlayerStateChange
+            function onYouTubeIframeAPIReady(){
+                if(playlist.length > 0) {
+                    player = new YT.Player('youtube-player', {
+                        height: '100%', 
+                        width: '100%',
+                        videoId: playlist[0], 
+                        playerVars : {
+                            autoplay: 1,
+                            mute: 1, // Lancement automatique sans son
+                            rel: 0,
+                            modestbranding: 1
+                        },
+                        events : {
+                            'onStateChange': onPlayerStateChange
+                        }
+                    });
                 }
-            });
-        }
-
-        function onPlayerStateChange(event){
-            // Quand une vidéo se termine, on passe à la suivante
-            if(event.data == YT.PlayerState.ENDED){
-                currentIndex++;
-                if(currentIndex >= playlist.length){
-                    currentIndex = 0; // On boucle
-                }
-                player.loadVideoById(playlist[currentIndex]);
-                
-                // Mise à jour du titre et de la date avec nos beaux formats
-                document.getElementById('video-title').innerText = videos[currentIndex].formatted_title;
-                document.getElementById('video-date').innerText = videos[currentIndex].formatted_date;
             }
-        }
-    </script>
+
+            function onPlayerStateChange(event){
+                if(event.data == YT.PlayerState.ENDED){
+                    currentIndex++;
+                    if(currentIndex >= playlist.length){
+                        currentIndex = 0;
+                    }
+                    player.loadVideoById(playlist[currentIndex]);
+                    document.getElementById('video-date').innerText = videos[currentIndex].formatted_date;
+                }
+            }
+        </script>
+    @endif
 </section>
-@endif

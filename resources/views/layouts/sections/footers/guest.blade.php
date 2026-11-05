@@ -7,7 +7,7 @@
                     <div class="acategory-two text-uppercase" style="font-weight: bold;">&nbsp;A Propos &nbsp; </div>
                     <div class="block-body">
                         <figure class="foot-logo">
-                            <img src="{{url('hphx/img/greenmedia mise jour.png')}}" class="img-responsive" alt="Logo">
+                            <img src="{{url('hphx/img/logo 3_0.png')}}" class="img-responsive" alt="Logo">
                         </figure>
                         <p class="brand-description">
                             Green Media Africa, Presse spécialiste des questions agricoles et environnementales opère à travers des reportages, enquêtes, dossiers et interviews.
@@ -81,7 +81,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="copyright b-content-1">
-                    Copyright 2025 Green Media Africa | Tous droits réservés | Conception et Réalisation <a href="https://phoenixmultimediapro.com" style="color:#cb0719 !important" target="_blank"><img src="{{url('hphx/img/logophx-2.jpg')}}" alt="" style="width: 70px;"></a>
+                    Copyright 2025 Green Media Africa | Tous droits réservés | Conception et Réalisation <a href="#" style="color:#cb0719 !important" target="_blank"><img src="{{url('hphx/img/UTRA.JPEG')}}" alt="" style="width: 70px;"></a>
                 </div>
             </div>
         </div>

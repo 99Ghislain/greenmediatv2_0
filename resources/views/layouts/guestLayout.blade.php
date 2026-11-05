@@ -5,6 +5,7 @@
         <!-- / Tags Google Analytics -->
 	    <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQY6RQ8D7P"></script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5336231094781905" crossorigin="anonymous"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -13,25 +14,59 @@
           gtag('config', 'G-KQY6RQ8D7P');
         </script>
 	    <!-- // Tags Google Analytics -->
-        <meta charset="utf-8">
+    <meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="author" content="Phoenix Multimédia & Pro">
 		<meta name="keyword" content="Actualité, Buzz, People, Agriculture et News">
+
+        {{-- ========================================================== --}}
+        {{-- BLOC OPEN GRAPH UNIQUE ET PROPRE (SANS DOUBLONS)          --}}
+        {{-- ========================================================== --}}
+        <meta property="og:url" content="{{ url()->current() }}">
+
+        {{-- CAS 1 : SI C'EST UN ARTICLE ($hcart) --}}
+        @if(isset($hcart) && count($hcart) > 0)
+            <meta property="og:type" content="article">
+            <meta property="og:title" content="{{ $hcart[0]->title_article }}">
+            <meta property="og:description" content="{{ isset($hcart[0]->desc_article) ? strip_tags(Str::limit($hcart[0]->desc_article, 150)) : 'Lire cet article sur Green Media TV' }}">
+            @if(!empty($hcart[0]->image_article))
+                <meta property="og:image" content="{{ asset('hphx/img/'.$hcart[0]->image_article) }}">
+            @else
+                <meta property="og:image" content="{{ asset('assets/img/short-logo-green-media-white.png') }}">
+            @endif
+
+        {{-- CAS 2 : SI C'EST UNE VIDÉO ($video) --}}
+        @elseif(isset($video))
+            <meta property="og:type" content="video.other">
+            <meta property="og:title" content="{{ formatTitle($video->title_video) }}">
+            <meta property="og:description" content="{{ isset($video->desc_video) ? strip_tags(Str::limit($video->desc_video, 150)) : 'Regardez ce reportage sur Green Media TV.' }}">
+            @if(!empty($video->image_video))
+                <meta property="og:image" content="{{ asset('hphx/img/' . $video->image_video) }}">
+            @else
+                <meta property="og:image" content="{{ asset('assets/img/short-logo-green-media-white.png') }}">
+            @endif
+
+        {{-- CAS 3 : SI $elmshared EST UTILISÉ --}}
+        @elseif(isset($elmshared) && !empty($elmshared))
+            <meta property="og:type" content="website">
+            <meta property="og:title" content="{{ $elmshared[0] }}">
+            <meta property="og:description" content="{{ $elmshared[1] }}">
+            <meta property="og:image" content="{{ isset($elmshared[2]) ? url('hphx/img/'.$elmshared[2]) : url('hphx/img/short-logo-green-media-white.png') }}">
+
+        {{-- CAS 4 : PAGE PAR DÉFAUT (Accueil, etc.) --}}
+        @else
+            <meta property="og:type" content="website">
+            <meta property="og:title" content="Green Media Africa">
+            <meta property="og:description" content="Green Media Africa - L'actualité et les reportages en Afrique">
+            <meta property="og:image" content="{{ asset('assets/img/short-logo-green-media-white.png') }}">
+        @endif
+        {{-- ========================================================== --}}
+
         <title><?=(isset($elmshared[0])&&!empty($elmshared[0]))?'Green Media Africa - '.$elmshared[0].' | E-mail(s) : infomondeagricole@gmail.com | Contacts : (+225) 05 75 85 95 43 / 07 07 49 84 25 - ' :' Green Media Africa -  E-mail(s) : infomondeagricole@gmail.com - Contacts : (+225) 05 75 85 95 43 / 07 07 49 84 25';?> </title>
         <link rel="icon" type="image/png" href="{{ url('assets/img/short-logo-green-media-white.png') }}">
-        <!--Canonical-->
         <link rel="canonical" href="https://www.greenmediaafrica.ci">
-        <!-- Pub Google Adsense -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5336231094781905"crossorigin="anonymous"></script>
-        <!-- Shareable -->
-        <meta property="og:url"           content="{{url()->current()}}" />
-        <meta property="og:type"          content="Actualité, News" />
-        <?php $imgshared="short-logo-green-media-white.png"; if(isset($elmshared)&&!empty($elmshared)){;?>
-        <meta property="og:title"         content="<?=$elmshared[0];?>" />
-        <meta property="og:description"   content="<?=$elmshared[1];?>" />
-        <meta property="og:image"         content="@if(isset($elmshared[2])){{url('hphx/img/'.$elmshared[2])}}@else{{url('hphx/img/'.$imgshared)}}@endif"/>
-        <?php };?>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5336231094781905" crossorigin="anonymous"></script>
         <!-- // Shared Facebook -->
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="{{url('assets/scripts/bootstrap/bootstrap.min.css')}}">
@@ -53,6 +88,7 @@
 		<link rel="stylesheet" href="{{url('assets/css/skins/all.css')}}">
 		<link rel="stylesheet" href="{{url('assets/css/demo.css')}}">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 		<link href="https://fonts.googleapis.com/css2?
 			family=Montserrat:wght@400;500;600;700;800&
@@ -84,6 +120,14 @@
               font-weight: normal;
               font-style: normal;
             }
+
+            @font-face {
+    font-family: 'Metropolis';
+    src: url('../fonts/Metropolis-Regular.woff') format('woff'),
+         url('../fonts/Metropolis-Regular.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
             
             body{
     font-family: 'Roboto', sans-serif !important;
@@ -103,9 +147,14 @@
 				box-shadow: 1px 1px 5px 1px #92929292;
 				overflow: hidden;
 			}
-			.news{
-				width: 160px; line-height: 20px;
-			}
+			.news {
+                width: auto !important;       /* S'adapte à la taille du texte plutôt que de s'étirer */
+                min-width: 110px;             /* Garde une largeur minimum propre */
+                flex: none !important;        /* Annule le flex-grow et flex-fill du HTML */
+                left: 0;                      /* Fixe le bloc complètement à gauche */
+                z-index: 10;                  /* Le place au-dessus du texte qui défile */
+                line-height: 20px;
+            }
 			/* .news-scroll{width: 90%} */
 			.news-scroll a{text-decoration: none}
 			.dot{height: 6px;width: 6px;margin-left: 3px; margin-right: 3px;
@@ -646,7 +695,7 @@ h4 {
 			}
 
 			.top-title-2 {
-				font-size: 250%; 
+				font-size: 150%; 
 				font-weight:bold; 
 				border-radius: 6px 0;
 			}
@@ -1036,7 +1085,7 @@ h4 {
         display: flex;
         flex-direction: column;
         height: 100%;
-        background-color: var(--gm-dark-green);
+        background-color: #127319;
     }
     .gm-main-img-wrap {
         width: 100%;
@@ -1054,7 +1103,7 @@ h4 {
     }
     .gm-main-content {
         padding: 25px;
-        color: white;
+        color: rgb(14, 13, 13);
     }
     .gm-badge {
         background-color: #ffa000 !important;
@@ -1072,9 +1121,9 @@ h4 {
         margin: 0 10px;
     }
     .gm-main-title {
-        color: white !important;
+        color: #ffffff !important;
         font-weight: 900;
-        font-size: 2rem;
+        font-size: 2.7rem;
         text-transform: uppercase;
         line-height: 1.1;
         margin: 15px 0;
@@ -1085,7 +1134,8 @@ h4 {
         color: #e0e0e0 !important;
     }
     .gm-main-desc {
-        font-size: 1.1rem;
+        color: #ffffff !important;
+        font-size: 1.6rem;
         opacity: 0.95;
         margin-bottom: 0;
         line-height: 1.5;
@@ -1095,7 +1145,7 @@ h4 {
     .gm-side-card {
         border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(78, 78, 78, 0.1);
         background: white;
         margin-bottom: 20px;
         display: flex;
@@ -1115,7 +1165,7 @@ h4 {
     }
     .gm-side-img {
         width: 140px;
-        height: 105px;
+        height: 125px;
         object-fit: cover;
         border-radius: 4px;
         flex-shrink: 0;
@@ -1128,19 +1178,19 @@ h4 {
     .gm-side-title {
         color: #000 !important;
         font-weight: 800;
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         line-height: 1.3;
         margin-bottom: 8px;
         text-decoration: none;
     }
     .gm-side-desc {
         color: #444;
-        font-size: 0.85rem;
+        font-size: 1.6rem;
         line-height: 1.4;
         margin-bottom: 0;
     }
     .gm-card-footer {
-        background-color: var(--gm-dark-green);
+        background-color: #f5f5f5;
         color: white;
         padding: 10px 15px;
         font-size: 0.85rem;
@@ -1153,7 +1203,7 @@ h4 {
         text-decoration: none;
     }
     .gm-card-footer a:hover {
-        color: var(--gm-light-green);
+        color: #f5f5f5;
     }
     .gm-icon-eye {
         font-size: 1.1rem;
@@ -1190,7 +1240,7 @@ h4 {
     .gm-grid-title {
         color: #000 !important;
         font-weight: 800;
-        font-size: 1.5rem;
+        font-size: 2rem;
         line-height: 1.3;
         margin-bottom: 8px;
         text-decoration: none;
@@ -1313,20 +1363,68 @@ h4 {
         font-weight: 800;
     }
 
+    /* Couleur verte temps de lecture */
+    .gm-card-footer a.reading-time {
+    background-color: #198754  !important; 
+    color: #ffff !important;
+    padding: 4px 10px; 
+    border-radius: 3px; 
+    text-decoration: none !important; 
+    display: inline-block;
+    font-weight: 800;
+        }
+
+    /* Maintient la couleur verte même au survol */
+    .gm-card-footer a.reading-time:hover {
+    color: #198754 !important;
+    background-color: transparent !important; /* Supprime le fond orange uniquement pour ce bloc */
+    }    
+
     /* Changement de couleur au survol de la souris */
     .gm-card-footer a:hover {
         background-color: #e69000 !important; 
         color: #ffffff !important;
     }
 
-	/* --- TYPOGRAPHIE DES TITRES (Laisse le PHP travailler) --- */
-    .gm-main-title, 
-    .gm-side-title, 
-    .gm-grid-title {
-        text-transform: none !important;
-    }
-
+/* --- AFFICHAGE DES TITRES TEL QUE DANS LA BASE DE DONNÉES --- */
+.gm-main-title,
+.gm-side-title,
+.gm-grid-title,
+.gm-article-title,
+.hero-title a,
+.side-title a,
+.article-vds .title-vds,
+.gm-tv-hero-title,
+.gm-tv-card-title,
+h2 a {
+    text-transform: none !important; /* Désactive toutes les modifications automatiques de casse */
+}
 		
+/* --- RETIRER LE GRAS SUR TOUS LES TITRES --- */
+/* .gm-main-title,
+.gm-side-title,
+.gm-grid-title,
+.gm-article-title,
+.hero-title a,
+.side-title a,
+.article-vds .title-vds,
+.gm-tv-hero-title,
+.gm-tv-card-title,
+h1, h2, h3, h4,
+h2 a {
+    font-weight: normal !important;
+} */
+
+/* --- POLICE METROPOLIS, SANS GRAS ET SANS MAJUSCULES POUR LES TITRES D'ARTICLES --- */
+.gm-main-title,
+.gm-side-title,
+.gm-grid-title,
+.gm-article-title {
+    font-family: 'Metropolis', sans-serif !important;
+    text-transform: none !important;
+    font-weight: 800 !important; /* Cette ligne force le texte en gras */
+}
+
     /* =========================================
        STYLES PREMIUM GREEN MEDIA (GLOBAL)
        ========================================= */
@@ -1352,16 +1450,16 @@ h4 {
     }
     .gm-side-desc {
         color: #555;
-        font-size: 0.9rem;
+        font-size: 1.4rem;
         line-height: 1.5;
         margin-bottom: 0;
     }
     
     /* --- PIED DE CARTE (FOOTER VERT) --- */
     .gm-card-footer {
-        background-color: #127319; /* Vert Green Media */
+        background-color: #f5f5f5; /* blanc Green Media */
         padding: 10px 15px;
-        color: #fff;
+        color: #030202;
         font-size: 0.85rem;
         display: flex;
         align-items: center;
@@ -1406,16 +1504,7 @@ h4 {
         100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
     }
 
-    /* --- TYPOGRAPHIE (Majuscule à chaque mot) --- */
-    .gm-main-title, .gm-side-title, .gm-grid-title {
-        text-transform: capitalize !important;
-        font-weight: 900;
-        color: #111;
-        text-decoration: none;
-        display: block;
-        margin-bottom: 10px;
-        line-height: 1.4;
-    }
+  
 
 
    body {
@@ -1694,6 +1783,225 @@ h4 {
     }
     .gm-grid-card:hover .gm-video-play-small { background-color: rgba(229, 57, 53, 0.9); border-color: rgba(229, 57, 53, 0.9); }
     .gm-video-play-small i { color: white; font-size: 24px; margin-left: 3px; }
+
+/* ==========================================================================
+   REFONTE ARTICLE - GREEN MEDIA AFRICA
+   ========================================================================== */
+
+/* Carte de l'article */
+.gm-article {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+/* En-tête & Titre */
+.gm-article-header {
+    margin-bottom: 20px;
+}
+
+.gm-article-title {
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.3;
+    color: #111111;
+    margin: 0 0 15px 0;
+}
+
+/* Barre de métadonnées */
+.gm-article-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    background-color: #f8f9fa;
+    border-top: 4px solid #127319;
+    border-bottom: 1px solid #eeeeee;
+    padding: 10px 15px;
+    color: #333333;
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
+    font-weight: 600;
+}
+
+.gm-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.gm-meta-item i {
+    color: #127319;
+}
+
+/* Séparateur vertical */
+.gm-meta-divider {
+    height: 18px;
+    width: 2px;
+    background-color: #ffa000;
+    border-radius: 1px;
+}
+
+/* Badge Rubrique */
+.gm-meta-badge {
+    background-color: #127319;
+    color: #ffffff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+}
+
+/* Image principale (Pleine largeur sous le titre) */
+.gm-photo {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.gm-photo img {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    display: block;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Légende sous la photo */
+.gm-caption {
+    background-color: #f8f9fa;
+    color: #3f3c3c;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+    font-weight: 400;
+    line-height: 1.35;
+    border-bottom: 1px solid #eee;
+    border-radius: 0 0 8px 8px;
+}
+
+/* Boîte du Chapeau (Description) */
+.gm-intro-box {
+    font-size: clamp(13px, 2.5vw, 15px);
+    font-weight: 700;
+    color: #1b3d1d;
+    line-height: 1.6;
+    background-color: #f4f8f4;
+    border-left: 5px solid #ffa000;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Zone Contenu (Corps de l'article) */
+.gm-article-content {
+    position: relative;
+}
+
+.gm-body {
+    font-size: clamp(14px, 2.5vw, 18px);
+    line-height: 2;
+    text-align: justify;
+    text-justify: inter-word;
+    color: #2c2c2c;
+}
+
+.gm-body p {
+    margin-bottom: 1.5em;
+}
+
+/* Protection pour les images dans le corps de l'article */
+.gm-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 15px 0;
+}
+
+/* --------------------------------------------------- */
+/* STYLE UNIQUEMENT POUR LES LIENS DANS LES ARTICLES   */
+/* --------------------------------------------------- */
+.gm-body a, 
+.gm-body p a {
+    color: #0066cc !important; /* Met le lien en Bleu */
+    font-weight: 600 !important; /* Légèrement en gras */
+    text-decoration: underline !important; /* Souligne le lien */
+    
+    /* LES DEUX LIGNES MAGIQUES POUR LA TAILLE ET LA POLICE : */
+    font-size: inherit !important; 
+    font-family: inherit !important; 
+    
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.gm-body a:hover, 
+.gm-body p a:hover {
+    color: #64b802 !important; /* Passe en Vert au survol */
+    text-decoration: none !important; /* Enlève le soulignement */
+}
+
+/* ==========================================================================
+   AJUSTEMENTS MOBILE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    .gm-body {
+        font-size: 17px !important;
+        line-height: 1.6;
+        text-align: left !important;
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    .gm-photo {
+        width: 100%;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+
+    .gm-caption {
+        font-size: 12px !important;
+        padding: 6px 10px;
+    }
+
+    .gm-intro-box {
+        font-size: 16px !important;
+        padding: 12px 15px;
+        margin-bottom: 20px;
+    }
+
+    .gm-article {
+        padding: 15px;
+    }
+}
+
+/* ==========================================================================
+   EFFET LETTRINE (Drop Cap) - GREEN MEDIA AFRICA
+   ========================================================================== */
+
+/* Lettrine sur la première lettre de la description (Chapeau) */
+.gm-intro-box::first-letter {
+    float: left;                /* Permet au reste du texte de l'entourer */
+    font-size: 12rem;           /* Taille de la lettre */
+    line-height: 0.8;           /* Évite le grand vide au-dessus */
+    padding: 10px;              /* Espace interne */
+    margin: 5px 15px 5px 0;     /* Espace à droite pour pousser le texte */
+    font-weight: 400;           /* Épaisseur de la lettre */
+    color: #111111;             /* Couleur du texte */
+    background-color: #ffffff;  /* Fond blanc (fait ressortir la lettre sur le fond #f4f8f4) */
+    border: 1px solid #d3d3d3;  /* Fine bordure grise */
+    border-radius: 4px;         /* Coins légèrement arrondis */
+    text-transform: uppercase;  /* Force la majuscule */
+}
+
+
 
 
         </style>

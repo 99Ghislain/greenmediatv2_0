@@ -6,6 +6,7 @@
       @csrf   
       <div class="card-body ">
         <div role="form">
+          
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
@@ -34,6 +35,7 @@
               </div>
             </div>
           </div>
+          
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
@@ -54,7 +56,28 @@
                 </small>
               </div>
             </div>
+          </div>
+
+          {{-- ================= NOUVEAU BLOC : ASSOCIATION DU REPORTER ================= --}}
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Reporter associé à la vidéo (Optionnel)</label>
+                <select name="reporter_id" class="form-control border-radius-0">
+                  <option value="">-- Aucun reporter (Média Standard) --</option>
+                  {{-- On boucle sur la liste des reporters envoyée par le contrôleur --}}
+                  @if(isset($reporters) && count($reporters) > 0)
+                      @foreach($reporters as $reporter)
+                          <option value="{{ $reporter->id_reporter }}">{{ $reporter->nom_reporter }}</option>
+                      @endforeach
+                  @endif
+                </select>
+                <small class="text-muted">Si un reporter est sélectionné, sa photo et sa biographie apparaîtront sous la vidéo.</small>
+              </div>
             </div>
+          </div>
+          {{-- ================= FIN BLOC REPORTER ================= --}}
+
         </div>
         <div class="card-footer">
           <div class="row">
@@ -81,8 +104,8 @@
         inputLink.addEventListener('input', function(e) {
             var url = e.target.value;
             
-            // On vérifie si c'est un lien YouTube (Formats supportés: youtube.com/watch, youtu.be, youtube.com/shorts)
-            var match = url.match(/(?:youtube(?:-nocookie)?\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/|youtube\.com\/shorts\/)([^"&?\/\s]{11})/i);
+           // La formule JS mise à jour pour accepter aussi les liens /live/
+            var match = url.match(/(?:youtube(?:-nocookie)?\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|live\/)|youtu\.be\/|youtube\.com\/shorts\/)([^"&?\/\s]{11})/i);
             
             // Si on trouve le code à 11 caractères, on remplace tout le contenu de la case par ce code.
             if (match && match[1]) {

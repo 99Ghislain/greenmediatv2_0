@@ -5,10 +5,10 @@
     <form method="POST" action="{{route('admins.updatevd')}}" class="card" enctype="multipart/form-data">
       @csrf   
       <div class="card-body ">
-        <div class="row" style="margin: 10px auto 20px auto; /*text-align: center;*/ ">
+        <div class="row" style="margin: 10px auto 20px auto;">
           <div class="col-sm-12">
             <div class="">
-              <img src="{{url('hphx/img/'.$hupvd[0]->image_video)}}" style="/*min-width: 300px;*/ max-height: 350px;">
+              <img src="{{url('hphx/img/'.$hupvd[0]->image_video)}}" style="max-height: 350px;">
             </div>
           </div>
           <hr/>
@@ -69,7 +69,29 @@
                 </small>
               </div>
             </div>
+          </div>
+
+          {{-- ================= NOUVEAU BLOC : ASSOCIATION DU REPORTER ================= --}}
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Reporter associé à la vidéo (Optionnel)</label>
+                <select name="reporter_id" class="form-control border-radius-0">
+                  <option value="">-- Aucun reporter (Média Standard) --</option>
+                  @if(isset($reporters) && count($reporters) > 0)
+                      @foreach($reporters as $reporter)
+                          <option value="{{ $reporter->id_reporter }}" {{ (isset($hupvd[0]->reporter_id) && $hupvd[0]->reporter_id == $reporter->id_reporter) ? 'selected' : '' }}>
+                              {{ $reporter->nom_reporter }}
+                          </option>
+                      @endforeach
+                  @endif
+                </select>
+                <small class="text-muted">Vous pouvez changer ou retirer le reporter associé à cette vidéo.</small>
+              </div>
             </div>
+          </div>
+          {{-- ================= FIN BLOC REPORTER ================= --}}
+
         </div>
         <div class="card-footer">
           <div class="row">

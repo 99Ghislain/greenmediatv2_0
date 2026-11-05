@@ -78,19 +78,25 @@ class AdController extends Controller
         		return back()->with('ok','Suppression éffectuée avec succès !');
 			}
 			if(isset($_GET['up'])&&!empty($_GET['up'])){
-				$up = strip_tags($_GET['up']);
-				// 
-				$hupart = DB::table('articles')->where('articles.id_article','=',$up)
-        		->get(); 
-        		// 
-	            $hallrbprins = DB::table('principalrubrique')->orderBy('id_prinrub','asc')->get();
-	            $hallrbsecs = DB::table('secondaryrubriques')->orderBy('id_secondrub','asc')->get();
+                $up = strip_tags($_GET['up']);
+                // 
+                $hupart = DB::table('articles')->where('articles.id_article','=',$up)
+                ->get(); 
+                // 
+                $hallrbprins = DB::table('principalrubrique')->orderBy('id_prinrub','asc')->get();
+                $hallrbsecs = DB::table('secondaryrubriques')->orderBy('id_secondrub','asc')->get();
                 $hallusts = DB::table('alustatuts')->orderBy('id_alustatut','asc')->get();
-	    		$pgactive = "uppost";
-				$page = 'uppost';
-	            $onglet = 'Modification article';
-	            return view('contents.apps.uppost',compact('hallusts','pgactive','page','hallrbprins','hallrbsecs','onglet','hupart'));
-			}
+                
+                // AJOUT : Récupération de la liste des rédacteurs pour la modification
+                $hallredacteurs = DB::table('redacteurs')->orderBy('id_redacteur', 'asc')->get();
+
+                $pgactive = "uppost";
+                $page = 'uppost';
+                $onglet = 'Modification article';
+                
+                // AJOUT : 'hallredacteurs' ajouté dans le compact
+                return view('contents.apps.uppost', compact('hallusts','pgactive','page','hallrbprins','hallrbsecs','onglet','hupart','hallredacteurs'));
+            }
 			$dsrch = "";
 			if(isset($_GET['t_search'])&&!empty($_GET['t_search'])){
 				$dsrch = strip_tags($_GET['t_search']);
@@ -189,18 +195,24 @@ class AdController extends Controller
 	    
     }
 
-    public function adaddpost(){
-    	
-            $hallrbprins = DB::table('principalrubrique')->orderBy('id_prinrub','asc')->get();
-            $hallrbsecs = DB::table('secondaryrubriques')->orderBy('id_secondrub','asc')->get();
-            $hallsts = DB::table('fhstatuts')->orderBy('id_fhstatut','asc')->get();
-            $hallusts = DB::table('alustatuts')->orderBy('id_alustatut','asc')->get();
-            $online = $this->visitors_online();
-            $donline = $this->d_visitors_online();
-            $pgactive = "addpost";
-            $page = 'addpost';
-            $onglet = 'Mise à Jour article';
-            return view('contents.apps.addpost',compact('pgactive','page','hallrbprins','hallrbsecs','onglet','hallsts','hallusts','online','donline'));
+public function adaddpost(){
+        
+        $hallrbprins = DB::table('principalrubrique')->orderBy('id_prinrub','asc')->get();
+        $hallrbsecs = DB::table('secondaryrubriques')->orderBy('id_secondrub','asc')->get();
+        $hallsts = DB::table('fhstatuts')->orderBy('id_fhstatut','asc')->get();
+        $hallusts = DB::table('alustatuts')->orderBy('id_alustatut','asc')->get();
+        
+        // AJOUT : Récupération de la liste des rédacteurs
+        $hallredacteurs = DB::table('redacteurs')->orderBy('id_redacteur', 'asc')->get();
+
+        $online = $this->visitors_online();
+        $donline = $this->d_visitors_online();
+        $pgactive = "addpost";
+        $page = 'addpost';
+        $onglet = 'Mise à Jour article';
+        
+        // AJOUT : 'hallredacteurs' ajouté dans compact()
+        return view('contents.apps.addpost', compact('pgactive','page','hallrbprins','hallrbsecs','onglet','hallsts','hallusts','hallredacteurs','online','donline'));
         
     }
 
@@ -214,10 +226,9 @@ class AdController extends Controller
             ]))
             {
             	$dif = date('myd');
-                // $iduser = Auth::user()->id}}
                 $dtinpr = $datinsar->input();
-            	if(strlen($dtinpr['post_title'])>=255){
-                    return back()->with('error','Echec d\'Ajout : Titre trop long !! Max : 255 Caractères.')->with('post_title', $dtinpr['post_title'])->with('post_chapo', $dtinpr['post_chapo'])->with('post_subtitle', $dtinpr['post_subtitle'])->with('post_prinrub', $dtinpr['post_prinrub'])->with('post_secondrub', $dtinpr['post_secondrub'])->with('post_chapo', $dtinpr['post_chapo'])->with('post_content', $dtinpr['post_content'])->with('post_fhstatut', $dtinpr['post_fhstatut'])->with('idxtitle', 'ok');;
+                if(strlen($dtinpr['post_title'])>=255){
+                    return back()->with('error','Echec d\'Ajout : Titre trop long !! Max : 255 Caractères.')->with('post_title', $dtinpr['post_title'])->with('post_chapo', $dtinpr['post_chapo'])->with('post_subtitle', $dtinpr['post_subtitle'])->with('post_prinrub', $dtinpr['post_prinrub'])->with('post_secondrub', $dtinpr['post_secondrub'])->with('post_content', $dtinpr['post_content'])->with('title_english', $dtinpr['title_english'] ?? '')->with('desc_english', $dtinpr['desc_english'] ?? '')->with('content_english', $dtinpr['content_english'] ?? '')->with('post_fhstatut', $dtinpr['post_fhstatut'])->with('idxtitle', 'ok');
                 }
                 // Image
                 $beginpath = $datinsar->file('post_firstimg');
@@ -225,23 +236,14 @@ class AdController extends Controller
                 $filesize = @getimagesize($beginpath);
 
                 if($filesize["0"]>1600&&$filesize["1"]>1600){
-                   return back()->with('error','Votre image est trop grande : Largeur = ['.$filesize["0"].'] px, hauteur/Longueur = ['.$filesize["1"].'] px. Les dimensions (maximales) requirent sont : - Largeur (maximale) = 1600px ; - hauteur/longueur (maximale) = 1600px')->with('post_title', $dtinpr['post_title'])->with('post_chapo', $dtinpr['post_chapo'])->with('post_subtitle', $dtinpr['post_subtitle'])->with('post_prinrub', $dtinpr['post_prinrub'])->with('post_secondrub', $dtinpr['post_secondrub'])->with('post_chapo', $dtinpr['post_chapo'])->with('post_content', $dtinpr['post_content'])->with('post_fhstatut', $dtinpr['post_fhstatut'])->with('idxfile','ok'); 
+                   return back()->with('error','Votre image est trop grande...')->with('idxfile','ok'); 
                 }
 
-                if($filesize["0"]>1600){
-                    return back()->with('error','La Largeur ['.$filesize["0"].'] de l\'image est trop élevée. Les dimensions (maximales) requirent sont : - Largeur (maximale) = 1600px ; - hauteur/longueur (maximale) = 1600px')->with('post_title', $dtinpr['post_title'])->with('post_chapo', $dtinpr['post_chapo'])->with('post_subtitle', $dtinpr['post_subtitle'])->with('post_prinrub', $dtinpr['post_prinrub'])->with('post_secondrub', $dtinpr['post_secondrub'])->with('post_chapo', $dtinpr['post_chapo'])->with('post_content', $dtinpr['post_content'])->with('post_fhstatut', $dtinpr['post_fhstatut'])->with('idxfile','ok');
-                }
-                if($filesize["1"]>1600){
-                    return back()->with('error','La hauteur/longueur ['.$filesize["1"].'] de l\'image est trop élevée. Les dimensions (maximales) requirent sont : - Largeur (maximale) = 1600px ; - hauteur/longueur (maximale) = 1600px')->with('post_title', $dtinpr['post_title'])->with('post_chapo', $dtinpr['post_chapo'])->with('post_subtitle', $dtinpr['post_subtitle'])->with('post_prinrub', $dtinpr['post_prinrub'])->with('post_secondrub', $dtinpr['post_secondrub'])->with('post_chapo', $dtinpr['post_chapo'])->with('post_content', $dtinpr['post_content'])->with('post_fhstatut', $dtinpr['post_fhstatut'])->with('idxfile','ok');
-                }
-                //-- Control dimension d'Image 
-                
                 $newimgname ='_article_'.uniqid().'.'.$datinsar->file('post_firstimg')->extension();
                 $endpath = 'hphx/img/'.$newimgname;
                 
                 $slugpost = Str::of('article-'.$dtinpr['post_title'].'-'.$dif)->slug('-');
-                // Image
-                //-- / INSERTION DEV PROJECT
+                
                 if(!move_uploaded_file($beginpath,$endpath)){
                     return back()->with('error','Echec d\'Ajout  !! Erreur de transfert de fichier.');
                 }
@@ -255,18 +257,22 @@ class AdController extends Controller
                     'imgsubtitle_article' => $dtinpr['post_subtitle'],
                     'prinrubid_article' => $dtinpr['post_prinrub'],
                     'content_article' => $dtinpr['post_content'],
+                    // AJOUT DES CHAMPS ANGLAIS ICI :
+                    'title_english' => $dtinpr['title_english'] ?? null,
+                    'desc_english' => $dtinpr['desc_english'] ?? null,
+                    'content_english' => $dtinpr['content_english'] ?? null,
                     'secondrubid_article' => 25,
                     'actustatutid_article' => 1,
                     'acturubid_article' => 6,
                     'alune_article' => $dtinpr['post_fhstatut'],
                     'userid_article' => Auth::user()->id,
+                    // LIGNE À AJOUTER AVEC LE BON NOM D'INPUT (id_redacteur)
+                    'redacteur_id' => $dtinpr['id_redacteur'] ?? null,
                     'datepub_article' => date('Y-m-d H:m:s')
                 ]);
                 
-                // 
-                
-	           if( $dtinpr['post_fhstatut'] == 2){
-	                $insluart = DB::table('luarticles')->insert([
+               if( $dtinpr['post_fhstatut'] == 2){
+                    $insluart = DB::table('luarticles')->insert([
                         'title_luarticle' => $dtinpr['post_title'],
                         'image_luarticle' => $newimgname,
                         'desc_luarticle' => $dtinpr['post_chapo'],
@@ -281,13 +287,12 @@ class AdController extends Controller
                         'userid_luarticle' => Auth::user()->id,
                         'datepub_luarticle' => date('Y-m-d H:m:s')
                     ]); 
-	           }
+               }
 
                 return back()->with('ok','Projet Ajouté avec succès !!');
             }else{
                return back()->with('error','Echec d\'Ajout  !! Erreur de Saisie.');
             }
-        
     }
 
     public function adupdatepost(Request $datupar){
@@ -298,39 +303,25 @@ class AdController extends Controller
             'post_prinrub'=>'required',
             'post_chapo'=>'required',
             'post_fhstatut'=>'required',
-            'post_content'=>'required'
+            'post_content'=>'required',
+            'id_redacteur'=>'required' 
             ]))
             {
 
             $dif = date('myd');
             $dtupar = $datupar->input();
-            //-/ Control Number 1
+            
             if(!empty($datupar->file('post_firstimg'))){
                 $beginpath = $datupar->file('post_firstimg');
-                
-                //-- Control dimension d'Image  
-                $filesize = @getimagesize($beginpath);
-
-                if($filesize["0"]>1600&&$filesize["1"]>1600){
-                    return back()->with('error','Votre image est trop grande : Largeur = ['.$filesize["0"].'] px, hauteur/Longueur = ['.$filesize["1"].'] px. Les dimensions (maximales) requirent sont : - Largeur (maximale) = 1600px ; - hauteur/longueur (maximale) = 1600px')->with('post_title', $dtupar['post_title'])->with('post_chapo', $dtupar['post_chapo'])->with('post_subtitle', $dtupar['post_subtitle'])->with('idxfile','ok'); 
-                }
-
-                if($filesize["0"]>1600){
-                    return back()->with('error','La Largeur ['.$filesize["0"].'] de l\'image est trop élevée. Les dimensions (maximales) requirent sont : - Largeur (maximale) = 1600px ; - hauteur/longueur (maximale) = 1600px')->with('post_title', $dtupar['post_title'])->with('post_chapo', $dtupar['post_chapo'])->with('post_subtitle', $dtupar['post_subtitle'])->with('idxfile','ok');
-                }
-                if($filesize["1"]>1600){
-                    return back()->with('error','La hauteur/longueur ['.$filesize["1"].'] de l\'image est trop élevée. Les dimensions (maximales) requirent sont : - Largeur (maximale) = 1600px ; - hauteur/longueur (maximale) = 1600px')->with('post_title', $dtupar['post_title'])->with('post_chapo', $dtupar['post_chapo'])->with('post_subtitle', $dtupar['post_subtitle'])->with('idxfile','ok');
-                }
-                //-- Control dimension d'Image 
-            
                 $newimgname ='_article_'.uniqid().'.'.$datupar->file('post_firstimg')->extension();
                 $endpath = 'hphx/img/'.$newimgname; 
                 $imgok = move_uploaded_file($beginpath,$endpath);
             }else{
                 $newimgname = $dtupar['post_imgfirst'];
             }
+            
             $slugpost = Str::of('article-'.$dtupar['post_title'].'-'.$dif)->slug('-');
-                //-- // INSERTION DEV postECT
+                
             $uppost = DB::table('articles')
                 ->where('id_article', $dtupar['post_id'])
                 ->update([
@@ -342,19 +333,23 @@ class AdController extends Controller
                 'imgsubtitle_article' => $dtupar['post_subtitle'],
                 'prinrubid_article' => $dtupar['post_prinrub'],
                 'content_article' => $dtupar['post_content'],
+                // AJOUT DES CHAMPS ANGLAIS ICI AUSSI :
+                'title_english' => $dtupar['title_english'] ?? null,
+                'desc_english' => $dtupar['desc_english'] ?? null,
+                'content_english' => $dtupar['content_english'] ?? null,
                 'secondrubid_article' => 25,
                 'alune_article' =>$dtupar['post_fhstatut'],
                 'actustatutid_article' => 1,
                 'acturubid_article' => 6,
+                'redacteur_id' => $dtupar['id_redacteur'], 
                 'datemodif_article' => date('Y-m-d H:m:s')
             ]);
-            //-- / UPDATED VALUE ORDER
 
-            //-- / GETTING DEV PROJECT
             return back()->with('ok','Les Informations ont été Modifié avec succès !!');
-
         }
     }
+
+
     // - / PUB ARTICLE
     public function adpbposts(){
     	
@@ -1195,73 +1190,118 @@ class AdController extends Controller
 	   
     }
 
-    public function advideos(){
-    	
-            $pgactive = "allvideos";
+public function advideos(){
+        
+        $pgactive = "allvideos";
+        
+        // --- 1. SUPPRESSION ---
+        if(isset($_GET['sup']) && !empty($_GET['sup'])){
+            $sup = strip_tags($_GET['sup']);
+            $hdelvds = DB::table('videos')->where('videos.id_video','=',$sup)->delete();
+            return back()->with('ok','Suppression éffectuée avec succès !');
+        }
+
+        // --- 2. MODIFICATION (REDIRECTION VERS LE FORMULAIRE UPVIDEO) ---
+        if(isset($_GET['up']) && !empty($_GET['up'])){
+            $up = strip_tags($_GET['up']);
             // 
-   			if(isset($_GET['sup'])&&!empty($_GET['sup'])){
-				$sup = strip_tags($_GET['sup']);
-				$hdelvds = DB::table('videos')->where('videos.id_video','=',$sup)->delete();
-        		return back()->with('ok','Suppression éffectuée avec succès !');
-			}
-			if(isset($_GET['up'])&&!empty($_GET['up'])){
-				$up = strip_tags($_GET['up']);
-				// 
-				$hupvd = DB::table('videos')->where('videos.id_video','=',$up)->get(); 
-        		// 
-	    		$pgactive = "upvideo";
-				$page = 'upvideo';
-	            $onglet = 'Modification vidéo';
-	            return view('contents.apps.upvideo',compact('pgactive','page','onglet','hupvd'));
-			}
-			$dsrch = "";
-			if(isset($_GET['t_search'])&&!empty($_GET['t_search'])){
-				$dsrch = strip_tags($_GET['t_search']);
-				
-        		$hallvds = DB::table('videos')
-        		->join('users','users.id','=','videos.userid_video')
-        		->join('principalrubrique','principalrubrique.id_prinrub','=','videos.prinrubid_video')
-        		->select('videos.*','users.id','users.name','users.lastename_user','users.firstname_user','principalrubrique.desig_prinrub')
-        		->where('videos.title_video','LIKE','%'.$dsrch.'%')
-        		->orderBy('id_video','desc')
-        		->paginate(30);
-		       	//	// Insertion Table
-			}elseif (isset($_GET['t_search'])&&empty($_GET['t_search'])) {
-				$hallvds = DB::table('videos')
-        		->join('users','users.id','=','videos.userid_video')
-        		->join('principalrubrique','principalrubrique.id_prinrub','=','videos.prinrubid_video')
-        		->select('videos.*','users.id','users.name','users.lastename_user','users.firstname_user','principalrubrique.desig_prinrub')
-        		->orderBy('id_video','desc')
-        		->paginate(7);
-	     		
-			}else{
-			
-            	$hallvds = DB::table('videos')
-        		->join('users','users.id','=','videos.userid_video')
-        		->select('videos.*','users.id','users.name','users.lastename_user','users.firstname_user')
-        		->orderBy('id_video','desc')
-        		->paginate(7);
-	        	
-			}
-        	$online = $this->visitors_online();
-            $donline = $this->d_visitors_online();
-        	$page = 'allvideos';
-            $onglet = 'Toutes les vidéos';
+            $hupvd = DB::table('videos')->where('videos.id_video','=',$up)->get(); 
             // 
-	        return view('contents.apps.allvideos',compact('pgactive','page','onglet','hallvds','dsrch','online','donline'));
-	   
+            
+            // NOUVEAU : Récupérer la liste des reporters pour le formulaire de modification
+            $reporters = DB::table('reporters')->orderBy('nom_reporter', 'asc')->get();
+
+            $pgactive = "upvideo";
+            $page = 'upvideo';
+            $onglet = 'Modification vidéo';
+            
+            // Ajout de $reporters au compact
+            return view('contents.apps.upvideo',compact('pgactive','page','onglet','hupvd', 'reporters'));
+        }
+
+        // --- 3. AFFICHAGE DE LA LISTE (AVEC OU SANS RECHERCHE) ---
+        $dsrch = "";
+        
+        if(isset($_GET['t_search']) && !empty($_GET['t_search'])){
+            // Avec Recherche
+            $dsrch = strip_tags($_GET['t_search']);
+            
+            $hallvds = DB::table('videos')
+            ->join('users','users.id','=','videos.userid_video')
+            // NOUVEAU : On ajoute le leftJoin avec les reporters
+            ->leftJoin('reporters', 'videos.reporter_id', '=', 'reporters.id_reporter') 
+            ->select(
+                'videos.*',
+                'users.id',
+                'users.name',
+                'users.lastename_user',
+                'users.firstname_user',
+                'reporters.nom_reporter' // NOUVEAU
+            )
+            ->where('videos.title_video','LIKE','%'.$dsrch.'%')
+            ->orderBy('id_video','desc')
+            ->paginate(30);
+            
+        } elseif (isset($_GET['t_search']) && empty($_GET['t_search'])) {
+            // Recherche soumise mais vide
+            $hallvds = DB::table('videos')
+            ->join('users','users.id','=','videos.userid_video')
+            // NOUVEAU : On ajoute le leftJoin avec les reporters
+            ->leftJoin('reporters', 'videos.reporter_id', '=', 'reporters.id_reporter')
+            ->select(
+                'videos.*',
+                'users.id',
+                'users.name',
+                'users.lastename_user',
+                'users.firstname_user',
+                'reporters.nom_reporter' // NOUVEAU
+            )
+            ->orderBy('id_video','desc')
+            ->paginate(7);
+            
+        } else {
+            // Affichage par défaut (Sans recherche)
+            $hallvds = DB::table('videos')
+            ->join('users','users.id','=','videos.userid_video')
+            // NOUVEAU : On ajoute le leftJoin avec les reporters
+            ->leftJoin('reporters', 'videos.reporter_id', '=', 'reporters.id_reporter')
+            ->select(
+                'videos.*',
+                'users.id',
+                'users.name',
+                'users.lastename_user',
+                'users.firstname_user',
+                'reporters.nom_reporter' // NOUVEAU
+            )
+            ->orderBy('id_video','desc')
+            ->paginate(7);
+        }
+
+        $online = $this->visitors_online();
+        $donline = $this->d_visitors_online();
+        $page = 'allvideos';
+        $onglet = 'Toutes les vidéos';
+        
+        return view('contents.apps.allvideos',compact('pgactive','page','onglet','hallvds','dsrch','online','donline'));
     }
-    public function adaddvideo(){
-    	
+
+
+public function adaddvideo(){
+        
             $hallrbprins = DB::table('principalrubrique')->orderBy('id_prinrub','asc')->get();
             $hallrbsecs = DB::table('secondaryrubriques')->orderBy('id_secondrub','asc')->get();
+            
+            // NOUVEAU : Récupérer la liste des reporters pour la vue
+            $reporters = DB::table('reporters')->orderBy('nom_reporter', 'asc')->get();
+
             $online = $this->visitors_online();
             $donline = $this->d_visitors_online();
             $pgactive = "addvideo";
             $page = 'addvideo';
             $onglet = 'Mise à Jour Vidéo';
-            return view('contents.apps.addvideo',compact('pgactive','page','hallrbprins','hallrbsecs','onglet','online','donline'));
-        
+            
+            // NOUVEAU : Ajouter '$reporters' dans le compact()
+            return view('contents.apps.addvideo', compact('pgactive', 'page', 'hallrbprins', 'hallrbsecs', 'reporters', 'onglet', 'online', 'donline'));
     }
 
     public function adinsvd(Request $datinsvd){
@@ -1319,7 +1359,7 @@ class AdController extends Controller
         }
     }
 
-    public function adupdatevd(Request $datupvd){
+public function adupdatevd(Request $datupvd){
         if($datupvd->validate([  
             'vd_id'=>'required',
             'vd_imgfirst'=>'required',
@@ -1331,8 +1371,8 @@ class AdController extends Controller
             $dif = date('myd');
                 // $iduser = Auth::user()->id}}
             $dtupvd = $datupvd->input();
+            
             //-/ Control Number 1
-                // return $dataupded->file('project_img');isset($dataupded->file('project_img'))&&
             if(!empty($datupvd->file('vd_firstimg'))){
                 $beginpath = $datupvd->file('vd_firstimg');
                 $newimgname ='_video_'.uniqid().'.'.$datupvd->file('vd_firstimg')->extension();
@@ -1341,7 +1381,8 @@ class AdController extends Controller
             }else{
                 $newimgname = $dtupvd['vd_imgfirst'];
             }
-                //-- // INSERTION DEV vdECT
+            
+            //-- // INSERTION DEV vdECT
             $upvd = DB::table('videos')
                 ->where('id_video', $dtupvd['vd_id'])
                 ->update([
@@ -1350,16 +1391,19 @@ class AdController extends Controller
                 'linkyoutube_video' => $dtupvd['vd_link'],
                 'prinrubid_video' => 7,
                 'typevideo_id' =>$dtupvd['typevideo_id'],
+                
+                // === NOUVELLE LIGNE POUR LE REPORTER ===
+                'reporter_id' => $dtupvd['reporter_id'] ?: null, 
+                // =======================================
+                
                 'datemodif_video' => date('Y-m-d')
             ]);
-            //-- / UPDATED VALUE ORDER
 
             //-- / GETTING DEV PROJECT
-            return back()->with('ok','Les Informations ont été Modifié avec succès !!');
+            return back()->with('ok','Les Informations ont été Modifiées avec succès !!');
 
         }
     }
-    
     // A PROPOS - MOT DU DIRECTEUR, 
     
     public function adabouts(){
@@ -2920,5 +2964,217 @@ class AdController extends Controller
         $onglet = 'Mon Profile';
         return view('contents.apps.myprofil',compact('pgactive','page','onglet','hallfcs','huser','online','donline'));
     }
+
+    // ==========================================
+    // GESTION DES RÉDACTEURS
+    // ==========================================
+
+// Fonction pour lister les rédacteurs
+    public function adallredacteurs() {
+
+        $pgactive = "allredacteur"; 
+        $page = 'allredacteur';
+        // 1. On crée la variable attendue par le layout
+        $onglet = "liste Rédacteurs";
+        
+        // On récupère tous les rédacteurs du plus récent au plus ancien
+        $redacteurs = DB::table('redacteurs')->orderBy('id_redacteur', 'desc')->get();
+        
+        // 2. On ajoute 'onglet', 'pgactive' et 'page' dans le compact()
+        return view('contents.apps.allredacteurs', compact('redacteurs', 'onglet', 'pgactive', 'page'));
+    }
+
+// 1. Afficher la page du formulaire
+public function adaddredacteur(){
+        
+        // Variables potentiellement exigées par votre menu (Sidebar) et Layout
+        $pgactive = "addredacteur"; 
+        $page = 'addredacteur';
+        $onglet = 'Ajouter Rédacteur'; // J'ai mis un vrai titre, comme "Mise à Jour article"
+        
+        // Si votre layout principal exige ABSOLUMENT de savoir qui est en ligne sur toutes les pages, 
+        // décommentez les deux lignes ci-dessous :
+        $online = $this->visitors_online();
+        $donline = $this->d_visitors_online();
+
+        // On retourne la vue avec toutes les variables nécessaires
+        return view('contents.apps.addredacteur', compact('pgactive','page','onglet'));
+    }
+
+    // 2. Traiter l'enregistrement dans la base de données
+    public function adinsredacteur(Request $request)
+{
+    // Validation des données du formulaire
+    $request->validate([
+        'nom_redacteur' => 'required|string|max:255',
+        'photo_redacteur' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'bio_redacteur' => 'nullable|string',
+    ]);
+
+    // Gestion de l'upload de la photo de profil
+    $photoName = null;
+    if ($request->hasFile('photo_redacteur')) {
+        $image = $request->file('photo_redacteur');
+        $photoName = time() . '_' . preg_replace('/\s+/', '_', $image->getClientOriginalName());
+        
+        // Assurez-vous que le dossier public/uploads/redacteurs existe
+        $image->move(public_path('uploads/redacteurs'), $photoName);
+    }
+
+    // Insertion dans la table redacteurs avec Query Builder
+    DB::table('redacteurs')->insert([
+        'nom_redacteur' => $request->input('nom_redacteur'),
+        'photo_redacteur' => $photoName,
+        'bio_redacteur' => $request->input('bio_redacteur'),
+    ]);
+
+    // Redirection avec un message de succès
+    return redirect()->back()->with('success', 'Rédacteur enregistré avec succès !');
+}
+
+// METHODE POUR METTRE A JOUR LE REDACTEUR
+    public function adupdredacteur(Request $request, $id)
+    {
+        // 1. Récupération du rédacteur
+        $redacteur = DB::table('redacteurs')->where('id_redacteur', $id)->first();
+        
+        if (!$redacteur) {
+            return redirect()->back()->with('error', 'Rédacteur introuvable.');
+        }
+
+        // 2. Préparation des données à mettre à jour
+        $data = [
+            'nom_redacteur' => $request->input('nom_redacteur'),
+            'bio_redacteur' => $request->input('bio_redacteur')
+        ];
+
+        // 3. Gestion de l'image s'il y a une nouvelle photo
+        if ($request->hasFile('photo_redacteur')) {
+            $file = $request->file('photo_redacteur');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            
+            // On déplace la nouvelle image
+            $file->move(public_path('uploads/redacteurs'), $filename);
+            
+            // On ajoute le nom de l'image au tableau de mise à jour
+            $data['photo_redacteur'] = $filename;
+
+            // Optionnel : tu peux ajouter ici un code pour supprimer l'ancienne image du dossier
+            /*
+            if (!empty($redacteur->photo_redacteur) && file_exists(public_path('uploads/redacteurs/'.$redacteur->photo_redacteur))) {
+                unlink(public_path('uploads/redacteurs/'.$redacteur->photo_redacteur));
+            }
+            */
+        }
+
+        // 4. Exécution de la mise à jour (adapte le nom de ta table ou de ton Model si tu utilises Eloquent)
+        DB::table('redacteurs')->where('id_redacteur', $id)->update($data);
+
+        return redirect()->back()->with('success', 'Les informations du rédacteur ont été mises à jour.');
+    }
+
+    // METHODE POUR SUPPRIMER LE REDACTEUR
+    public function addelredacteur($id)
+    {
+        // Optionnel : Supprimer la photo du dossier avant de supprimer en base
+        /*
+        $redacteur = DB::table('redacteurs')->where('id_redacteur', $id)->first();
+        if ($redacteur && !empty($redacteur->photo_redacteur) && file_exists(public_path('uploads/redacteurs/'.$redacteur->photo_redacteur))) {
+            unlink(public_path('uploads/redacteurs/'.$redacteur->photo_redacteur));
+        }
+        */
+
+        // Suppression en base
+        DB::table('redacteurs')->where('id_redacteur', $id)->delete();
+
+        return redirect()->back()->with('success', 'Le rédacteur a été supprimé avec succès.');
+    }
+
+
+
+// 1. Afficher la liste de tous les reporters
+public function adallreporters() {
+
+    $pgactive = "allreporter"; 
+    $page = 'allreporter';
+    // 1. Variable attendue par le layout
+    $onglet = "liste Reporters";
+
+    // On récupère tous les reporters du plus récent au plus ancien
+    $reporters = DB::table('reporters')
+        ->orderBy('id_reporter', 'desc')
+        ->get();
+
+    // 2. On transmet toutes les variables au compact()
+    return view('contents.apps.allreporters', compact('reporters', 'onglet', 'pgactive', 'page'));
+}
+
+// 2. Afficher le formulaire d'ajout d'un reporter
+public function adaddreporter(){
+    
+    // Variables exigées par votre menu (Sidebar) et Layout
+    $pgactive = "addreporter"; 
+    $page = 'addreporter';
+    $onglet = 'Ajouter Reporter';
+    
+    // Si votre layout principal exige de savoir qui est en ligne :
+    $online = $this->visitors_online();
+    $donline = $this->d_visitors_online();
+
+    // Retourne la vue des reporters avec toutes les variables nécessaires
+    return view('contents.apps.addreporter', compact('pgactive', 'page', 'onglet', 'online', 'donline'));
+}
+
+// 3. Enregistrer le nouveau reporter en BDD
+public function adinsreporter(Request $request) {
+    // Validation des données saisies
+    $request->validate([
+        'nom_reporter'   => 'required|string|max:255',
+        'photo_reporter' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        'bio_reporter'   => 'nullable|string',
+    ], [
+        'nom_reporter.required' => 'Le nom du reporter est obligatoire.',
+        'photo_reporter.image'  => 'Veuillez sélectionner un fichier image valide.',
+        'photo_reporter.mimes'  => 'Formats d\'image autorisés : jpeg, png, jpg, webp.',
+        'photo_reporter.max'    => 'La taille de la photo ne doit pas dépasser 2 Mo.'
+    ]);
+
+    $fileName = null;
+
+    // Traitement et sauvegarde de la photo dans public/images/reporters
+    if ($request->hasFile('photo_reporter')) {
+        $file = $request->file('photo_reporter');
+        $fileName = time() . '_' . preg_replace('/[^A-Za-z0-9\-.]/', '', $file->getClientOriginalName());
+        $file->move(public_path('uploads/reporters'), $fileName);
+    }
+
+    // Insertion dans la table `reporters`
+    DB::table('reporters')->insert([
+        'nom_reporter'   => $request->nom_reporter,
+        'photo_reporter' => $fileName,
+        'bio_reporter'   => $request->bio_reporter,
+        'created_at'     => now(),
+        'updated_at'     => now(),
+    ]);
+
+    return redirect()->back()->with('success', 'Le reporter a été enregistré avec succès !');
+}
+
+public function adallnewsletters() {
+    $pgactive = "newsletter"; 
+    $page = 'newsletter';
+    // Variable attendue par le layout
+    $onglet = "Liste Abonnés Newsletter";
+
+    // On récupère tous les abonnés de la newsletter du plus récent au plus ancien
+    // L'utilisation de \DB permet d'éviter les erreurs si le composant n'est pas importé en haut du fichier
+    $abonnees = \DB::table('newsletters')
+        ->orderBy('id', 'desc')
+        ->get();
+
+    // On transmet toutes les variables à la vue
+    return view('contents.apps.allnewsletters', compact('abonnees', 'onglet', 'pgactive', 'page'));
+}
+
 
 }

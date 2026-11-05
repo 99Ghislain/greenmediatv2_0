@@ -148,6 +148,23 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         //
         Route::get('/admyprofilus','admyprofilus')->name('admins.myprofilus');
         //
+        // ==========================================
+        // GESTION DES RÉDACTEURS
+        // ==========================================
+        Route::get('/adallredacteurs', 'adallredacteurs')->name('admins.allredacteurs');
+        Route::get('/adaddredacteur', 'adaddredacteur')->name('admins.addredacteur');
+        Route::post('/adinsredacteur', 'adinsredacteur')->name('admins.insredacteur');
+        Route::post('/adupdredacteur/{id}', 'adupdredacteur')->name('admins.updateredacteur');
+        Route::post('/addelredacteur/{id}', 'addelredacteur')->name('admins.deleteredacteur');
+        
+        // Routes pour la gestion des Reporters
+        Route::get('/adallreporters', 'adallreporters')->name('admins.allreporters');
+        Route::get('/adaddreporter', 'adaddreporter')->name('admins.addreporter');
+        Route::post('/adinsreporter', 'adinsreporter')->name('admins.insreporter');
+
+        // Gestion de la Newsletter
+        Route::get('/adallnewsletters', 'adallnewsletters')->name('admins.allnewsletters');
+        
         // OFFRES D'EMPLOI
         Route::get('/adalloffres','adoffres')->name('admins.alloffres');
         //
@@ -180,6 +197,8 @@ Route::controller(GuestController::class)->group(function(){
     Route::get('/category','vhome')->name('visitors.home');
     //Pages
     Route::get('/green-media-africa-tv', 'vallvideos')->name('visitors.allvideos');
+    Route::get('/green-media-africa-tv/video/{id}', 'vshowvideo')->name('visitors.showvideo');
+    
     Route::get('/contact', 'vcontact')->name('visitors.contact');
     //  
     Route::get('/allarticles/','vallactus')->name('visitors.allactusz');
@@ -189,6 +208,12 @@ Route::controller(GuestController::class)->group(function(){
     Route::get('/{rub}/','vallposts')->name('visitors.allactus');
     // 
     Route::get('/{rub}/{slug}/{ip}/','vsgpost')->name('visitors.sgactu');
+   // Route pour soumettre un commentaire
+    Route::post('/articles/{id}/comments', 'storeComment')->name('comments.store');
+    
+    Route::post('/newsletter/subscribe', [App\Http\Controllers\GuestController::class, 'storeNewsletter'])->name('newsletter.store');
+    // Route pour le formulaire de déblocage des articles premium (Newsletter)
+    Route::post('/article/debloquer', [GuestController::class, 'unlock'])->name('article.unlock');
 });
 
 

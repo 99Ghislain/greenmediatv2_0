@@ -60,15 +60,28 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('admins.addredacteur') }}" class="nav-link">
+                    <i class="fa fa-plus nav-icon"></i>
+                    <p>Ajouter un rédacteur</p>
+                </a>
+            </li>
+              <li class="nav-item">
                 <a href="{{route('admins.allluposts')}}" class="nav-link <?=(isset($pgactive)&&($pgactive=='allluposts'))?'active':false;?>">
                   <i class="fa fa-list nav-icon"></i>
                   <p>A la Une</p>
                 </a>
               </li>
+
               <li class="nav-item">
                 <a href="{{route('admins.allposts')}}" class="nav-link <?=(isset($pgactive)&&(($pgactive=='allposts')||($pgactive=='uppost')))?'active':false;?>">
                   <i class="fa fa-list nav-icon"></i>
                   <p>Tous les Articles</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admins.allredacteurs')}}" class="nav-link <?=(isset($pgactive)&&(($pgactive=='allredacteurs')))?'active':false;?>">
+                  <i class="fa fa-list nav-icon"></i>
+                  <p>Tous les redacteurs</p>
                 </a>
               </li>
             </ul>
@@ -279,6 +292,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{route('admins.addreporter')}}" class="nav-link  <?=(isset($pgactive)&&($pgactive=='addreporter'))?'active':false;?>">
+                  <i class="fa fa-plus nav-icon"></i>
+                  <p>Ajouter Reporters</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{route('admins.livesstreaming')}}" class="nav-link bg-danger <?=(isset($pgactive)&&(($pgactive=='livesstreaming')||($pgactive=='upvideo')))?'active':false;?>">
                   <i class="fa fa-list nav-icon"></i>
                   <p>Lives Streaming</p>
@@ -288,6 +307,12 @@
                 <a href="{{route('admins.allvideos')}}" class="nav-link <?=(isset($pgactive)&&(($pgactive=='allvideos')||($pgactive=='upvideo')))?'active':false;?>">
                   <i class="fa fa-list nav-icon"></i>
                   <p>Tous les Vidéos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admins.allreporters')}}" class="nav-link <?=(isset($pgactive)&&(($pgactive=='allreporters')))?'active':false;?>">
+                  <i class="fa fa-list nav-icon"></i>
+                  <p>Tous les Reporters</p>
                 </a>
               </li>
             </ul>
@@ -315,7 +340,33 @@
           <!--    </li>-->
           <!--  </ul>-->
           <!--</li>-->
-        <li class="nav-header" style="color: #64b802; font-weight: bolder;">&nbsp;&nbsp;&nbsp;&nbsp; <i class=" fas fa-cog"></i>&nbsp;&nbsp;Configuration</li>
+          
+          <!-- ============================================== -->
+          <!-- DEBUT SECTION NEWSLETTER (Ajout Professionnel) -->
+          <!-- ============================================== -->
+          <li class="nav-header" style="color: #64b802; font-weight: bolder;">&nbsp;&nbsp;&nbsp;&nbsp; <i class=" fas fa-envelope"></i>&nbsp;&nbsp;Gestion Newsletter</li>
+          <li class="nav-item has-treeview <?=(isset($pgactive)&&($pgactive=='newsletter'))?'menu-open':false;?>" style="">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-paper-plane"></i>
+              <p>
+                Abonnements
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview border-bottom-phx">
+              <li class="nav-item">
+                <a href="{{route('admins.allnewsletters')}}" class="nav-link <?=(isset($pgactive)&&($pgactive=='newsletter'))?'active':false;?>">
+                  <i class="fa fa-list nav-icon"></i>
+                  <p>Liste des Abonnés</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- ============================================== -->
+          <!-- FIN SECTION NEWSLETTER -->
+          <!-- ============================================== -->
+          
+          <li class="nav-header" style="color: #64b802; font-weight: bolder;">&nbsp;&nbsp;&nbsp;&nbsp; <i class=" fas fa-cog"></i>&nbsp;&nbsp;Configuration</li>
           <!--<li class="nav-item has-treeview <?=(isset($pgactive)&&(($pgactive=='allabouts')||($pgactive=='addabout')||($pgactive=='upabout')))?'menu-open':false;?>" style="">-->
           <!--  <a href="#" class="nav-link">-->
           <!--    <i class="nav-icon fas fa-info-circle"></i>-->
