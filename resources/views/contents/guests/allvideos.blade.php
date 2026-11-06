@@ -466,6 +466,116 @@
             animation-duration: .01ms !important;
         }
     }
+
+    /* V2 — TITRES VISIBLEMENT SOUS LES REPORTAGES
+       Correction exclusivement CSS : les titres Blade, liens et lecteurs sont inchangés. */
+    .gm-tv-page .gm-tv-lead {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        height: 100%;
+        background: #fff;
+        border: 1px solid var(--gm-line);
+    }
+    .gm-tv-page .gm-tv-lead::after { display: none; }
+    .gm-tv-page .gm-tv-lead-image {
+        position: relative;
+        inset: auto;
+        aspect-ratio: 16 / 9;
+        height: auto;
+        flex: 0 0 auto;
+    }
+    .gm-tv-page .gm-tv-lead-copy {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        padding: 22px 25px 26px;
+        background: #fff;
+        flex-grow: 1;
+    }
+    .gm-tv-page .gm-tv-lead-category { color: var(--gm-green); }
+    .gm-tv-page .gm-tv-lead-title {
+        display: block;
+        font-size: clamp(1.3rem, 2vw, 1.85rem);
+        line-height: 1.35;
+        margin: 9px 0 12px;
+    }
+    .gm-tv-page .gm-tv-lead-title a {
+        display: block !important;
+        color: var(--gm-ink) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    .gm-tv-page .gm-tv-lead-title a:hover { color: var(--gm-green) !important; }
+    .gm-tv-page .gm-tv-lead-meta { color: var(--gm-muted); }
+    .gm-tv-page .gm-tv-lead-meta i { color: var(--gm-green); }
+
+    /* Les reportages secondaires affichent aussi l'image au-dessus du titre. */
+    .gm-tv-page .gm-tv-teaser {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        min-height: 0;
+        overflow: hidden;
+    }
+    .gm-tv-page .gm-tv-teaser-thumb {
+        display: block;
+        width: 100%;
+        height: 130px;
+        aspect-ratio: auto;
+        flex: 0 0 auto;
+        border-radius: 14px 14px 0 0;
+    }
+    .gm-tv-page .gm-tv-teaser-body {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding: 12px 15px 15px;
+        flex-grow: 1;
+    }
+    .gm-tv-page .gm-tv-teaser-title {
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        color: var(--gm-ink) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        font-size: .9rem;
+        font-weight: 850;
+        line-height: 1.4;
+        margin: 2px 0 0;
+    }
+    .gm-tv-page .gm-tv-teaser-title:hover { color: var(--gm-green) !important; }
+    .gm-tv-page .gm-tv-teaser-date { margin-top: auto; padding-top: 8px; }
+
+    /* Confirmation du titre juste sous chaque miniature du catalogue. */
+    .gm-tv-page .gm-tv-card-body { display: flex; flex-direction: column; }
+    .gm-tv-page .gm-tv-card-title {
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        color: var(--gm-ink) !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-size: 1.05rem;
+        font-weight: 850;
+        line-height: 1.48;
+        margin: 0 0 5px;
+    }
+    .gm-tv-page .gm-tv-card-title:hover { color: var(--gm-green) !important; }
+    @media (max-width: 991px) {
+        .gm-tv-page .gm-tv-teaser-thumb { height: auto; aspect-ratio: 16 / 9; }
+        .gm-tv-page .gm-tv-lead-copy { padding: 20px; }
+    }
+    @media (max-width: 575px) {
+        .gm-tv-page .gm-tv-lead-title { font-size: 1.28rem; }
+        .gm-tv-page .gm-tv-teaser-title { font-size: .98rem; }
+    }
 </style>
 
 @php
