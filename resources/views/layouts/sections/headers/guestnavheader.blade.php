@@ -375,9 +375,9 @@
             <div id="menu-list">
                 <ul class="nav-list">
                     <li class="dropdown magz-dropdown" style="">
-                        <a href="<?=(isset($hpage)&&(!isset($slgsgpost))&&($hpage=='home'))?'#':url('/home');?>">Accueil <i class="ion-ios-arrow-down"></i></a>
+                        <a href="{{ url('/home') }}">Accueil <i class="ion-ios-arrow-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li class="<?=(isset($hpage)&&($hpage=='home'))?'active':false;?> bg-success"><a href="<?=(isset($hpage)&&(!isset($slgsgpost))&&($hpage=='home'))?'#':url('/');?>"> La Une</a></li>
+                            <li class="<?= (request()->is('/') || request()->is('home')) ? 'active' : ''; ?> bg-success"><a href="{{ url('/') }}"> La Une</a></li>
                             <li class="<?=(isset($hpage)&&($hpage==$hrbprins[17]->slug_prinrub))?'active':false;?>"><a href="<?=(isset($hpage)&&(!isset($slgsgpost))&&($hpage==$hrbprins[17]->slug_prinrub))?'#':route('visitors.allactus',['rub' => $hrbprins[17]->slug_prinrub]);?>">Evènements</a></li>
                             <li class="<?=(isset($hpage)&&($hpage==$hrbprins[16]->slug_prinrub))?'active':false;?>"><a href="<?=(isset($hpage)&&(!isset($slgsgpost))&&($hpage==$hrbprins[16]->slug_prinrub))?'#':route('visitors.allactus',['rub' => $hrbprins[16]->slug_prinrub]);?>">Entretien / Interview</a></li>
                             <li class="<?=(isset($hpage)&&($hpage==$hrbprins[7]->slug_prinrub))?'active':false;?>"><a href="<?=(isset($hpage)&&(!isset($slgsgpost))&&($hpage==$hrbprins[7]->slug_prinrub))?'#':route('visitors.allactus',['rub' => $hrbprins[7]->slug_prinrub]);?>">Enquetes</a></li>
@@ -402,7 +402,7 @@
                         </ul>
                     </li>
                                         
-                    <li class="<?=(isset($hpage)&&($hpage=='Green Media Africa - TV'))?'active':false;?> bg-warning-green" ><a href="<?=(isset($hpage)&&($hpage=='Green Media Africa - TV'))?'#':route('visitors.allvideos');?>" class="text-white" style="width: 100%;"><img src="{{url('hphx/img/tv.png')}}" alt="Green Media Africa" style="width: 30px; height: 30px; object-fit: contain;"> TV</a></li>
+                    <li class="<?= request()->is('green-media-africa-tv') ? 'active' : ''; ?> bg-warning-green" ><a href="{{ route('visitors.allvideos') }}" class="text-white" style="width: 100%;"><img src="{{url('hphx/img/tv.png')}}" alt="Green Media Africa" style="width: 30px; height: 30px; object-fit: contain;"> TV</a></li>
                     <li class="<?=(isset($hpage)&&($hpage=='Green Media Africa - TV'))? false:false;?>" style="" ><a href="{{url('/2phx-login-greenmedia-2025')}}" target="_blank" class="text-white btn btn-danger btn-xs" style="width: 100%; padding: 0 auto !important;"><i class="ion-locked" style=""></i></a></li>
                 </ul>
             </div>

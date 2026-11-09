@@ -191,12 +191,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 });
 Route::controller(GuestController::class)->group(function(){
-    Route::get('/', 'vhome')->name('visitors.home');
-    Route::get('/home', 'vhome')->name('visitors.home');
+    Route::get('/', 'vallvideos')->name('visitors.home');
+    Route::get('/home', 'vallvideos');
     Route::get('/allactus', 'vallactus')->name('visitors.aallactus');
-    Route::get('/category','vhome')->name('visitors.home');
+    Route::get('/category','vhome');
     //Pages
-    Route::get('/green-media-africa-tv', 'vallvideos')->name('visitors.allvideos');
+    Route::get('/green-media-africa-tv', 'vhome')->name('visitors.allvideos');
     Route::get('/green-media-africa-tv/video/{id}', 'vshowvideo')->name('visitors.showvideo');
     
     Route::get('/contact', 'vcontact')->name('visitors.contact');
