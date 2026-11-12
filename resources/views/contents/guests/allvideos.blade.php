@@ -576,6 +576,277 @@
         .gm-tv-page .gm-tv-lead-title { font-size: 1.28rem; }
         .gm-tv-page .gm-tv-teaser-title { font-size: .98rem; }
     }
+
+    /* V3 - PRESENTATION LISTE HORIZONTALE, style reportage (ordinateur et mobile).
+       Aucun changement des boucles Blade, des URLs, du PHP ou de la pagination. */
+
+    /* Le catalogue utilise toute la largeur. La colonne éditoriale suit après la liste. */
+    .gm-tv-page > .container > .row > main.col-lg-8,
+    .gm-tv-page > .container > .row > aside.col-lg-4 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    .gm-tv-page > .container > .row > aside.gm-tv-sidebar {
+        position: static;
+        margin-top: 35px;
+        padding-top: 25px;
+        border-top: 1px solid var(--gm-line);
+    }
+    .gm-tv-page .gm-tv-sidebar-original-content {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        align-items: stretch;
+    }
+    .gm-tv-page .gm-tv-sidebar-original-content > .gm-quote-card {
+        margin-bottom: 0;
+    }
+    .gm-tv-page .gm-tv-sidebar-original-content > div:last-child {
+        grid-column: 1 / -1;
+        margin-top: 4px !important;
+    }
+
+    /* Les quatre vidéos de la sélection apparaissent aussi en lignes. */
+    .gm-tv-page .gm-tv-spotlight > .row > .col-lg-8,
+    .gm-tv-page .gm-tv-spotlight > .row > .col-lg-4 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-bottom: 0 !important;
+    }
+    .gm-tv-page .gm-tv-spotlight,
+    .gm-tv-page .gm-tv-spotlight .gm-tv-teasers {
+        margin-bottom: 25px;
+    }
+    .gm-tv-page .gm-tv-lead,
+    .gm-tv-page .gm-tv-teaser,
+    .gm-tv-page .gm-tv-card {
+        display: grid !important;
+        grid-template-columns: minmax(170px, 29%) minmax(0, 1fr) !important;
+        align-items: start;
+        gap: 0 !important;
+        width: 100%;
+        height: auto !important;
+        min-height: 0 !important;
+        padding: 14px 0 !important;
+        border: 0 !important;
+        border-bottom: 1px solid var(--gm-line) !important;
+        border-radius: 0 !important;
+        background: #fff !important;
+        box-shadow: none !important;
+        transform: none !important;
+        overflow: visible;
+    }
+    .gm-tv-page .gm-tv-lead:hover,
+    .gm-tv-page .gm-tv-teaser:hover,
+    .gm-tv-page .gm-tv-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        background: #f9fbf9 !important;
+    }
+
+    /* Images à gauche, toujours au ratio YouTube 16:9. */
+    .gm-tv-page .gm-tv-lead-image,
+    .gm-tv-page .gm-tv-teaser-thumb,
+    .gm-tv-page .gm-tv-card-media {
+        display: block !important;
+        position: relative !important;
+        inset: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        aspect-ratio: 16 / 9 !important;
+        overflow: hidden;
+        border-radius: 11px !important;
+        background: #12271b;
+    }
+    .gm-tv-page .gm-tv-lead-image img,
+    .gm-tv-page .gm-tv-teaser-thumb img,
+    .gm-tv-page .gm-tv-card-media img {
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+        border-radius: 11px;
+    }
+    .gm-tv-page .gm-tv-lead::after,
+    .gm-tv-page .gm-tv-lead-label {
+        display: none !important;
+    }
+    .gm-tv-page .gm-tv-teasers {
+        display: block !important;
+        height: auto !important;
+        margin-top: 0 !important;
+    }
+
+    /* Titres et métadonnées occupent la colonne de droite. */
+    .gm-tv-page .gm-tv-lead-copy,
+    .gm-tv-page .gm-tv-teaser-body,
+    .gm-tv-page .gm-tv-card-body {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+        position: static !important;
+        min-width: 0;
+        height: auto !important;
+        background: transparent !important;
+        padding: 5px 16px 4px 22px !important;
+        gap: 7px !important;
+    }
+    .gm-tv-page .gm-tv-lead-category,
+    .gm-tv-page .gm-tv-teaser-type {
+        font-family: 'Montserrat', sans-serif;
+        color: var(--gm-green) !important;
+        font-size: .68rem !important;
+        font-weight: 900 !important;
+        letter-spacing: .08em !important;
+        text-transform: uppercase;
+        margin: 0;
+    }
+    .gm-tv-page .gm-tv-lead-title,
+    .gm-tv-page .gm-tv-teaser-title,
+    .gm-tv-page .gm-tv-card-title {
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical !important;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        max-width: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: clamp(.96rem, 1.4vw, 1.2rem) !important;
+        font-weight: 800 !important;
+        line-height: 1.45 !important;
+        color: #1b2a21 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        text-transform: none !important;
+    }
+    .gm-tv-page .gm-tv-lead-title a {
+        display: inline !important;
+        color: inherit !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    .gm-tv-page .gm-tv-lead-title a:hover,
+    .gm-tv-page .gm-tv-teaser-title:hover,
+    .gm-tv-page .gm-tv-card-title:hover {
+        color: var(--gm-green) !important;
+    }
+    .gm-tv-page .gm-tv-lead-meta,
+    .gm-tv-page .gm-tv-teaser-date,
+    .gm-tv-page .gm-tv-card-footer {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        display: flex !important;
+        gap: 7px;
+        align-items: center;
+        color: #758079 !important;
+        font-size: .78rem !important;
+        line-height: 1.4;
+        font-weight: 500 !important;
+    }
+    .gm-tv-page .gm-tv-card-footer i,
+    .gm-tv-page .gm-tv-lead-meta i { color: var(--gm-green) !important; }
+    .gm-tv-page .gm-tv-card-tag {
+        left: 9px;
+        top: 9px;
+        padding: 5px 8px;
+        border-radius: 5px;
+        font-size: .59rem;
+    }
+    .gm-tv-page .gm-tv-card-play {
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+    }
+
+    /* Une entrée = une ligne, y compris dans la grille existante de Bootstrap. */
+    .gm-tv-page main > .row > .col-md-6 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-bottom: 0 !important;
+    }
+    .gm-tv-page .gm-tv-section-heading {
+        margin-bottom: 14px;
+    }
+    .gm-tv-page .gm-tv-pagination {
+        margin-top: 28px;
+    }
+
+    /* Sur téléphone, la miniature reste à gauche comme dans la référence. */
+    @media (max-width: 767px) {
+        .gm-tv-page .gm-tv-lead,
+        .gm-tv-page .gm-tv-teaser,
+        .gm-tv-page .gm-tv-card {
+            grid-template-columns: minmax(0, 41%) minmax(0, 1fr) !important;
+            padding: 12px 0 !important;
+            align-items: start !important;
+        }
+        .gm-tv-page .gm-tv-lead-copy,
+        .gm-tv-page .gm-tv-teaser-body,
+        .gm-tv-page .gm-tv-card-body {
+            gap: 5px !important;
+            padding: 0 0 0 13px !important;
+        }
+        .gm-tv-page .gm-tv-lead-title,
+        .gm-tv-page .gm-tv-teaser-title,
+        .gm-tv-page .gm-tv-card-title {
+            -webkit-line-clamp: 2 !important;
+            font-size: clamp(.79rem, 3.45vw, .98rem) !important;
+            line-height: 1.35 !important;
+        }
+        .gm-tv-page .gm-tv-lead-category,
+        .gm-tv-page .gm-tv-teaser-type {
+            font-size: .58rem !important;
+            letter-spacing: .04em !important;
+        }
+        .gm-tv-page .gm-tv-lead-meta,
+        .gm-tv-page .gm-tv-teaser-date,
+        .gm-tv-page .gm-tv-card-footer {
+            font-size: .68rem !important;
+        }
+        .gm-tv-page .gm-tv-card-tag {
+            font-size: .53rem;
+            padding: 4px 6px;
+            top: 6px;
+            left: 6px;
+        }
+        .gm-tv-page .gm-tv-card-play,
+        .gm-tv-page .gm-tv-teaser-play {
+            width: 29px;
+            height: 29px;
+            font-size: .8rem;
+        }
+        .gm-tv-page .gm-tv-sidebar-original-content {
+            display: block !important;
+        }
+        .gm-tv-page .gm-tv-sidebar-original-content > .gm-quote-card {
+            margin-bottom: 14px;
+        }
+    }
+    @media (max-width: 360px) {
+        .gm-tv-page .gm-tv-lead,
+        .gm-tv-page .gm-tv-teaser,
+        .gm-tv-page .gm-tv-card {
+            grid-template-columns: minmax(0, 39%) minmax(0, 1fr) !important;
+        }
+        .gm-tv-page .gm-tv-lead-copy,
+        .gm-tv-page .gm-tv-teaser-body,
+        .gm-tv-page .gm-tv-card-body {
+            padding-left: 10px !important;
+        }
+        .gm-tv-page .gm-tv-lead-title,
+        .gm-tv-page .gm-tv-teaser-title,
+        .gm-tv-page .gm-tv-card-title {
+            font-size: .77rem !important;
+        }
+    }
+
 </style>
 
 @php
