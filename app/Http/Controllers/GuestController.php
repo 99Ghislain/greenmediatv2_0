@@ -672,7 +672,7 @@ public function vsgpost($rub,$slug,$ip){
         $elmshared = $this->elmsShareable();
         $parts = $this->parterns(20);
         
-		return view('contents.guests.allvideos',compact('hlastvd','parts','hwdlnws','hpage','imgshared','elmshared','hwdlmns','hinvnms','hnbarts','hartvws','hmainvds','rdsdvds','hrandfts','hrecvds','hnbvds','hallarts','hallrbprins','hnbartsprinrub','onglet','pubs_a','fhs','hrbprins','hcvds','online','donline'));
+		return view('contents.guests.allvideos',compact('hlastvd','parts','hwdlnws','hpage','imgshared','elmshared','hwdlmns','hinvnms','hnbarts','hartvws','hmainvds','rdsdvds','hrandfts','hrecvds','hnbvds','hallarts','hallrbprins','hnbartsprinrub','onglet','pubs_a','pubs_i2','pubs_i3','pubs_i4','pubs_i5','fhs','hrbprins','hcvds','online','donline'));
 	}
 
 
