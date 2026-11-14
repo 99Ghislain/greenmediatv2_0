@@ -875,7 +875,7 @@
     }
     .gm-tv-ad-counter { color: var(--gm-muted); font-size: .8rem; font-weight: 700; }
     .gm-tv-ad-stage {
-        height: clamp(230px, 35vw, 455px);
+        height: clamp(210px, 30vw, 380px);
         position: relative;
         background: linear-gradient(135deg,#f8faf7,#edf5ef);
         overflow: hidden;
@@ -952,7 +952,7 @@
     @media (max-width: 575px) {
         .gm-tv-advertising { border-radius: 14px; margin-bottom: 28px; }
         .gm-tv-ad-header { padding: 12px 15px; }
-        .gm-tv-ad-stage { height: 270px; }
+        .gm-tv-ad-stage { height: 230px; }
         .gm-tv-ad-slide { padding: 11px; }
         .gm-tv-ad-controls { gap: 14px; }
     }
