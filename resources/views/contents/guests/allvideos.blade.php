@@ -38,7 +38,7 @@
         background: radial-gradient(circle at 85% 20%, rgba(255,160,0,.16), transparent 33%),
                     linear-gradient(125deg, #08271b 0%, #0b3c26 54%, #126b37 100%);
         color: #fff;
-        padding: clamp(24px, 3.5vw, 46px);
+        padding: clamp(18px, 2.4vw, 30px);
         margin-bottom: 38px;
         box-shadow: 0 24px 45px rgba(7,49,28,.13);
     }
@@ -75,18 +75,18 @@
     .gm-tv-masthead h1 {
         color: #fff;
         font-family: 'Montserrat', sans-serif;
-        font-size: clamp(1.75rem, 3.8vw, 3.1rem);
+        font-size: clamp(1.45rem, 2.9vw, 2.45rem);
         font-weight: 900;
         line-height: 1.12;
         letter-spacing: -.045em;
-        margin: 12px 0 10px;
+        margin: 8px 0 6px;
         max-width: 780px;
     }
     .gm-tv-masthead h1 span { color: var(--gm-orange); }
     .gm-tv-masthead p {
         color: rgba(255,255,255,.82);
         font-size: 1rem;
-        line-height: 1.6;
+        line-height: 1.45;
         max-width: 640px;
         margin: 0;
     }
@@ -95,7 +95,7 @@
         gap: 14px;
         flex-wrap: wrap;
         align-items: center;
-        margin-top: 18px;
+        margin-top: 12px;
     }
     .gm-tv-count-pill {
         display: inline-flex;
@@ -452,7 +452,7 @@
         .gm-tv-sidebar { position: static; margin-top: 14px; }
     }
     @media (max-width: 575px) {
-        .gm-tv-masthead { padding: 24px 22px; border-radius: 17px; margin-bottom: 26px; }
+        .gm-tv-masthead { padding: 18px 18px; border-radius: 17px; margin-bottom: 22px; }
         .gm-tv-lead { min-height: 360px; border-radius: 15px; }
         .gm-tv-lead-label { top: 14px; left: 14px; }
         .gm-tv-lead-copy { padding: 24px 18px; }
