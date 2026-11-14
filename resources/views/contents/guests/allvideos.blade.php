@@ -847,6 +847,119 @@
         }
     }
 
+
+    /* Slider publicitaire unique - visuels de toutes proportions, non recadrés. */
+    .gm-tv-advertising {
+        margin: 0 0 42px;
+        border: 1px solid var(--gm-line);
+        border-radius: 20px;
+        background: #fff;
+        overflow: hidden;
+        box-shadow: 0 12px 28px rgba(14, 50, 28, .065);
+    }
+    .gm-tv-ad-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 15px 22px;
+        border-bottom: 1px solid var(--gm-line);
+    }
+    .gm-tv-ad-header h2 {
+        font: 800 .78rem 'Montserrat', sans-serif;
+        letter-spacing: .11em;
+        text-transform: uppercase;
+        color: #52665b;
+        margin: 0;
+    }
+    .gm-tv-ad-counter { color: var(--gm-muted); font-size: .8rem; font-weight: 700; }
+    .gm-tv-ad-stage {
+        height: clamp(230px, 35vw, 455px);
+        position: relative;
+        background: linear-gradient(135deg,#f8faf7,#edf5ef);
+        overflow: hidden;
+    }
+    .gm-tv-ad-slide {
+        display: none;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        padding: 16px 25px;
+    }
+    .gm-tv-ad-slide.is-active { display: flex; }
+    .gm-tv-ad-link,
+    .gm-tv-ad-media {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+    .gm-tv-ad-link:focus-visible {
+        outline: 3px solid var(--gm-orange);
+        outline-offset: -3px;
+    }
+    .gm-tv-ad-image {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+    .gm-tv-ad-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding: 13px 20px;
+        background: #fff;
+    }
+    .gm-tv-ad-arrow {
+        width: 35px;
+        height: 35px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #d8e6dc;
+        border-radius: 50%;
+        background: #fff;
+        color: var(--gm-green);
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: background .18s ease, color .18s ease;
+    }
+    .gm-tv-ad-arrow:hover,
+    .gm-tv-ad-arrow:focus-visible { background: var(--gm-green); color: #fff; }
+    .gm-tv-ad-dots { display: flex; gap: 9px; align-items: center; }
+    .gm-tv-ad-dot {
+        padding: 0;
+        width: 9px;
+        height: 9px;
+        border: 0;
+        border-radius: 50%;
+        background: #c2d5c7;
+        cursor: pointer;
+    }
+    .gm-tv-ad-dot.is-active {
+        background: var(--gm-green);
+        width: 22px;
+        border-radius: 999px;
+    }
+    @media (max-width: 575px) {
+        .gm-tv-advertising { border-radius: 14px; margin-bottom: 28px; }
+        .gm-tv-ad-header { padding: 12px 15px; }
+        .gm-tv-ad-stage { height: 270px; }
+        .gm-tv-ad-slide { padding: 11px; }
+        .gm-tv-ad-controls { gap: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .gm-tv-ad-arrow, .gm-tv-ad-dot { transition: none !important; }
+    }
+
 </style>
 
 @php
@@ -878,6 +991,79 @@
                 <span class="gm-tv-count-pill"><i class="ion-ios-play" aria-hidden="true"></i> Green Media TV</span>
             </div>
         </header>
+
+
+        {{-- Publicités déjà diffusées sur index : un seul emplacement sur la page TV. --}}
+        @php
+            $gmTvAds = collect([
+                $pubs_i2[0] ?? null,
+                $pubs_i3[0] ?? null,
+                $pubs_i4[0] ?? null,
+                $pubs_i5[0] ?? null,
+            ])->filter(fn ($ad) => $ad && !empty($ad->image_pub))->values();
+        @endphp
+
+        @if($gmTvAds->isNotEmpty())
+            <section class="gm-tv-advertising" id="gm-tv-ads-slider" aria-label="Annonces publicitaires">
+                <div class="gm-tv-ad-header">
+                    <h2>Publicités · Nos partenaires</h2>
+                    @if($gmTvAds->count() > 1)
+                        <span class="gm-tv-ad-counter" aria-live="off">
+                            <span class="gm-tv-ad-current">1</span> / {{ $gmTvAds->count() }}
+                        </span>
+                    @endif
+                </div>
+                <div class="gm-tv-ad-stage">
+                    @foreach($gmTvAds as $gmAd)
+                        <div class="gm-tv-ad-slide {{ $loop->first ? 'is-active' : '' }}"
+                             aria-hidden="{{ $loop->first ? 'false' : 'true' }}"
+                             role="group"
+                             aria-roledescription="diapositive"
+                             aria-label="Publicité {{ $loop->iteration }} sur {{ $gmTvAds->count() }}">
+                            @if(!empty($gmAd->linkdest_pub))
+                                <a class="gm-tv-ad-link"
+                                   href="{{ $gmAd->linkdest_pub }}"
+                                   target="_blank"
+                                   rel="noopener noreferrer sponsored"
+                                   tabindex="{{ $loop->first ? '0' : '-1' }}">
+                                    <img class="gm-tv-ad-image"
+                                         src="{{ url('hphx/img/'.$gmAd->image_pub) }}"
+                                         alt="Bannière publicitaire Green Media Africa"
+                                         loading="{{ $loop->first ? 'eager' : 'lazy' }}">
+                                </a>
+                            @else
+                                <div class="gm-tv-ad-media">
+                                    <img class="gm-tv-ad-image"
+                                         src="{{ url('hphx/img/'.$gmAd->image_pub) }}"
+                                         alt="Bannière publicitaire Green Media Africa"
+                                         loading="{{ $loop->first ? 'eager' : 'lazy' }}">
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+
+                @if($gmTvAds->count() > 1)
+                    <div class="gm-tv-ad-controls" aria-label="Commandes du carrousel publicitaire">
+                        <button type="button" class="gm-tv-ad-arrow gm-tv-ad-previous" aria-label="Publicité précédente">
+                            <i class="ion-ios-arrow-back" aria-hidden="true"></i>
+                        </button>
+                        <div class="gm-tv-ad-dots" role="group" aria-label="Choisir une publicité">
+                            @foreach($gmTvAds as $gmAd)
+                                <button type="button"
+                                        class="gm-tv-ad-dot {{ $loop->first ? 'is-active' : '' }}"
+                                        aria-label="Afficher la publicité {{ $loop->iteration }}"
+                                        aria-pressed="{{ $loop->first ? 'true' : 'false' }}"
+                                        data-ad-index="{{ $loop->index }}"></button>
+                            @endforeach
+                        </div>
+                        <button type="button" class="gm-tv-ad-arrow gm-tv-ad-next" aria-label="Publicité suivante">
+                            <i class="ion-ios-arrow-forward" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                @endif
+            </section>
+        @endif
 
         @if($gmLead)
             <section class="gm-tv-spotlight" aria-labelledby="gm-tv-spotlight-title">
@@ -1043,4 +1229,84 @@
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const carousel = document.getElementById('gm-tv-ads-slider');
+    if (!carousel) return;
+
+    const slides = Array.from(carousel.querySelectorAll('.gm-tv-ad-slide'));
+    const dots = Array.from(carousel.querySelectorAll('.gm-tv-ad-dot'));
+    const countLabel = carousel.querySelector('.gm-tv-ad-current');
+    const previous = carousel.querySelector('.gm-tv-ad-previous');
+    const next = carousel.querySelector('.gm-tv-ad-next');
+    if (slides.length < 2) return;
+
+    const intervalMs = 30000;
+    let current = 0;
+    let timer = null;
+
+    function displaySlide(index) {
+        current = (index + slides.length) % slides.length;
+        slides.forEach(function (slide, i) {
+            const active = i === current;
+            slide.classList.toggle('is-active', active);
+            slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+            const link = slide.querySelector('a');
+            if (link) link.tabIndex = active ? 0 : -1;
+        });
+        dots.forEach(function (dot, i) {
+            const active = i === current;
+            dot.classList.toggle('is-active', active);
+            dot.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        if (countLabel) countLabel.textContent = String(current + 1);
+    }
+
+    function pause() {
+        if (timer !== null) {
+            window.clearInterval(timer);
+            timer = null;
+        }
+    }
+
+    function resume() {
+        pause();
+        if (document.hidden || carousel.matches(':hover') || carousel.matches(':focus-within')) return;
+        timer = window.setInterval(function () {
+            displaySlide(current + 1);
+        }, intervalMs);
+    }
+
+    if (previous) previous.addEventListener('click', function () {
+        displaySlide(current - 1);
+        resume();
+    });
+    if (next) next.addEventListener('click', function () {
+        displaySlide(current + 1);
+        resume();
+    });
+    dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+            displaySlide(Number(dot.getAttribute('data-ad-index')));
+            resume();
+        });
+    });
+
+    carousel.addEventListener('mouseenter', pause);
+    carousel.addEventListener('mouseleave', resume);
+    carousel.addEventListener('focusin', pause);
+    carousel.addEventListener('focusout', function () {
+        window.setTimeout(resume, 0);
+    });
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) pause();
+        else resume();
+    });
+
+    displaySlide(0);
+    resume();
+});
+</script>
+
 @stop
