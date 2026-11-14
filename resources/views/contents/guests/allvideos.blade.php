@@ -452,7 +452,36 @@
         .gm-tv-sidebar { position: static; margin-top: 14px; }
     }
     @media (max-width: 575px) {
-        .gm-tv-masthead { padding: 18px 18px; border-radius: 17px; margin-bottom: 22px; }
+        /* Compactage spécifique au téléphone : le titre et les badges réduisent réellement la hauteur. */
+        .gm-tv-masthead {
+            padding: 12px 15px;
+            border-radius: 17px;
+            margin-bottom: 18px;
+        }
+        .gm-tv-eyebrow {
+            font-size: .63rem;
+            letter-spacing: .11em;
+            gap: 7px;
+        }
+        .gm-tv-eyebrow::before { width: 16px; height: 2px; }
+        .gm-tv-masthead h1 {
+            font-size: 1.25rem;
+            line-height: 1.08;
+            margin: 7px 0 5px;
+        }
+        .gm-tv-masthead p {
+            font-size: .82rem;
+            line-height: 1.35;
+        }
+        .gm-tv-masthead-bottom {
+            gap: 6px;
+            margin-top: 9px;
+        }
+        .gm-tv-count-pill {
+            padding: 5px 9px;
+            font-size: .67rem;
+            gap: 6px;
+        }
         .gm-tv-lead { min-height: 360px; border-radius: 15px; }
         .gm-tv-lead-label { top: 14px; left: 14px; }
         .gm-tv-lead-copy { padding: 24px 18px; }
