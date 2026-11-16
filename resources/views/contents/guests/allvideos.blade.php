@@ -1022,15 +1022,7 @@
         </header>
 
 
-        {{-- Publicités déjà diffusées sur index : un seul emplacement sur la page TV. --}}
-        @php
-            $gmTvAds = collect([
-                $pubs_i2[0] ?? null,
-                $pubs_i3[0] ?? null,
-                $pubs_i4[0] ?? null,
-                $pubs_i5[0] ?? null,
-            ])->filter(fn ($ad) => $ad && !empty($ad->image_pub))->values();
-        @endphp
+        {{-- Les annonces actives autorisées pour Green Media TV sont fournies par GuestController. --}}
 
         @if($gmTvAds->isNotEmpty())
             <section class="gm-tv-advertising" id="gm-tv-ads-slider" aria-label="Annonces publicitaires">
