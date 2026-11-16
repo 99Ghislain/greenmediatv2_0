@@ -643,6 +643,18 @@ public function vsgpost($rub,$slug,$ip){
         $pubs_i3 =  $this->phxpub(6,2);
         $pubs_i4 =  $this->phxpub(7,2);
         $pubs_i5 =  $this->phxpub(8,2);
+        // Slider TV : toutes les publicités en ligne explicitement autorisées.
+        // La jointure écarte les annonces rattachées à un bloc supprimé.
+        // Aucun ID de bloc n'est codé en dur et aucune limite de 1 annonce.
+        $gmTvAds = DB::table('publicites')
+            ->join('blockspublicites', 'blockspublicites.id_blockpub', '=', 'publicites.blockpubid_pub')
+            ->where('publicites.statutid_pub', 2)
+            ->where('publicites.diffusion_tv_pub', 1)
+            ->whereNotNull('publicites.image_pub')
+            ->where('publicites.image_pub', '!=', '')
+            ->select('publicites.*')
+            ->orderBy('publicites.id_pub', 'desc')
+            ->get();
         // ---------------------------------
         $fhs = $this->phxfsh();
         $online = $this->visitors_online();
@@ -672,7 +684,7 @@ public function vsgpost($rub,$slug,$ip){
         $elmshared = $this->elmsShareable();
         $parts = $this->parterns(20);
         
-		return view('contents.guests.allvideos',compact('hlastvd','parts','hwdlnws','hpage','imgshared','elmshared','hwdlmns','hinvnms','hnbarts','hartvws','hmainvds','rdsdvds','hrandfts','hrecvds','hnbvds','hallarts','hallrbprins','hnbartsprinrub','onglet','pubs_a','fhs','hrbprins','hcvds','online','donline'));
+		return view('contents.guests.allvideos',compact('hlastvd','parts','hwdlnws','hpage','imgshared','elmshared','hwdlmns','hinvnms','hnbarts','hartvws','hmainvds','rdsdvds','hrandfts','hrecvds','hnbvds','hallarts','hallrbprins','hnbartsprinrub','onglet','pubs_a','pubs_i2','pubs_i3','pubs_i4','pubs_i5','gmTvAds','fhs','hrbprins','hcvds','online','donline'));
 	}
 
 

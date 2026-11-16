@@ -50,6 +50,20 @@
         </div>
         <!--  -->
         <!--  -->
+        <div class="form-group p-3 mt-3" style="background: #f4f8f4; border: 1px solid #d9e9db; border-radius: 8px;">
+          <input type="hidden" name="pb_diffusion_tv" value="0">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="pb_diffusion_tv" name="pb_diffusion_tv" value="1"
+                   {{ old('pb_diffusion_tv', 0) ? 'checked' : '' }}>
+            <label class="form-check-label font-weight-bold" for="pb_diffusion_tv">
+              Autoriser la diffusion dans le slider Green Media TV
+            </label>
+          </div>
+          <small class="text-muted d-block mt-2">
+            Une publicité cochée apparaîtra automatiquement sur la page TV si son statut est « En Ligne ».
+            Aucun emplacement particulier n'est imposé.
+          </small>
+        </div>
         <div class="card-footer">
           <div class="row">
             <div class="col-sm-6">

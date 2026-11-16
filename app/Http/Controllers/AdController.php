@@ -2437,7 +2437,8 @@ public function adupdatevd(Request $datupvd){
             if($datinspb->validate([
             'pb_firstimg'=>'required|mimes:jpeg,jpg,png,gif,ico',
             'pb_statut'=>'required',
-            'pb_block'=>'required'
+            'pb_block'=>'required',
+            'pb_diffusion_tv'=>'sometimes|boolean'
             ]))
             {
             	$dif = date('myd');
@@ -2460,6 +2461,7 @@ public function adupdatevd(Request $datupvd){
                     'blockpubid_pub' => $dtinpb['pb_block'],
                     'userid_pub' => Auth::user()->id,
                     'statutid_pub' => $dtinpb['pb_statut'],
+                    'diffusion_tv_pub' => $datinspb->boolean('pb_diffusion_tv'),
                     'datedebut_pub' => date('Y-m-d')
                 ]);
                 return back()->with('ok','Carrousel Ajoutée avec succès !!');
@@ -2474,7 +2476,8 @@ public function adupdatevd(Request $datupvd){
             if($datuppb->validate([  
             	'pb_id'=>'required',
             	'pb_imgfirst'=>'required',
-            	'pb_statut'=>'required'
+            	'pb_statut'=>'required',
+                'pb_diffusion_tv'=>'sometimes|boolean'
              ]))
              {
 
@@ -2501,7 +2504,8 @@ public function adupdatevd(Request $datupvd){
                     'pubcustid_pub' => 3,
                     'blockpubid_pub' => $dtuppb['pb_block'],
                     'userid_pub' => Auth::user()->id,
-                    'statutid_pub' => $dtuppb['pb_statut']
+                    'statutid_pub' => $dtuppb['pb_statut'],
+                    'diffusion_tv_pub' => $datuppb->boolean('pb_diffusion_tv')
                 ]);
                 //-- / UPDATED VALUE ORDER
 
