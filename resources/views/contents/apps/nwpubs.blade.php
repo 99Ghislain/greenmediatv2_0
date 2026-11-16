@@ -30,6 +30,7 @@
               <th class="" style="width: 10%;">Block</th>
               <th style="width: 10%;">Date</th>
               <th style="width: 5%;">Statut</th>
+              <th style="width: 5%;">Diffusion TV</th>
               <th colspan="2" style="width: 10%;">Actions</th>
             </tr>
           </thead>
@@ -42,6 +43,13 @@
                   <td class="" style="width: 10%;">{{$pb->desig_blockpub}}</td>
                   <td style="width: 10%;">@if(!empty($pb->datedebut_pub)){{ $tday = date_format($dt,'d/m/Y') }}@else{{today()->format('d/m/Y')}}@endif</td>
                   <td style="width: 5%;"><span type="button" class="btn <?=($pb->lib_fhstatut=='En Ligne')?'btn-success':'btn-warning';?> badge" onClick="alert('Voir le Bouton Modifer')">{{$pb->lib_fhstatut}}</span></td>
+                  <td style="width: 5%;">
+                    @if(!empty($pb->diffusion_tv_pub))
+                      <span class="badge badge-success">Autorisée</span>
+                    @else
+                      <span class="badge badge-secondary">Non autorisée</span>
+                    @endif
+                  </td>
                   <td style="width: 5%;"><a href="{{route('admins.allpubs',['up'=>$pb->id_pub])}}" class="btn btn-info"><span class="d-none d-sm-inline-block">Modifier&nbsp;&nbsp;</span><i class="fa fa-edit"></i></a></td>
                   <td style="width: 5%;"><button type="button" data-toggle="modal" data-target="#statpb{{$pb->id_pub}}" class="btn btn-warning border-radius-0">Désactiver <i class="fa fa-check"></i></button></td>
                 </tr>
